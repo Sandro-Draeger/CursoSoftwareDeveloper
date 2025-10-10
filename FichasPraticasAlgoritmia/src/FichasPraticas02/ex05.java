@@ -14,7 +14,7 @@ public class ex05 {
         System.out.println("insira outro valor: ");
         num2 = input.nextInt();
 
-        if (num1 > num2) ;
+        if (num1 > num2)
         {
             System.out.println(num1 + " " + num2);
         } else
