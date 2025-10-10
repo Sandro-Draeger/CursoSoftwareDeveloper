@@ -22,19 +22,33 @@ h1 {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 40px);
-  gap: 20%;
-  padding: 30px;
-  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Layout responsivo */
+  gap: 20px; /* Espaçamento entre os itens */
+  padding: 20px;
+  margin-top: 30px;
 }
 
-.item {
-  background: #c0b9b900;
-  color: rgb(77, 91, 218);
-  padding: 50px;
-  text-align: justify;
-  font-size: 18px;
-  font-family: Impact;
+/* Estiliza os itens da grid */
+.grid .item {
+  background-color: #f4f4f421;
+  border: 1px solid #cccccc00;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.grid .item:hover {
+  transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+}
+
+/* Imagens dentro dos itens */
+.grid .item img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-top: 10px;
 }
 
 
@@ -46,10 +60,7 @@ h1 {
   margin-left: 40%;
 }
 
-img {
-  
-  
-}
+
 
 .top-bar {          
   display:flex;
