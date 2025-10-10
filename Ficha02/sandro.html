@@ -4,26 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="html" href="Formulario.html">
     <title>Página Pessoal Sandro Draeger</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
-<body style="background-color: rgb(177, 179, 182);">
+<body class="background">
+   
+    <div class="top-bar">
+ 
+    <nav>      
+      <a onclick="window.location.href='Formulario.html';" href="Formulario.html">Contact</a>
+    </nav>
+  </div>
     <section>
-        <div id="Apresentação">
+        <div>
+            
+            <img class="imagem" src="https://mir-s3-cdn-cf.behance.net/user/276/9bd2ff98831977.62cc2f001e4d2.png" alt="Sandro Draeger">
+            
             <h1>Sandro Draeger</h1>
             <p>Bem vindo a minha página, este sou eu, constantemente em busca de evoluir como pessoa e profissional.</p>
-            <img src="https://mir-s3-cdn-cf.behance.net/user/276/9bd2ff98831977.62cc2f001e4d2.png" alt="Sandro Draeger">
+           
         </div>
-        <div id="Hobbies">
-            <ul>
-                <li type="circle">Jogador de vôlei;</li>
-                <li type="circle">Nadador nas horas livres;</li>
-                <li type="circle">Metido a programador;</li>
-                <li type="circle">infelizmente gosto de lol;</li>
-            </ul>
-        </div>
+        
+            <div class="grid"> 
+            
+                <div class="item">
+                    <h4>Jogador de vôlei</h4>
+                    <img src="https://encurtador.com.br/D6XRF" alt="bola de volei">
+                </div>
+                <div class="item">
+                    <h4>Jogador de vôlei</h4>
+                    <img src="https://encurtador.com.br/D6XRF" alt="bola de volei">
+                </div>
+                <div class="item">
+                    <h4>Jogador de vôlei</h4>
+                    <img src="https://encurtador.com.br/D6XRF" alt="bola de volei">
+                </div>
+                <div class="item">
+                    <h4>Jogador de vôlei</h4>
+                    <img src="https://encurtador.com.br/D6XRF" alt="bola de volei">
+                </div>
+                
+            
+        </div>  
     </section>
     <section>
         <div id="Redes Sociais">
@@ -34,6 +59,7 @@
                  <li type="square"><a href="https://encurtador.com.br/EEgvI" target="blank">Facebook</a></li>
             </ul>
         </div>
+        
     </section>
     <section>
         <div id="Música favorita">
@@ -41,16 +67,7 @@
             <br>
             <caption>Minha música favorita</caption>
         </div>
-    <section>
-        <div id="Formulario"></div>
-            <form action="processa.php" method="POST">
-            <label for="nome">Nome:</label>
-            <input type="text" name="nome" id="nome">
 
-            <label for="email">E-mail:</label>
-            
-            </form>
-    </section>
     </section>
 </body>
 </html>
