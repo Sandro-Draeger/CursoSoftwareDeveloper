@@ -6,15 +6,17 @@ public class ex02 {
         public static void main(String[] args) {
             Scanner input = new Scanner(System.in);
 
-           int salarioLido;
+           double salarioLido, imposto;
 
            System.out.println("insira seu salário: ");
-           salarioLido = input.nextInt();
+           salarioLido = input.nextDouble();
 
            if (salarioLido<=1500){
-               System.out.println(salarioLido*0.2);}
+               imposto=salarioLido*0.2;
+               System.out.println("taxa de 20%: " + imposto);}
            else {
-               System.out.println(salarioLido*0.3);
+               imposto=salarioLido*0.3;
+               System.out.println("taxa de 30%: " + imposto);
            }
         }
 }

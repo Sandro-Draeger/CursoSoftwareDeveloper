@@ -19,7 +19,7 @@ public class ex01 {
             System.out.println(num1);
         }
         else{
-                System.out.println(num2);
+            System.out.println(num2);
             }
         }
 
