@@ -26,6 +26,7 @@ public class ex04 {
                     System.out.println("O número é ímpar.");
                 }
                 break;
+
             case 2:
                 if (BibliotecaLeitura.positivo(num)) {
                     System.out.println("O número é positivo.");
@@ -33,6 +34,7 @@ public class ex04 {
                     System.out.println("O número é negativo.");
                 }
                 break;
+
             case 3:
                 if (BibliotecaLeitura.primo(num)) {
                     System.out.println("O número é primo.");
@@ -40,6 +42,7 @@ public class ex04 {
                     System.out.println("O número não é primo.");
                 }
                 break;
+
             case 4:
                 if (BibliotecaLeitura.perfeito(num)) {
                     System.out.println("O número é perfeito.");
@@ -47,6 +50,7 @@ public class ex04 {
                     System.out.println("O número não é perfeito.");
                 }
                 break;
+
             case 5:
                 if (BibliotecaLeitura.triangular(num)) {
                     System.out.println("O número é triângular.");
