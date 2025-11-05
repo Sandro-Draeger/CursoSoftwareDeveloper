@@ -6,7 +6,7 @@ public class ex07 {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        int[] array = new int[4];
+        int[] array = new int[10];
         int i = 0, maiorNum;
 
         for (i = 0; i < array.length; i++) {
