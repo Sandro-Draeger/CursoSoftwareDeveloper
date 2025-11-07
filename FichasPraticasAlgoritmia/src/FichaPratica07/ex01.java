@@ -18,6 +18,6 @@ public class ex01 {
 
     public static void main(String[] args) throws FileNotFoundException {
         // Chama a função passando o nome do ficheiro
-        imprimirFicheiro("dados.txt");
+        imprimirFicheiro("exercicio");
     }
 }
