@@ -1,3 +1,5 @@
+package FichaPratica07;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -18,6 +20,7 @@ public class ex01 {
 
     public static void main(String[] args) throws FileNotFoundException {
         // Chama a função passando o nome do ficheiro
-        imprimirFicheiro("exercicio");
+        imprimirFicheiro("ficheiros/exercicio_01.txt");
+
     }
 }

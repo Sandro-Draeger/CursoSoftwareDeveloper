@@ -1,4 +1,4 @@
-package FichasPraticas02.FichaPratica07;
+package FichaPratica07;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,7 +10,7 @@ public class ex06 {
     }
 
     public static void lerFicheiro() throws FileNotFoundException {
-        Scanner ficheiro = new Scanner(new File("FichaPratica07/ficheiros/exercicio_06.txt"));
+        Scanner ficheiro = new Scanner(new File("ficheiros/exercicio_06.txt"));
 
 
         int idade = 0;
