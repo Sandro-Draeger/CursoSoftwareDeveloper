@@ -9,8 +9,7 @@ package ex02;
         private int numAndares;
         private boolean garagem;
 
-
-        public Edificio(String nome, String rua, String cidade, String corFachada, int numAndares, boolean garagem) {
+        public Edificio(String nome, String rua, String cidade, String corFachada, int numAndares, boolean isGaragem) {
             this.nome = nome;
             this.rua = rua;
             this.cidade = cidade;
@@ -20,33 +19,38 @@ package ex02;
 
         }
 
-
-        public void setCorFachada(){
+        public void setCorFachada(String corFachada) {
             this.corFachada = corFachada;
         }
-        public String getCorFachada(){
-            return this.corFachada;
+
+        public String getNome() {
+            return nome;
         }
 
-        public String getNome(){
-            return this.nome;
+        public String getRua() {
+            return rua;
         }
 
-        public String getRua(){
-            return this.rua;
+        public String getCidade() {
+            return cidade;
         }
 
-        public String getCidade(){
-            return this.cidade;
+        public String getCorFachada() {
+            return corFachada;
         }
 
-        public int getNumAndares(){
-            return this.numAndares;
+        public int getNumAndares() {
+            return numAndares;
         }
 
-        public boolean getGaragem(){
-
-            return this.garagem;
+        public boolean isGaragem() {
+            return garagem;
         }
+
+
+
+
+
+
     }
 
