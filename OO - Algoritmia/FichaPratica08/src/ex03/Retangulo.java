@@ -1,7 +1,7 @@
 package ex03;
 
 public class Retangulo {
-    private String cor;
+    private String cor = "Branco";
     private double largura;
     private double altura;
 
@@ -15,6 +15,7 @@ public class Retangulo {
         this.largura = largura;
         this.altura = altura;
     }
+
     public double perimetro(){
         return this.largura+this.altura+this.largura+this.altura;
     }
