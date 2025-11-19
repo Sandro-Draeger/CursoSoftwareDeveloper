@@ -11,6 +11,10 @@ public class Pessoa {
         return nome;
     }
 
+    public String getCidade() {
+        return cidade;
+    }
+
     public Pessoa(String nome, int idade, String cidade, String email, String telemovel) {
         this.nome = nome;
         this.idade = idade;
@@ -20,12 +24,11 @@ public class Pessoa {
     }
 
     public void exibirDetalhes(){
-        System.out.println("----- Info -----");
-        System.out.println("Nome: "+this.nome);
-        System.out.println("idade: "+this.idade);
-        System.out.println("Cidade: "+this.cidade);
-        System.out.println("E-mail: "+this.email);
-        System.out.println("Telemovel: "+this.telemovel);
+        System.out.print("\nNome: "+this.nome+" | ");
+        System.out.print("idade: "+this.idade+" | ");
+        System.out.print("Cidade: "+this.cidade+" | ");
+        System.out.print("E-mail: "+this.email+" | ");
+        System.out.print("Telemovel: "+this.telemovel);
 
     }
 

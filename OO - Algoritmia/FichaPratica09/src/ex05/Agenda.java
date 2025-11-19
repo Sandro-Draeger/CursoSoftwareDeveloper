@@ -9,35 +9,35 @@ public class Agenda {
     }
 
     public void adicionarPessoa(Pessoa pessoaNova) {
-        boolean contem = false;
         for (int i = 0; i < this.listaContactos.length; i++) {
             if (this.listaContactos[i] == null) {
                 listaContactos[i] = pessoaNova;
-                i = this.listaContactos.length;
-
-            } else if (this.listaContactos[i] == pessoaNova) {
-                contem = true;
+                System.out.println(pessoaNova.getNome() + " adicionado com sucesso");
+                return;
             }
         }
-        if (contem) {
-            System.out.println("Pessoa já se encontra nesta lista");
-        } else {
-            System.out.println("Adicionado com sucesso");
-        }
+        System.out.println(pessoaNova.getNome() + " já se encontra nesta lista");
     }
 
 
-    public void listarContatos(){
-        for (int i = 0; i<this.listaContactos.length; i++){
-            System.out.println(this.listaContactos[i]);
+    public void listarContatos() {
+        exibirDetalhes();
+    }
+
+    public void exibirDetalhes() {
+        System.out.println("\n----- Lista de alunos -----");
+        for (int i = 0; i < this.listaContactos.length; i++) {
+            if (listaContactos[i] != null) {
+                listaContactos[i].exibirDetalhes();
+            }
         }
     }
-    public void exibirDetalhes(){
-        System.out.println("----- Lista de alunos -----");
-        System.out.println("infos:");
-        for (int i = 0; i<this.listaContactos.length; i++) {
-            listaContactos[i].exibirDetalhes();
 
+    public void pesquisarContacto(String cidade) {
+        for (int i = 0; i < this.listaContactos.length; i++) {
+            if (this.listaContactos[i].getCidade().equals(cidade)) {
+                listaContactos[i].exibirDetalhes();
+            }
         }
     }
 }
