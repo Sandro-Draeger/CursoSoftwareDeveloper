@@ -51,7 +51,10 @@ public class MusicPlayer {
     }
 
     public void imprimirRelatorio() {
-        programacaoMusical.forEach(Musica::exibirDetalhes);
+        for (int i = 0; i < programacaoMusical.size(); i++) {
+            System.out.print("Música " + i + ": ");
+            programacaoMusical.get(i).exibirDetalhes();
+        }
     }
 }
 

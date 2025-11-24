@@ -30,6 +30,6 @@ public class Musica {
     }
 
     public void exibirDetalhes(){
-        System.out.println("Música: "+this.titulo+" | "+this.genero+" | "+this.artista+" | "+this.duracao);
+        System.out.println(this.titulo+" | "+this.genero+" | "+this.artista+" | "+this.duracao);
     }
 }
