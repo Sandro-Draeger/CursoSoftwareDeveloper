@@ -22,7 +22,7 @@ public class Main {
         System.out.println("\n____________________________________________________\n");
         nova.imprimirRelatorio();
         System.out.println("\n____________________________________________________\n");
-        nova.trocarMusicas(m3, m1);
+        nova.trocarMusicas(0, 1);
         nova.imprimirRelatorio();
         System.out.println("\n____________________________________________________\n");
         nova.limparProgramacao();
@@ -32,6 +32,9 @@ public class Main {
         nova.adicionarMusica(m2);
         nova.adicionarMusica(m3);
         System.out.println("\n____________________________________________________\n");
+        nova.imprimirRelatorio();
+        System.out.println("\n____________________________________________________\n");
+        nova.trocarMusicas(0, 1);
         nova.imprimirRelatorio();
 
     }

@@ -8,7 +8,7 @@ public class MusicPlayer {
 
     public MusicPlayer(String criador, ArrayList programacaoMusical) {
         this.criador = criador;
-        this.programacaoMusical = programacaoMusical;
+        this.programacaoMusical = new ArrayList<Musica>();
     }
 
     public void adicionarMusica(Musica m) {
@@ -29,21 +29,15 @@ public class MusicPlayer {
         }
     }
 
-    public void trocarMusicas(Musica mAntiga, Musica mNova) {
+    public void trocarMusicas(int index1, int index2) {
 
-        boolean contem = false;
-        for (int i = 0; i < programacaoMusical.size(); i++)
-            if (programacaoMusical.contains(mAntiga)) {
-                programacaoMusical.remove(i);
-                programacaoMusical.add(mNova);
-                contem = true;
-            }
-        if (contem) {
-            System.out.println("Troca realizada com sucesso");
-        } else {
-            System.out.println("Musica não encontrada");
-        }
+        Musica musica1 = this.programacaoMusical.get(index1);
+        Musica musica2 = this.programacaoMusical.get(index2);
+
+        this.programacaoMusical.set(index1, musica2);
+        this.programacaoMusical.set(index2, musica1);
     }
+
 
     public void limparProgramacao() {
         programacaoMusical.clear();
