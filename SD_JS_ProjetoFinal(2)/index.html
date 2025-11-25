@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestor de Despesas</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+</head>
+<body class="light">
+
+    <header>
+        <h1>Gestor de Despesas Pessoais</h1>
+        <div class="top-info">
+            <span id="dataHora"></span>
+            <button id="modo-noturno">🌙</button>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Formulário -->
+        <section class="formulario">
+            <h2>Registar Despesa</h2>
+            <form id="formDespesas">
+                <input type="text" id="descricao" placeholder="Descrição" required>
+                <input type="number" id="valor" placeholder="Valor (€)" required>
+                <select id="categoria" required>
+                    <option value="">Categoria</option>
+                    <option>Alimentação</option>
+                    <option>Transporte</option>
+                    <option>Lazer</option>
+                    <option>Saúde</option>
+                    <option>Outros</option>
+                </select>
+                <button type="submit">Adicionar</button>
+            </form>
+        </section>
+
+        <!-- lista de despesas -->
+<section class="lista">
+    <h2>Despesas</h2>
+
+    <ul id="tabelaDespesas"></ul>
+</section>
+
+
+        <!-- Filtro e Total -->
+        <section class="painel">
+            <h2>Resumo</h2>
+            <p>Total gasto: <span id="totalGasto">0€</span></p>
+
+            <label>Filtrar por categoria:</label>
+            <select id="filtroCategoria">
+                <option value="todas">Todas</option>
+                <option>Alimentação</option>
+                <option>Transporte</option>
+                <option>Lazer</option>
+                <option>Saúde</option>
+                <option>Outros</option>
+            </select>
+        </section>
+
+
+        <!-- Dados de API externa -->
+        <section class="api-section">
+            <h2>Informação Externa (API)</h2>
+            <div id="apiDados">A carregar...</div>
+        </section>
+
+    </main>
+
+</body>
+</html>
