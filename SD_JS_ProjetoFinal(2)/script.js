@@ -1,16 +1,17 @@
 // Modo Noturno
-const modoNoturno = document.getElementById("modo-noturno");
+const modoNoturno = document.getElementById("themeToggle");
 
 modoNoturno.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
+  document.body.classList.toggle("dark-theme");
+  modoNoturno.textContent = '🌞' === modoNoturno.textContent ? '🌛' : '🌞';
 });
 
 // Tabela de Despesas
-const form = document.getElementById("formDespesas");
+const form = document.getElementById("expenseForm");
 const tabela = document.getElementById("tabelaDespesas");
-const descricao = document.getElementById("descricao");
-const valor = document.getElementById("valor");
-const categoria = document.getElementById("categoria");
+const descricao = document.getElementById("description");
+const valor = document.getElementById("amount");
+const categoria = document.getElementById("category");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
