@@ -1,74 +1,249 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gestor de Despesas</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Expense Manager</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="light">
-
-    <header>
-        <h1>Gestor de Despesas Pessoais</h1>
-        <div class="top-info">
-            <span id="dataHora"></span>
-            <button id="modo-noturno">🌙</button>
+<body class="light-theme">
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <h1>Personal Expense Manager</h1>
+                <div class="datetime-display">
+                    <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    <div class="datetime-text" id="datetime">
+                        Wednesday, November 26, 2025 • 10:30:45 AM
+                    </div>
+                </div>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
         </div>
-    </header>
 
-    <main>
+        <div class="main-grid">
+            <!-- Left Column - Form -->
+            <div class="left-column">
+                <!-- Expense Form -->
+                <div class="expense-form-card">
+                    <h2>Add New Expense</h2>
+                    <form id="expenseForm" class="expense-form">
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input 
+                                type="text" 
+                                id="description" 
+                                name="description" 
+                                placeholder="Enter expense description"
+                                required
+                            >
+                        </div>
 
-        <!-- Formulário -->
-        <section class="formulario">
-            <h2>Registar Despesa</h2>
-            <form id="formDespesas">
-                <input type="text" id="descricao" placeholder="Descrição" required>
-                <input type="number" id="valor" placeholder="Valor (€)" required>
-                <select id="categoria" required>
-                    <option value="">Categoria</option>
-                    <option>Alimentação</option>
-                    <option>Transporte</option>
-                    <option>Lazer</option>
-                    <option>Saúde</option>
-                    <option>Outros</option>
-                </select>
-                <button type="submit">Adicionar</button>
-            </form>
-        </section>
+                        <div class="form-group">
+                            <label for="amount">Amount ($)</label>
+                            <input 
+                                type="number" 
+                                id="amount" 
+                                name="amount" 
+                                placeholder="0.00"
+                                step="0.01"
+                                min="0.01"
+                                required
+                            >
+                        </div>
 
-        <!-- lista de despesas -->
-<section class="lista">
-    <h2>Despesas</h2>
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select id="category" name="category">
+                                <option value="Food">Food</option>
+                                <option value="Transport">Transport</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Shopping">Shopping</option>
+                                <option value="Bills">Bills</option>
+                                <option value="Health">Health</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
 
-    <ul id="tabelaDespesas"></ul>
-</section>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">
+                                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                                Add Expense
+                            </button>
+                            <button type="button" class="btn-secondary" id="cancelEdit" style="display: none;">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
 
+                <!-- API Placeholder -->
+                <div class="api-placeholder">
+                    <div class="api-header">
+                        <div class="api-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+                            </svg>
+                        </div>
+                        <div class="api-title">
+                            <h3>API Integration Ready</h3>
+                            <p>This area is reserved for future API integration</p>
+                        </div>
+                    </div>
+                    
+                    <div class="api-features">
+                        <div class="api-feature">
+                            <svg class="icon-small" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            <span>Sync expenses to cloud</span>
+                        </div>
+                        <div class="api-feature">
+                            <svg class="icon-small" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            <span>Export to external services</span>
+                        </div>
+                        <div class="api-feature">
+                            <svg class="icon-small" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            <span>Generate expense reports</span>
+                        </div>
+                    </div>
 
-        <!-- Filtro e Total -->
-        <section class="painel">
-            <h2>Resumo</h2>
-            <p>Total gasto: <span id="totalGasto">0€</span></p>
+                    <div class="api-footer">
+                        <p>Connect your API endpoints here to enable cloud features</p>
+                    </div>
+                </div>
+            </div>
 
-            <label>Filtrar por categoria:</label>
-            <select id="filtroCategoria">
-                <option value="todas">Todas</option>
-                <option>Alimentação</option>
-                <option>Transporte</option>
-                <option>Lazer</option>
-                <option>Saúde</option>
-                <option>Outros</option>
-            </select>
-        </section>
+            <!-- Right Column - List and Summary -->
+            <div class="right-column">
+                <!-- Summary Card -->
+                <div class="summary-section">
+                    <div class="total-card">
+                        <div class="total-content">
+                            <div>
+                                <p class="total-label">Total Spent</p>
+                                <p class="total-amount" id="totalAmount">$0.00</p>
+                            </div>
+                            <div class="total-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <p class="total-count" id="expenseCount">0 expenses recorded</p>
+                    </div>
 
+                    <!-- Filter by Category -->
+                    <div class="filter-card">
+                        <div class="filter-header">
+                            <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                            </svg>
+                            <span>Filter by Category</span>
+                        </div>
+                        <div class="filter-buttons" id="filterButtons">
+                            <button class="filter-btn active" data-category="all">All</button>
+                            <button class="filter-btn" data-category="Food">Food</button>
+                            <button class="filter-btn" data-category="Transport">Transport</button>
+                            <button class="filter-btn" data-category="Entertainment">Entertainment</button>
+                            <button class="filter-btn" data-category="Shopping">Shopping</button>
+                            <button class="filter-btn" data-category="Bills">Bills</button>
+                            <button class="filter-btn" data-category="Health">Health</button>
+                            <button class="filter-btn" data-category="Other">Other</button>
+                        </div>
+                    </div>
+                </div>
 
-        <!-- Dados de API externa -->
-        <section class="api-section">
-            <h2>Informação Externa (API)</h2>
-            <div id="apiDados">A carregar...</div>
-        </section>
+                <!-- Expense List -->
+                <div class="expense-list-card">
+                    <!-- Empty State -->
+                    <div class="empty-state" id="emptyState">
+                        <p>No expenses found. Start by adding your first expense!</p>
+                    </div>
 
-    </main>
-
+                    <!-- Expense Table -->
+                    <table class="expense-table" id="expenseTable" style="display: none;">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th class="actions-column">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expenseTableBody">
+                            <!-- Example row - will be populated by JavaScript -->
+                            <tr>
+                                <td>Grocery shopping</td>
+                                <td>$85.50</td>
+                                <td>
+                                    <span class="category-badge category-food">Food</span>
+                                </td>
+                                <td>
+                                    <div class="date-cell">
+                                        <svg class="icon-small" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                                        </svg>
+                                        Nov 26, 2025
+                                    </div>
+                                </td>
+                                <td class="actions-column">
+                                    <div class="action-buttons">
+                                        <button class="btn-icon btn-edit" aria-label="Edit expense">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                            </svg>
+                                        </button>
+                                        <button class="btn-icon btn-delete" aria-label="Delete expense">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polyline points="3 6 5 6 21 6"></polyline>
+                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+<script src="script.js"></script>
 </html>

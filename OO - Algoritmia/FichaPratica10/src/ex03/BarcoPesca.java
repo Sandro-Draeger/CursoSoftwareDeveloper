@@ -69,20 +69,23 @@ public class BarcoPesca {
         System.out.println(mariscoAtual.getEspecie() + " largado!");
     }
 
-    public void calcularTotal() {
+    public double calcularTotal() {
         double precoTotalPeixes = 0;
         double precoTotalMariscos = 0;
         double precoTotal = 0;
 
         for (int i = 0; i < peixesPescados.size(); i++) {
-            precoTotalPeixes += peixesPescados.get(i).getPreco();
+            precoTotalPeixes += peixesPescados.get(i).getPreco() * peixesPescados.get(i).getPeso();
         }
         for (int i = 0; i < mariscosPescados.size(); i++) {
-            precoTotalMariscos += mariscosPescados.get(i).getPreco();
+            precoTotalMariscos += mariscosPescados.get(i).getPreco() * peixesPescados.get(i).getPeso();
         }
         precoTotal = precoTotalMariscos + precoTotalPeixes;
         System.out.println("\nTotal pescado: €" + precoTotal);
+
+        return  precoTotal;
     }
+
 
     public void exebirDetalhes() {
         System.out.println("\n******** Barco " + nome + "********");
@@ -97,18 +100,9 @@ public class BarcoPesca {
     }
 
     public double salarioTripulacao(){
-        double precoSomaPeixe = 0;
-        double precoSomaMarisco = 0;
-        double valorTotal = 0;
-        double salarioTripulacao=0;
+        double valorTotal = calcularTotal();
+        double salarioTripulacao;
 
-        for (Peixe peixe : peixesPescados) {
-            precoSomaPeixe += peixe.getPreco();
-        }
-        for (Marisco marisco : mariscosPescados) {
-            precoSomaMarisco += marisco.getPreco();
-        }
-        valorTotal = precoSomaMarisco + precoSomaPeixe;
         salarioTripulacao = (valorTotal-(valorTotal*0.40))/this.tripulacao;
         System.out.println("Salario de cada tripulante: "+salarioTripulacao);
         return salarioTripulacao;
