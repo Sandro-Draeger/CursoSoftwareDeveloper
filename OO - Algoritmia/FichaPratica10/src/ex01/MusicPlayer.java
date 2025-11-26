@@ -50,5 +50,21 @@ public class MusicPlayer {
             programacaoMusical.get(i).exibirDetalhes();
         }
     }
+
+    public void calcularDuracaoTotal(){
+        int segTotal=0;
+
+        for (Musica musicaAtual : this.programacaoMusical){
+            segTotal += musicaAtual.getDuracao();
+        }
+        System.out.println("Segundos totais: " + segTotal);
+        int horas, minutos, segundos;
+
+        horas=segTotal/3600;
+        minutos=(segTotal/60)-(horas*60);
+        segundos=segTotal-(horas*3600)-(minutos*60);
+
+        System.out.println(horas+":"+minutos+":"+segundos);
+    }
 }
 

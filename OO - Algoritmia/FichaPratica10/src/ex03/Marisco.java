@@ -22,4 +22,8 @@ public class Marisco {
     public double getPreco() {
         return preco;
     }
+
+    public void exibirDetalhesMarisco(){
+        System.out.println(especie+" | "+peso+" | "+"€"+preco);
+    }
 }
