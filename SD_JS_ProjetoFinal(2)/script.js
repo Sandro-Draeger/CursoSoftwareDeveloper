@@ -66,7 +66,7 @@ const selectedCategoria = formulario.elements.categoria.value;
     if (estaEditando) {
       textoDescricao.contentEditable = "true";
       textoValor.contentEditable = "true";
-      textoValor.dataset.valor = parseInt(valor); // Armazena o valor para calcular o total
+      textoValor.dataset.valor = parseFloat(valor); // Armazena o valor para calcular o total
      
       selectCategoria.disabled = false; // Habilita o select
       botaoEditar.textContent = "✔";
@@ -127,6 +127,7 @@ filtroCategoria.addEventListener('change', function() {
   const categoriaSelecionada = filtroCategoria.value; 
   // Percorre os itens da lista e ajusta a visibilidade
   for (const item of listaDespesas.children) {
+    //chamar função e adicionar 
     const categoriaItem = item.querySelector('.categoria').value;
     // Verifica se o item deve ser exibido
     if (categoriaSelecionada === '' || categoriaItem === categoriaSelecionada) {

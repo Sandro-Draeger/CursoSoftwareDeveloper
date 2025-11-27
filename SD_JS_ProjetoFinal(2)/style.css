@@ -139,8 +139,12 @@ form button:hover {
   transform: translateY(-1px);
 }
 
+.filtro {
+  text-align: center;
+  width: 100;
+}
 
-/* === CARDS EM LINHA, COMPACTOS === */
+
 .lista-section li {
   display: flex;
   align-items: center;
@@ -163,7 +167,7 @@ body.dark-theme .lista-section li {
 }
 
 
-/* === TEXTOS À ESQUERDA (sem alterar HTML) === */
+
 li span.descricao {
   font-weight: 600;
   font-size: 0.95rem;
@@ -180,16 +184,20 @@ body.dark-theme li span.valor {
   color: #55e7c4;
 }
 
-/* Categoria pequena embaixo */
+
 li .categoria {
   font-size: 0.75rem;
   opacity: .65;
-  
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  padding: 3px;
+  border: none;
   cursor: default;
 }
 
 
-/* === ICONES/BOTÕES DISCRETOS NO CANTO DIREITO === */
+/* === ICONES/BOTÕES === */
 li button {
   margin: 0;
   padding: 4px 4px;
@@ -208,7 +216,7 @@ li button:hover {
   transform: scale(1.15);
 }
 
-/* Cores específicas para editar/excluir, mas suaves */
+
 li button:first-of-type {
   color: #8b83f8;
 }
@@ -217,7 +225,7 @@ li button:last-of-type {
 }
 
 
-/* === ESTADO EDITANDO MANTIDO, MAS MAIS MODERNO === */
+
 li.editando {
   background-color: #aca8ec !important;
   color: #fff !important;
