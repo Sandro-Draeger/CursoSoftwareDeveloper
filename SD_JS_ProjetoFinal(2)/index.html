@@ -1,52 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Expense Manager</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestão de Despesas</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
-<body class="light-theme">
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <div class="header-left">
-                <h1>Personal Expense Manager</h1>
-            </div>
-            <div class="header-right">
-                <button id="theme-toggle"> 🌛 </button> 
-            </div>
-        </div>
-        
-<form id="form-despesa">
-<label>
-Despesa:
-<input placeholder="Despesa" type="text" name="descricao" required>
-</label>
+<body>
 
-<label>
-Valor:
-<input placeholder="€" type="number" name="valor" required>
-</label>
+  <div class="app-container">
+    <div id="data-hora-atual" class="data-hora"></div>
+    <header>
+      <h1>💸 Minhas Despesas</h1>
+      <button id="theme-toggle">🌛</button>
+    </header>
+    
 
-<label for="categoria">Categoria:</label>
- <select id="categoria" name="categoria">
-    <option value="alimentacao">Alimentação</option>
-    <option value="transporte">Transporte</option>
-    <option value="entreterimento">Entreterimento</option>
-    <option value="compras">Compras</option>
-    <option value="contas">Contas</option>
-    <option value="saude">Saúde</option>
-    <option value="outros">Outros</option>
-    </select>               
+    <section class="form-section">
+      <form id="form-despesa">
+        <input type="text" name="descricao" placeholder="Descrição" required>
+        <input type="number" name="valor" placeholder="Valor (€)" step="0.01" required>
+        <select name="categoria" required>
+          <option value="">Categoria</option>
+          <option value="alimentacao">🍔 Alimentação</option>
+          <option value="transporte">🚌 Transporte</option>
+          <option value="entreterimento">🎮 Entreterimento</option>
+          <option value="compras">🛍️ Compras</option>
+          <option value="contas">💡 Contas</option>
+          <option value="saude">💊 Saúde</option>
+          <option value="outros">✨ Outros</option>
+        </select>
+        <button type="submit">Adicionar</button>
+      </form>
 
-<button type="submit">Adicionar</button>
-</form>
-<div>
-<ul id="lista-despesas"></ul>
+      <div class="filtro">
+        <label for="filtroCategoria">Filtrar por categoria:</label>
+        <select id="filtroCategoria">
+          <option value="">Todas</option>
+          <option value="alimentacao">🍔 Alimentação</option>
+          <option value="transporte">🚌 Transporte</option>
+          <option value="entreterimento">🎮 Entreterimento</option>
+          <option value="compras">🛍️ Compras</option>
+          <option value="contas">💡 Contas</option>
+          <option value="saude">💊 Saúde</option>
+          <option value="outros">✨ Outros</option>
+        </select>
+      </div>
+    </section>
 
-</div>
-    </div>
+    <section class="lista-section">
+      <ul id="lista-despesas"></ul>
+      
+      <div class="total">
+        Total: <span id="totalDespesas">€ 0.00</span>
+      </div>
+    </section>
+  </div>
+
 </body>
 </html>
