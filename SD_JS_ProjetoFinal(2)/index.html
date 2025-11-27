@@ -21,30 +21,31 @@
         
 <form id="form-despesa">
 <label>
-Descrição:
-<input type="text" name="descricao" required>
+Despesa:
+<input placeholder="Despesa" type="text" name="descricao" required>
 </label>
 
 <label>
 Valor:
-<input type="number" name="valor" required>
+<input placeholder="€" type="number" name="valor" required>
 </label>
 
 <label for="categoria">Categoria:</label>
  <select id="categoria" name="categoria">
-    <option value="Food">Alimentação</option>
-    <option value="Transport">Transporte</option>
-    <option value="Entertainment">Entreterimento</option>
-    <option value="Shopping">Compras</option>
-    <option value="Bills">Contas</option>
-    <option value="Health">Saúde</option>
-    <option value="Other">Outros</option>
+    <option value="alimentacao">Alimentação</option>
+    <option value="transporte">Transporte</option>
+    <option value="entreterimento">Entreterimento</option>
+    <option value="compras">Compras</option>
+    <option value="contas">Contas</option>
+    <option value="saude">Saúde</option>
+    <option value="outros">Outros</option>
     </select>               
 
 <button type="submit">Adicionar</button>
 </form>
 <div>
 <ul id="lista-despesas"></ul>
+
 </div>
     </div>
 </body>

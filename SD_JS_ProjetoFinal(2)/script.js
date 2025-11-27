@@ -31,6 +31,7 @@ textoValor.textContent = `€ ${valor}`;
 // select categoria
 const textoCategoria = document.createElement("select");
 textoCategoria.className = "categoria";
+textoCategoria.textContent = categoria;
 
 const option = document.createElement("option");
 option.value = categoria;
@@ -40,12 +41,12 @@ textoCategoria.appendChild(option);
 // Botão Editar
 const botaoEditar = document.createElement("button");
 botaoEditar.type = "button";
-botaoEditar.textContent = "Editar";
+botaoEditar.textContent = "✒";
 
 // Botão Apagar
 const botaoApagar = document.createElement("button");
 botaoApagar.type = "button";
-botaoApagar.textContent = "Apagar";
+botaoApagar.textContent = "🚮";
 
 // --- LÓGICA DE EDIÇÃO INLINE ---
 botaoEditar.addEventListener("click", function () {
@@ -53,8 +54,9 @@ const estaEditando = item.classList.toggle("editando");
 
 if (estaEditando) {
 textoDescricao.contentEditable = "true";
-textoValor.contentEditable = "true";
+textoValor.contentEditable = "true";  
 textoCategoria.contentEditable = "true";
+
 
 botaoEditar.textContent = "Salvar";
 textoDescricao.focus();
