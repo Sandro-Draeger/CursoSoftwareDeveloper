@@ -137,11 +137,22 @@ filtroCategoria.addEventListener('change', function() {
   }
 });
 
-// data e hora atual
+
 const dataHoraAtual = document.getElementById("data-hora-atual");
-const opcoes = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-const dataAtualFormatada = new Date().toLocaleDateString('pt-PT', opcoes);
-dataHoraAtual.textContent = dataAtualFormatada;    
-setTimeout(() => {
-  location.reload();
-}, 60000);  
+
+function atualizarDataHora() {
+  const opcoes = { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric', 
+    hour: '2-digit', 
+    minute: '2-digit' 
+  };
+
+  const dataAtualFormatada = new Date().toLocaleString('pt-PT', opcoes);
+  dataHoraAtual.textContent = dataAtualFormatada;
+}
+
+atualizarDataHora();
+
+setInterval(atualizarDataHora, 60000);
