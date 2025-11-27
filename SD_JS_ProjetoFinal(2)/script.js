@@ -6,7 +6,7 @@ modoNoturno.addEventListener("click", () => {
   modoNoturno.textContent = '🌞' === modoNoturno.textContent ? '🌛' : '🌞';
 });
 
-
+// Gerenciamento de Despesas
 const formulario = document.getElementById("form-despesa");
 const listaDespesas = document.getElementById("lista-despesas");
 
@@ -28,9 +28,14 @@ const textoValor = document.createElement("span");
 textoValor.className = "valor";
 textoValor.textContent = `€ ${valor}`;
 
-const textoCategoria = document.createElement("span");
+// select categoria
+const textoCategoria = document.createElement("select");
 textoCategoria.className = "categoria";
-textoCategoria.textContent = categoria;
+
+const option = document.createElement("option");
+option.value = categoria;
+option.textContent = categoria;
+textoCategoria.appendChild(option);
 
 // Botão Editar
 const botaoEditar = document.createElement("button");
@@ -61,9 +66,8 @@ textoCategoria.contentEditable = "false";
 botaoEditar.textContent = "Editar";
 
 console.log("Descrição salva:", textoDescricao.textContent.trim());
-console.log(
-"Valor salvo:",
-textoValor.textContent.replace("R$", "").trim()
+console.log("Valor salvo:",
+textoValor.textContent.replace("€", "").trim()
 );
 console.log("Categoria salva:", textoCategoria.textContent.trim());
 }
