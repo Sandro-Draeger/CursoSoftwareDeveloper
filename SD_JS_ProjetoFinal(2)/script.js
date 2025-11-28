@@ -63,29 +63,30 @@ formulario.addEventListener("submit", function (evento) {
     const estaEditando = item.classList.toggle("editando");
     // Alterna entre modos de edição e visualização usando o bolleano estaEditando
     if (estaEditando) {
+      // Modo edição
       textoDescricao.contentEditable = "true";
       textoValor.contentEditable = "true";
-      let novoValor = textoValor.textContent; // pego o valor digitado
-      textoValor.dataset.valor = parseFloat(novoValor);
-      console.log(novoValor);
+      selectCategoria.disabled = false;
 
-      selectCategoria.disabled = false; // Habilita o select
       botaoEditar.textContent = "✔";
-      textoValor.dataset.valor = parseFloat(novoValor);
-      console.log(novoValor);
-      atualizarTotal();
     } else {
+      // Modo salvar
       textoDescricao.contentEditable = "false";
       textoValor.contentEditable = "false";
-      selectCategoria.disabled = true; // Desabilita o select
+      selectCategoria.disabled = true;
+
       botaoEditar.textContent = "✏️";
+
+      let novoValor = textoValor.textContent.replace(",", ".");
+      textoValor.dataset.valor = parseFloat(novoValor) || 0;
+      calcularTotalCategoria();
     }
   });
 
   // função Apagar
   botaoApagar.addEventListener("click", function () {
     item.remove();
-    atualizarTotal();
+    calcularTotalCategoria();
   });
 
   // Monta o item
@@ -97,6 +98,7 @@ formulario.addEventListener("submit", function (evento) {
 
   filtroCategoria.value = "";
   filtroCategoria.dispatchEvent(new Event("change"));
+  
 
   // Adiciona à lista
   listaDespesas.appendChild(item);
@@ -137,7 +139,6 @@ filtroCategoria.addEventListener("change", function () {
 });
 
 // atualizar o total das POR CATEGORIA
-
 function calcularTotalCategoria() {
   let total = 0;
   const categoriaSelecionada = filtroCategoria.value;
@@ -164,12 +165,13 @@ filtroCategoria.addEventListener("change", function () {
   calcularTotalCategoria();
 });
 
+//ATUALIZAÇÃO DE DATA E HORA
 const dataHoraAtual = document.getElementById("data-hora-atual");
 
 function atualizarDataHora() {
   const opcoes = {
-    year: "numeric",
-    month: "long",
+    year: "2-digit",
+    month: "short",
     day: "numeric",
     hour: "2-digit",
     minute: "2-digit",
@@ -178,7 +180,18 @@ function atualizarDataHora() {
   const dataAtualFormatada = new Date().toLocaleString("pt-PT", opcoes);
   dataHoraAtual.textContent = dataAtualFormatada;
 }
-
 atualizarDataHora();
-
+//Intervalo para atualizar horário
 setInterval(atualizarDataHora, 60000);
+
+//API DE TEMPO
+const weatherEl = document.querySelector("#weather");
+
+fetch(
+  "https://api.open-meteo.com/v1/forecast?latitude=41.1496&longitude=-8.6109&current_weather=true"
+)
+  .then((response) => response.json())
+  .then((data) => {
+    const temperatura = data.current_weather.temperature;
+    weatherEl.textContent = `Porto: ${temperatura}°C`;
+  });

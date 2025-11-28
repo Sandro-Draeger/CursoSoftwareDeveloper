@@ -18,7 +18,7 @@ body {
   justify-content: center;
   align-items: flex-start;
   padding: 20px;
-  transition: background-color .3s, color .3s;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 body.dark-theme {
@@ -32,15 +32,15 @@ body.dark-theme {
   max-width: 420px;
   background-color: #ffffff;
   border-radius: 22px;
-  box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
   padding: 22px;
   margin-top: 20px;
-  transition: background-color .3s, box-shadow .3s;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 body.dark-theme .app-container {
   background-color: #211b31;
-  box-shadow: 0 8px 28px rgba(0,0,0,0.4);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
 }
 
 /* ==== HEADER ==== */
@@ -62,25 +62,35 @@ header button {
   background: none;
   border: none;
   padding: 6px;
-  transition: transform .2s;
+  transition: transform 0.2s;
 }
 
 header button:hover {
   transform: scale(1.1);
 }
 
-/* ===== DATA & HORA NO TOPO ===== */
+/* Container dos dois elementos */
+.top-bar {
+  display: flex;
+  justify-content: space-between; /* um à esquerda, outro à direita */
+  align-items: center;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* ===== DATA ===== */
 .data-hora {
-  width: 100%;
-  text-align:right;
   font-size: 0.8rem;
   font-weight: 500;
   opacity: 0.7;
-  margin-bottom: 8px;
-  padding-bottom: 6px;
+}
 
-  /* linha suave separando do conteúdo */
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+/* ===== TEMPO ===== */
+#weather {
+  font-size: 0.8rem;
+  font-weight: 500;
+  opacity: 0.7;
 }
 
 /* === Ajuste para Dark Mode === */
@@ -104,7 +114,7 @@ form select {
   border: 1px solid #c4bff6;
   font-size: 1rem;
   background-color: #f7f6ff;
-  transition: border-color .2s, background-color .3s;
+  transition: border-color 0.2s, background-color 0.3s;
 }
 
 form input:focus,
@@ -130,8 +140,8 @@ form button {
   color: #fff;
   font-weight: bold;
   cursor: pointer;
-  letter-spacing: .5px;
-  transition: filter .2s, transform .2s;
+  letter-spacing: 0.5px;
+  transition: filter 0.2s, transform 0.2s;
 }
 
 form button:hover {
@@ -144,7 +154,6 @@ form button:hover {
   width: 100;
 }
 
-
 .lista-section li {
   display: flex;
   align-items: center;
@@ -153,9 +162,8 @@ form button:hover {
   border-radius: 14px;
   background-color: #f1efff;
   margin: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  transition: background-color .3s, transform .15s;
- 
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s, transform 0.15s;
 }
 
 body.dark-theme .lista-section li {
@@ -166,36 +174,31 @@ body.dark-theme .lista-section li {
   transform: translateY(-1px);
 }
 
-
-
 li span.descricao {
   font-weight: 600;
   font-size: 0.95rem;
-  
 }
 
 li span.valor {
   color: #8b83f8;
   font-weight: 600;
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 body.dark-theme li span.valor {
   color: #55e7c4;
 }
 
-
 li .categoria {
   font-size: 0.75rem;
-  opacity: .65;
-  background-color: white;
+  opacity: 0.65;
+  background-color: rgb(255, 255, 255);
   color: black;
   border-radius: 5px;
   padding: 3px;
   border: none;
   cursor: default;
 }
-
 
 /* === ICONES/BOTÕES === */
 li button {
@@ -205,17 +208,16 @@ li button {
   border: none;
   cursor: pointer;
   background: transparent;
-  font-size: .85rem;
+  font-size: 0.85rem;
   color: inherit;
-  opacity: .6;
-  transition: opacity .2s, transform .2s;
+  opacity: 0.6;
+  transition: opacity 0.2s, transform 0.2s;
 }
 
 li button:hover {
   opacity: 1;
   transform: scale(1.15);
 }
-
 
 li button:first-of-type {
   color: #8b83f8;
@@ -224,8 +226,6 @@ li button:last-of-type {
   color: #f55c75;
 }
 
-
-
 li.editando {
   background-color: #aca8ec !important;
   color: #fff !important;
@@ -233,7 +233,7 @@ li.editando {
 li.editando span.valor,
 li.editando button {
   color: #fff !important;
-  opacity: .9 !important;
+  opacity: 0.9 !important;
 }
 
 /* ==== TOTAL ==== */
