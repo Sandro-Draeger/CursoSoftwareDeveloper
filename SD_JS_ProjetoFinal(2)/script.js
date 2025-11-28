@@ -3,13 +3,12 @@ const modoNoturno = document.getElementById("theme-toggle");
 
 modoNoturno.addEventListener("click", () => {
   document.body.classList.toggle("dark-theme");
-  modoNoturno.textContent = '🌞' === modoNoturno.textContent ? '🌛' : '🌞';
+  modoNoturno.textContent = "🌞" === modoNoturno.textContent ? "🌛" : "🌞";
 });
 
 // Gerenciamento de Despesas
 const formulario = document.getElementById("form-despesa");
 const listaDespesas = document.getElementById("lista-despesas");
-
 
 // Envio do formulário
 formulario.addEventListener("submit", function (evento) {
@@ -20,8 +19,8 @@ formulario.addEventListener("submit", function (evento) {
 
   // Capturando os valores do formulário
   const descricao = formulario.elements.descricao.value;
-const valor = formulario.elements.valor.value;
-const selectedCategoria = formulario.elements.categoria.value; 
+  const valor = formulario.elements.valor.value;
+  const selectedCategoria = formulario.elements.categoria.value;
 
   // Texto Descrição
   const textoDescricao = document.createElement("span");
@@ -40,7 +39,7 @@ const selectedCategoria = formulario.elements.categoria.value;
   selectCategoria.disabled = true;
   selectCategoria.innerHTML = `
     <option value="alimentacao">Alimentação</option>
-    <option value="trasnporte">Transporte</option>
+    <option value="transporte">Transporte</option>
     <option value="entreterimento">Entreterimento</option>
     <option value="compras">Compras</option>
     <option value="contas">Contas</option>
@@ -66,19 +65,21 @@ const selectedCategoria = formulario.elements.categoria.value;
     if (estaEditando) {
       textoDescricao.contentEditable = "true";
       textoValor.contentEditable = "true";
-      textoValor.dataset.valor = parseFloat(valor); // Armazena o valor para calcular o total
-     
+      let novoValor = textoValor.textContent; // pego o valor digitado
+      textoValor.dataset.valor = parseFloat(novoValor);
+      console.log(novoValor);
+
       selectCategoria.disabled = false; // Habilita o select
       botaoEditar.textContent = "✔";
+      textoValor.dataset.valor = parseFloat(novoValor);
+      console.log(novoValor);
       atualizarTotal();
-     
     } else {
       textoDescricao.contentEditable = "false";
       textoValor.contentEditable = "false";
       selectCategoria.disabled = true; // Desabilita o select
       botaoEditar.textContent = "✏️";
     }
-    
   });
 
   // função Apagar
@@ -94,63 +95,87 @@ const selectedCategoria = formulario.elements.categoria.value;
   item.appendChild(botaoEditar);
   item.appendChild(botaoApagar);
 
+  filtroCategoria.value = "";
+  filtroCategoria.dispatchEvent(new Event("change"));
+
   // Adiciona à lista
   listaDespesas.appendChild(item);
 
   // Cálculo do Total
-  atualizarTotal();
+  calcularTotalCategoria();
 
   // Limpa formulário
   formulario.reset();
 });
 
 // Função para atualizar o total das despesas
-const totalValor = document.querySelector('#totalDespesas');
+const totalValor = document.querySelector("#totalDespesas");
 
-function atualizarTotal() {
-  let total = 0;
-  //  Percorre os itens da lista e soma os valores
-  for (const item of listaDespesas.children) {
-    // Pega o valor do dataset e converte para número
-    const valorItem = Number.parseFloat(item.querySelector('.valor').dataset.valor);
-    total += valorItem;
-  }
-  // Atualiza o texto do total
+function atualizarTotal(total) {
+  total = Number(total) || 0;
+
   totalValor.textContent = `€ ${total.toFixed(2)}`;
 }
 
 // Filtro por categoria
-const filtroCategoria = document.querySelector('#filtroCategoria');
+const filtroCategoria = document.querySelector("#filtroCategoria");
 
-filtroCategoria.addEventListener('change', function() {
+filtroCategoria.addEventListener("change", function () {
   // Obtém a categoria selecionada no filtro
-  const categoriaSelecionada = filtroCategoria.value; 
+  const categoriaSelecionada = filtroCategoria.value;
   // Percorre os itens da lista e ajusta a visibilidade
   for (const item of listaDespesas.children) {
-    //chamar função e adicionar 
-    const categoriaItem = item.querySelector('.categoria').value;
+    //chamar função e adicionar
+    const categoriaItem = item.querySelector(".categoria").value;
     // Verifica se o item deve ser exibido
-    if (categoriaSelecionada === '' || categoriaItem === categoriaSelecionada) {
-      item.style.display = ''; // Exibe o item
+    if (categoriaSelecionada === "" || categoriaItem === categoriaSelecionada) {
+      item.style.display = ""; // Exibe o item
     } else {
-      item.style.display = 'none'; // Oculta o item
-    }   
+      item.style.display = "none"; // Oculta o item
+    }
   }
 });
 
+// atualizar o total das POR CATEGORIA
+
+function calcularTotalCategoria() {
+  let total = 0;
+  const categoriaSelecionada = filtroCategoria.value;
+  //  Percorre os itens da lista e soma os valores
+  for (const item of listaDespesas.children) {
+    const categoriaItem = item.querySelector(".categoria").value;
+
+    if (categoriaItem === categoriaSelecionada) {
+      const valorItem = Number.parseFloat(
+        item.querySelector(".valor").dataset.valor
+      );
+      total += valorItem;
+    } else if (categoriaSelecionada === "") {
+      const valorItem = Number.parseFloat(
+        item.querySelector(".valor").dataset.valor
+      );
+      total += valorItem;
+    }
+  }
+  atualizarTotal(total);
+}
+
+filtroCategoria.addEventListener("change", function () {
+  calcularTotalCategoria();
+});
 
 const dataHoraAtual = document.getElementById("data-hora-atual");
 
 function atualizarDataHora() {
-  const opcoes = { 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric', 
-    hour: '2-digit', 
-    minute: '2-digit' 
+  const opcoes = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
   };
 
-  const dataAtualFormatada = new Date().toLocaleString('pt-PT', opcoes);
+  const dataAtualFormatada = new Date().toLocaleString("pt-PT", opcoes);
   dataHoraAtual.textContent = dataAtualFormatada;
 }
 
