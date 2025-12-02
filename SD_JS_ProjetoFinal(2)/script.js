@@ -1,5 +1,5 @@
 // Modo Noturno
-const modoNoturno = document.getElementById("theme-toggle");
+const modoNoturno = document.querySelector("#theme-toggle");
 
 modoNoturno.addEventListener("click", () => {
   document.body.classList.toggle("dark-theme");
@@ -7,8 +7,8 @@ modoNoturno.addEventListener("click", () => {
 });
 
 // Gerenciamento de Despesas
-const formulario = document.getElementById("form-despesa");
-const listaDespesas = document.getElementById("lista-despesas");
+const formulario = document.querySelector("#form-despesa");
+const listaDespesas = document.querySelector("#lista-despesas");
 
 // Envio do formulário
 formulario.addEventListener("submit", function (evento) {
@@ -166,7 +166,7 @@ filtroCategoria.addEventListener("change", function () {
 });
 
 //ATUALIZAÇÃO DE DATA E HORA
-const dataHoraAtual = document.getElementById("data-hora-atual");
+const dataHoraAtual = document.querySelector("#data-hora-atual");
 
 function atualizarDataHora() {
   const opcoes = {
