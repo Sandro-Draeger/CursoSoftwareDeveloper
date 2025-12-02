@@ -12,5 +12,63 @@ public class Aviao {
     protected double autonomia;
     protected double velocidadeMaxima;
     protected double preço;
+
+    public Aviao(int serie, String modelo, int anoFabrico, double peso, double comprimentoFuselagem, double envergaduraAsas, double alturaCauda, int numMotores, double autonomia, double velocidadeMaxima, double preço) {
+        this.serie = serie;
+        this.modelo = modelo;
+        this.anoFabrico = anoFabrico;
+        this.peso = peso;
+        this.comprimentoFuselagem = comprimentoFuselagem;
+        this.envergaduraAsas = envergaduraAsas;
+        this.alturaCauda = alturaCauda;
+        this.numMotores = numMotores;
+        this.autonomia = autonomia;
+        this.velocidadeMaxima = velocidadeMaxima;
+        this.preço = preço;
+    }
+
+    public int getSerie() {
+        return serie;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public int getAnoFabrico() {
+        return anoFabrico;
+    }
+
+    public double getPeso() {
+        return peso;
+    }
+
+    public double getComprimentoFuselagem() {
+        return comprimentoFuselagem;
+    }
+
+    public double getEnvergaduraAsas() {
+        return envergaduraAsas;
+    }
+
+    public double getAlturaCauda() {
+        return alturaCauda;
+    }
+
+    public int getNumMotores() {
+        return numMotores;
+    }
+
+    public double getAutonomia() {
+        return autonomia;
+    }
+
+    public double getVelocidadeMaxima() {
+        return velocidadeMaxima;
+    }
+
+    public double getPreço() {
+        return preço;
+    }
 }
 
