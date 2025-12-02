@@ -21,6 +21,14 @@ public class Catalogo extends Aviao{
     }
 
     public void calcularTotal(){
-       
+        double valorTotal = 0;
+        for(int i = 0; i<this.listaAvioes.size(); i++){
+            valorTotal += this.getPreço();
+        }
+        System.out.println("€" + valorTotal);
+    }
+
+    public void exebirDetalhesCatalogo(){
+        System.out.println();
     }
 }

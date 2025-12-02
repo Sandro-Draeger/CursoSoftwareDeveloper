@@ -12,5 +12,8 @@ public class AviaoCombate extends Aviao {
         this.armas = armas;
     }
 
+    public void exibirDetalhes(){
+        System.out.println(this.serie+" | "+this.modelo+" | "+this.anoFabrico+" | "+);
+    }
 
 }
