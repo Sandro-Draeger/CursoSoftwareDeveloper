@@ -1,6 +1,6 @@
 package AirplaneStore.Avioes;
 
-public class Aviao {
+public abstract class Aviao {
     protected int serie;
     protected String modelo;
     protected int anoFabrico;
@@ -25,6 +25,9 @@ public class Aviao {
         this.autonomia = autonomia;
         this.velocidadeMaxima = velocidadeMaxima;
         this.preço = preço;
+    }
+
+    protected Aviao() {
     }
 
     public int getSerie() {
@@ -69,6 +72,10 @@ public class Aviao {
 
     public double getPreço() {
         return preço;
+    }
+
+    public void exibirDetalhes(){
+        System.out.println(this.serie+" | "+this.modelo+" | "+this.anoFabrico+" | "+this.preço);
     }
 }
 

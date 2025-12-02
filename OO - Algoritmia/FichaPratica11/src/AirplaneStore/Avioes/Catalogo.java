@@ -5,8 +5,7 @@ import java.util.ArrayList;
 public class Catalogo extends Aviao{
     private ArrayList<Aviao> listaAvioes;
 
-    public Catalogo(int serie, String modelo, int anoFabrico, double peso, double comprimentoFuselagem, double envergaduraAsas, double alturaCauda, int numMotores, double autonomia, double velocidadeMaxima, double preço, ArrayList<Aviao> listaAvioes) {
-        super(serie, modelo, anoFabrico, peso, comprimentoFuselagem, envergaduraAsas, alturaCauda, numMotores, autonomia, velocidadeMaxima, preço);
+    public Catalogo(ArrayList<Aviao> listaAvioes) {
         this.listaAvioes = listaAvioes;
     }
 
@@ -28,7 +27,10 @@ public class Catalogo extends Aviao{
         System.out.println("€" + valorTotal);
     }
 
-    public void exebirDetalhesCatalogo(){
-        System.out.println();
+    public void exibirDetalhesCatalogo(){
+        System.out.println("Aviões em Catálogo!:\n");
+        for (int i = 0; i< listaAvioes.size(); i++){
+            exibirDetalhes();
+        }
     }
 }
