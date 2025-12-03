@@ -1,59 +1,55 @@
 package AirplaneStore.Avioes;
 
-import AirplaneStore.Enums.Armas;
-import AirplaneStore.Enums.Categoria;
-import AirplaneStore.Enums.Instalacoes;
-
-import java.util.ArrayList;
+import AirplaneStore.Avioes.AviaoCombate;
+import AirplaneStore.Avioes.Catalogo;
+import AirplaneStore.Avioes.JatoParticular;
+import AirplaneStore.Enums.Arma;
+import AirplaneStore.Enums.CategoriaJato;
+import AirplaneStore.Enums.Instalacao;
 
 public class Main {
-    static void main() {
-
-        JatoParticular jato1 = new JatoParticular(
-                101, "Gulfstream G650", 2020, 33000, 30.4, 30.4, 7.7,
-                2, 12900, 956, 65000000, 18, 2900,
-                Categoria.HeavyJet, Instalacoes.Cinema);
-
-        JatoParticular jato2 = new JatoParticular(
-                102, "Cessna Citation X", 2018, 16500, 22.0, 21.0, 6.0,
-                2, 6000, 972, 23000000, 12, 1500,
-                Categoria.LightJet, Instalacoes.Chuveiro);
-
-        JatoParticular jato3 = new JatoParticular(
-                103, "Embraer Phenom 300", 2021, 8000, 15.6, 15.9, 5.1,
-                2, 3650, 839, 9500000, 7, 900,
-                Categoria.MidsizeJet, Instalacoes.Escritório);
+    public static void main(String[] args) {
 
 
-        AviaoCombate combate1 = new AviaoCombate(
-                201, "F-22 Raptor", 2015,
-                19700.0, 18.9, 13.6, 5.1,
-                2, 2960.0, 2410.0, 150_000_000.0,
-                "EUA", true, Armas.Misseis
-        );
+        JatoParticular cessna = new JatoParticular(1200, "Cessna XPTO", 2020, 4500, 12.5, 5.75, 2, 2, 3500, 850, 10000, 12, 500, CategoriaJato.LIGHT_JET);
+        cessna.montarInstalacao(Instalacao.WC);
+        cessna.montarInstalacao(Instalacao.WIFI);
+        cessna.montarInstalacao(Instalacao.SUITE);
 
-        AviaoCombate combate2 = new AviaoCombate(
-                202, "Su-57 Felon", 2022,
-                18000.0, 20.1, 14.1, 4.7,
-                2, 3500.0, 2600.0, 50_000_000.0,
-                "Rússia", false, Armas.Metralhadoras
-        );
+        JatoParticular gulfstream = new JatoParticular(2350, "Gulstream F500", 2012, 5600, 22, 8.6, 3, 4, 6700, 980, 15000, 18, 1000, CategoriaJato.MIDSIZE_JET);
+        gulfstream.montarInstalacao(Instalacao.WC);
+        gulfstream.montarInstalacao(Instalacao.PARQUE_INFANTIL);
+        gulfstream.montarInstalacao(Instalacao.TOMADAS);
+        gulfstream.montarInstalacao(Instalacao.WIFI);
 
-        AviaoCombate combate3 = new AviaoCombate(
-                203, "Dassault Rafale", 2019,
-                10600.0, 15.3, 10.8, 5.3,
-                2, 3700.0, 1912.0, 74_000_000.0,
-                "França", true, Armas.Bombas
-        );
+        JatoParticular boeing = new JatoParticular(4411, "747", 2018, 8900, 25, 12, 2.9, 4, 5000, 980, 20000, 120, 4800, CategoriaJato.HEAVY_JET);
+        boeing.montarInstalacao(Instalacao.WC);
+        boeing.montarInstalacao(Instalacao.WC);
+        boeing.montarInstalacao(Instalacao.TOMADAS);
+        boeing.montarInstalacao(Instalacao.WIFI);
+        boeing.montarInstalacao(Instalacao.CINEMA);
+        boeing.montarInstalacao(Instalacao.PISCINA);
 
-        Catalogo listaAvioes = new Catalogo (new ArrayList<Aviao>());
+        AviaoCombate f16 = new AviaoCombate(122, "F16", 2018, 700, 7.5, 4, 0.9, 2, 1200, 1400, 40000, "USA", false);
+        f16.montarArma(Arma.METRALHADORAS);
+        f16.montarArma(Arma.FOGUETES);
 
-        listaAvioes.adquirirAvioes(jato3);
-        listaAvioes.adquirirAvioes(jato1);
-        listaAvioes.adquirirAvioes(jato2);
+        AviaoCombate f22 = new AviaoCombate(133, "F22", 2022, 650, 7.8, 4.2, 1, 2, 1500, 1800, 45000, "USA", true);
+        f22.montarArma(Arma.MISSEIS);
+        f22.montarArma(Arma.TORPEDOS);
+        f22.montarArma(Arma.FOGUETES);
+        f22.montarArma(Arma.BOMBAS);
 
-        listaAvioes.exibirDetalhesCatalogo();
 
+        System.out.println("____________________________");
 
+        Catalogo comAsas = new Catalogo("Porto", "Com Asas - Airplane Store Lda.");
+        comAsas.adquirirAviao(f16);
+        comAsas.adquirirAviao(boeing);
+        comAsas.adquirirAviao(cessna);
+        comAsas.adquirirAviao(f22);
+        comAsas.adquirirAviao(gulfstream);
+
+        comAsas.exibirCatalogo();
     }
 }

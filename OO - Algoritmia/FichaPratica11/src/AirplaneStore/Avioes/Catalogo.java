@@ -1,36 +1,45 @@
 package AirplaneStore.Avioes;
 
+import AirplaneStore.Avioes.Aviao;
+import AirplaneStore.Avioes.AviaoCombate;
+import AirplaneStore.Avioes.JatoParticular;
+
 import java.util.ArrayList;
 
-public class Catalogo extends Aviao{
-    private ArrayList<Aviao> listaAvioes;
+public class Catalogo {
+    private String localizacaoLoja;
+    private String nomeLoja;
+    private ArrayList<Aviao> stock;
 
-    public Catalogo(ArrayList<Aviao> listaAvioes) {
-        this.listaAvioes = listaAvioes;
+    public Catalogo(String localizacaoLoja, String nomeLoja) {
+        this.localizacaoLoja = localizacaoLoja;
+        this.nomeLoja = nomeLoja;
+        this.stock = new ArrayList<Aviao>();
     }
 
-    public void adquirirAvioes(Aviao novoAviao){
-        this.listaAvioes.add(novoAviao);
-        System.out.println(this.modelo + " adicionado ao Catálogo.");
+    public void adquirirAviao(Aviao aviaoNovo) {
+        this.stock.add(aviaoNovo);
     }
 
-    public void venderAvioes(Aviao aviaoVendido){
-        this.listaAvioes.remove(aviaoVendido);
-        System.out.println(this.modelo + " vendido!");
+    public void venderAviao(Aviao aviaoVendido) {
+        this.stock.remove(aviaoVendido);
     }
 
-    public void calcularTotal(){
-        double valorTotal = 0;
-        for(int i = 0; i<this.listaAvioes.size(); i++){
-            valorTotal += this.getPreço();
+    public void exibirCatalogo() {
+        System.out.println("******************** Bem-vindo/a à " + this.nomeLoja + " | " + this.localizacaoLoja + " ********************");
+        for (Aviao aviaoAtual : this.stock) {
+            aviaoAtual.exibirDetalhes();
+
+            if (aviaoAtual instanceof JatoParticular) {
+                JatoParticular jatoParticularAtual = (JatoParticular) aviaoAtual;
+                jatoParticularAtual.gabarJato();
+            }
+
+            if (aviaoAtual instanceof AviaoCombate) {
+                AviaoCombate aviaoCombateAtual = (AviaoCombate) aviaoAtual;
+                aviaoCombateAtual.mostrarArsenal();
+            }
         }
-        System.out.println("€" + valorTotal);
     }
 
-    public void exibirDetalhesCatalogo(){
-        System.out.println("Aviões em Catálogo!:\n");
-        for (int i = 0; i< listaAvioes.size(); i++){
-            exibirDetalhes();
-        }
-    }
 }

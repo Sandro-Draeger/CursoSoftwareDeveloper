@@ -1,81 +1,34 @@
 package AirplaneStore.Avioes;
 
-public abstract class Aviao {
-    protected int serie;
+public class Aviao {
+    protected int numSerie;
     protected String modelo;
     protected int anoFabrico;
     protected double peso;
-    protected double comprimentoFuselagem;
-    protected double envergaduraAsas;
+    protected double compFuselagem;
+    protected double envAsas;
     protected double alturaCauda;
     protected int numMotores;
     protected double autonomia;
-    protected double velocidadeMaxima;
-    protected double preço;
+    protected double velMax;
+    protected double preco;
 
-    public Aviao(int serie, String modelo, int anoFabrico, double peso, double comprimentoFuselagem, double envergaduraAsas, double alturaCauda, int numMotores, double autonomia, double velocidadeMaxima, double preço) {
-        this.serie = serie;
+    public Aviao(int numSerie, String modelo, int anoFabrico, double peso, double compFuselagem, double envAsas, double alturaCauda, int numMotores, double autonomia, double velMax, double preco) {
+        this.numSerie = numSerie;
         this.modelo = modelo;
         this.anoFabrico = anoFabrico;
         this.peso = peso;
-        this.comprimentoFuselagem = comprimentoFuselagem;
-        this.envergaduraAsas = envergaduraAsas;
+        this.compFuselagem = compFuselagem;
+        this.envAsas = envAsas;
         this.alturaCauda = alturaCauda;
         this.numMotores = numMotores;
         this.autonomia = autonomia;
-        this.velocidadeMaxima = velocidadeMaxima;
-        this.preço = preço;
+        this.velMax = velMax;
+        this.preco = preco;
     }
 
-    protected Aviao() {
-    }
-
-    public int getSerie() {
-        return serie;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public int getAnoFabrico() {
-        return anoFabrico;
-    }
-
-    public double getPeso() {
-        return peso;
-    }
-
-    public double getComprimentoFuselagem() {
-        return comprimentoFuselagem;
-    }
-
-    public double getEnvergaduraAsas() {
-        return envergaduraAsas;
-    }
-
-    public double getAlturaCauda() {
-        return alturaCauda;
-    }
-
-    public int getNumMotores() {
-        return numMotores;
-    }
-
-    public double getAutonomia() {
-        return autonomia;
-    }
-
-    public double getVelocidadeMaxima() {
-        return velocidadeMaxima;
-    }
-
-    public double getPreço() {
-        return preço;
-    }
-
-    public void exibirDetalhes(){
-        System.out.println(this.serie+" | "+this.modelo+" | "+this.anoFabrico+" | "+this.preço);
+    public void exibirDetalhes() {
+        System.out.println("\n______________________________ " + this.numSerie + " | " + this.modelo + " | " + this.anoFabrico + " ______________________________");
+        System.out.println("Peso: " + this.peso + " Kg. | Autonomia: " + this.autonomia + " Km. | Vel. Máx: " + this.velMax + " Km/h | Preço: " + this.preco + " €");
     }
 }
-
