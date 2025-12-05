@@ -1,30 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\UtilController;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/home', [UtilController::class, 'home'])->name('home');
 
+Route::get('/hello', [UtilController::class, 'hello'])->name('hello');
 
-Route::get('/hello', function () {
-    return "<h1>Hello, World!</h1>";
-})->name('hello');
-
-
-Route::get('/welcome/{name}', function ($name) {
-    return "<h1>bem-vindo, $name</h1>";
-});
-
-Route::get('/home', function(){
-    return view('homepage');
-});
+Route::get('/welcome/{name}', [UtilController::class, 'welcome'])->name('welcome');
 
 
 //rota nova para o formulário
-Route::get('/form', function(){
-    return view('users.formpage');
-})->name('form');
+Route::get('/form',  [UserController::class, 'form'])->name('form');
 
 
 Route::fallback(function () {
