@@ -13,5 +13,12 @@
         <button type="submit">Adicionar Utilizador</button>
 </form>
 
+<h4>Utilizadores Atuais:</h4>
+<ul>
+    @foreach ($users as $user)
+    <li>{{ $user }}</li>
+    @endforeach
+</ul>
+
 @endsection
-      
+
