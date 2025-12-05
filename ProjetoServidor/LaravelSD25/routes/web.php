@@ -23,7 +23,7 @@ Route::get('/home', function(){
 
 //rota nova para o formulário
 Route::get('/form', function(){
-    return view('formpage');
+    return view('users.formpage');
 })->name('form');
 
 
