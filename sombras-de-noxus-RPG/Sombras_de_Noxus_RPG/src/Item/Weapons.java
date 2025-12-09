@@ -1,7 +1,7 @@
-package src.Item;
+package Item;
 
-import src.Enums.ClassType;
-import src.Enums.ItemType;
+import Enums.ClassType;
+import Enums.ItemType;
 
 public class Weapons extends Item{
     public ClassType ableToUse;

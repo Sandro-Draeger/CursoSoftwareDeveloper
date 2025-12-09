@@ -1,4 +1,4 @@
-package src.Character;
+package Character;
 
 public abstract class Entity {
    protected String name;

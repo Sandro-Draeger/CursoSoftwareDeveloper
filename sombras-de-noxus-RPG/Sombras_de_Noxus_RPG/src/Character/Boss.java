@@ -1,4 +1,4 @@
-package src.Character;
+package Character;
 
 public class Boss extends Entity{
     public int difficulty;

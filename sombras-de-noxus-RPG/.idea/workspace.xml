@@ -4,7 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b884a7f7-b454-441b-973d-f5d25e8db36e" name="Changes" comment="" />
+    <list default="true" id="b884a7f7-b454-441b-973d-f5d25e8db36e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Character/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Banco de Dados/Ex01MySQL/Ex01MySQL.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Banco de Dados/Ex01MySQL/Ex01MySQL.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SoftwareDeGestao_CodeSavanna/CodeSavanna_SandroDraeger.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Character/Boss.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Character/Boss.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Character/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Character/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Character/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Character/Hero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Enums/ClassType.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Enums/ClassType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Enums/ItemType.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Enums/ItemType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Item/Consumable.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Item/Consumable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Item/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Item/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Item/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Item/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Item/Weapons.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Item/Weapons.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Main.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,7 +33,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -28,7 +43,7 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Sandro-Draeger/sombras-de-noxus-RPG.git&quot;,
+    &quot;url&quot;: &quot;https://github.com/Sandro-Draeger/CursoSoftwareDeveloper.git&quot;,
     &quot;accountId&quot;: &quot;05bb99c4-13be-4906-a59c-07613b699563&quot;
   }
 }</component>
@@ -51,7 +66,7 @@
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/sdevpt19/Desktop/PromacaoWeb/sombras-de-noxus-RPG",
     "onboarding.tips.debug.path": "C:/Users/sdevpt19/Desktop/PromacaoWeb/sombras-de-noxus-RPG/untitled/src/Main.java",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+    "settings.editor.selected.configurable": "preferences.rainbow.brackets.color"
   }
 }]]></component>
   <component name="RecentsManager">
