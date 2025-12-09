@@ -11,6 +11,18 @@ public abstract class Entity {
         this.attack = attack;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
     public String getName() {
         return name;
     }
@@ -19,4 +31,7 @@ public abstract class Entity {
         return hp;
     }
 
+    public int getAttack() {
+        return attack;
+    }
 }
