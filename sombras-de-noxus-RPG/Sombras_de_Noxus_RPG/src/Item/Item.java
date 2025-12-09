@@ -1,6 +1,6 @@
-package src.Item;
+package Item;
 
-import src.Enums.ItemType;
+import Enums.ItemType;
 
 public abstract class Item {
     protected String name;

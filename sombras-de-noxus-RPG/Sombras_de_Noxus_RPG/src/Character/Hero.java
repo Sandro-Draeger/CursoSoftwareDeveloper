@@ -1,7 +1,7 @@
-package src.Character;
+package Character;
 
-import src.Enums.ClassType;
-import src.Item.Item;
+import Enums.ClassType;
+import Item.Item;
 import java.util.ArrayList;
 
 public class Hero extends Entity {

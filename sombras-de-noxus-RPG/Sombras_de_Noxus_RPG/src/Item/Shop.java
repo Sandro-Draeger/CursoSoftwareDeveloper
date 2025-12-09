@@ -1,4 +1,4 @@
-package src.Item;
+package Item;
 
 public abstract class Shop {
 }
