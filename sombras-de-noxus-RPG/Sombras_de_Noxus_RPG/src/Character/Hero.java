@@ -1,27 +1,27 @@
 package Character;
-
 import Enums.ClassType;
-import Item.Item;
-
-import java.sql.SQLOutput;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public abstract class Hero extends Entity {
-    public ArrayList<Item> inventory;
     public ClassType player;
+    public String specialAbility;
+    public int abilityDamage;
 
-    public Hero(String name, int hp, int attack, ClassType player) {
+    public Hero(String name, int hp, int attack, ClassType player, String specialAbility, int abilityDamage) {
         super(name, hp, attack);
         this.player = player;
+        this.specialAbility = specialAbility;
+        this.abilityDamage = abilityDamage;
     }
 
-
     public void heroDetails(){
-        System.out.println("=========STATUS=========");
+        System.out.println("============STATUS============");
         System.out.println("* "+this.player);
-        System.out.println("* "+this.hp+" hp");
-        System.out.println("* "+this.attack+" atk");
+        System.out.println("* "+this.hp+" (hp)");
+        System.out.println("* "+this.attack+" (atk)");
+        System.out.println("* "+this.specialAbility+" (special attack)");
+        System.out.println("* "+this.abilityDamage+" (special damage)");
+        System.out.println("==============================");
     }
 
     // Função para definir a classe do personagem para o restante do game através de um imput do player.
@@ -42,13 +42,13 @@ public abstract class Hero extends Entity {
                 return new Legionnaire();
             case 2:
                 System.out.println("You chose the Bloody Mage!");
-                //mage
+                return new BloodyMage();
             case 3:
                 System.out.println("You chose the Crimson Archer!");
-                //archer
+                return new CrimsonArcher();
             case 4:
-                System.out.println("You chose the Vanguard!");
-                //vanguard
+                System.out.println("You chose the Red Bastion!");
+                return new RedBastion();
             default:
                 System.out.println("Invalid option, try again.\n");
                 return chooseCharacter();
@@ -56,7 +56,7 @@ public abstract class Hero extends Entity {
 
 
     }
-    // função para que o usuário possa personalizar seu nickName no game
+    // função para que o usuário possa personalizar seu nickName no jogo
     public void chooseYourName(){
         Scanner input = new Scanner(System.in);
         System.out.println("\nNow brave hero, tell us the name that shall echo through legends:");

@@ -4,13 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b884a7f7-b454-441b-973d-f5d25e8db36e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Character/Legionnaire.java" afterDir="false" />
+    <list default="true" id="b884a7f7-b454-441b-973d-f5d25e8db36e" name="Changes" comment="Ajustes nas classes e finalização dos exercivios de BD">
+      <change afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Character/BloodyMage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Character/CrimsonArcher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Character/RedBastion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Character/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Character/Entity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Character/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Character/Hero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Character/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Character/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Character/Legionnaire.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Character/Legionnaire.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Character/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Enums/ClassType.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Enums/ClassType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/Character/Hero.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/Character/Hero.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/Character/Legionnaire.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/Character/Legionnaire.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/Enums/ClassType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/Enums/ClassType.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,14 +71,17 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\sdevpt19\Desktop\PromacaoWeb\sombras-de-noxus-RPG\src" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Character.Main" />
+      <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="untitled" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Character.*" />
+          <option name="PATTERN" value=".*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -95,6 +103,19 @@
       <option name="presentableId" value="Default" />
       <updated>1764837832864</updated>
     </task>
+    <task id="LOCAL-00001" summary="Ajustes nas classes e finalização dos exercivios de BD">
+      <option name="closed" value="true" />
+      <created>1765289403033</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1765289403033</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Ajustes nas classes e finalização dos exercivios de BD" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajustes nas classes e finalização dos exercivios de BD" />
   </component>
 </project>
