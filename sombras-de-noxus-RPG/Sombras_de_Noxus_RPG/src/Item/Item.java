@@ -12,4 +12,5 @@ public abstract class Item {
         this.type = type;
         this.effect = effect;
     }
+
 }
