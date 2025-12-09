@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Main {
         static void main(String[] args) {
 
-            //Instanciar os Itens
+            //Instanciar os Itens //Adicionar PREÇOOOOO
             Consumable sHealPotion = new Consumable("Small Heal Potion", ItemType.HEAL, 10);
             Consumable mHealPotion = new Consumable("Medium Heal Potion", ItemType.HEAL, 15);
             Consumable lHealPotion = new Consumable("Big Heal Potion", ItemType.HEAL, 20);
