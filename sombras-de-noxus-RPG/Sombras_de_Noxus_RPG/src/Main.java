@@ -10,7 +10,7 @@ import Tavern.Shop;
 import java.util.ArrayList;
 
 public class Main {
-    static void main(String[] args) {
+    static void main(String[] args) throws InterruptedException {
 
         //Instanciar os Itens
 
@@ -89,10 +89,11 @@ public class Main {
 
         GameHelper.printDivider();
 
-        System.out.println("Dear "+player.getName()+", you receive 60 noxians crowns to start your jorney");
-        player.addGold(60);
+        Thread.sleep(2000);
 
-        player.heroDetails();
+        GameHelper.printTavernInit();
+
+        Tavern.tavernMenu(actualShop, player);
 
     }
 }

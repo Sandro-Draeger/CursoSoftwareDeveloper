@@ -28,17 +28,17 @@ public class Shop extends Tavern {
         return result;
     }
 //exibir loja
-    public void showShop(Shop shop, Hero hero) {
+    public static void showShop(Shop shop, Hero hero) {
         System.out.println("\n===== WELCOME TO THE SHOP =====\n");
 
         ArrayList<Item> todayStock = shop.randomItems();
 
         for (int i = 0; i < todayStock.size(); i++) {
             Item item = todayStock.get(i);
-            System.out.println((i + 1) + " - " + item.getName() + " (" + item.getPrice() + " Crowns)");
+            System.out.println((i + 1) + " - " + item.getName() + "|" + item.getEffect() +" (" + item.getPrice() + "nx)");
         }
 
-        System.out.println("\nYou have: " + hero.getGold() + " Crowns");
+        System.out.println("\nYou have: " + hero.getGold() + "nx");
     }
 
 
