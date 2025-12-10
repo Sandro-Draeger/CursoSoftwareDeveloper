@@ -35,10 +35,10 @@ public class Shop extends Tavern {
 
         for (int i = 0; i < todayStock.size(); i++) {
             Item item = todayStock.get(i);
-            System.out.println((i + 1) + " - " + item.getName() + "|" + item.getEffect() +" (" + item.getPrice() + "nx)");
+            System.out.println((i + 1) + " - " + item.getName() + "|" + item.getEffect() +" (" + item.getPrice() + "nc)");
         }
 
-        System.out.println("\nYou have: " + hero.getGold() + "nx");
+        System.out.println("\nYou have: " + hero.getGold() + "nc");
     }
 
 

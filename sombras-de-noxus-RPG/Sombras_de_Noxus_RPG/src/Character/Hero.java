@@ -1,12 +1,17 @@
 package Character;
 import Enums.ClassType;
+
+import java.util.ArrayList;
 import java.util.Scanner;
+import Item.Item;
 
 public abstract class Hero extends Entity {
     public ClassType player;
     public String specialAbility;
     public int abilityDamage;
     public int gold;
+    public ArrayList<Item> inventory;
+
 
     public Hero(String name, int hp, int attack, ClassType player, String specialAbility, int abilityDamage, int gold) {
         super(name, hp, attack);
@@ -14,10 +19,14 @@ public abstract class Hero extends Entity {
         this.specialAbility = specialAbility;
         this.abilityDamage = abilityDamage;
         this.gold = gold;
+        this.inventory = new ArrayList<>();
     }
 
     public int getGold() {
         return gold;
+    }
+    public ArrayList<Item> getInventory() {
+        return inventory;
     }
 
     public void heroDetails(){
@@ -72,6 +81,7 @@ public abstract class Hero extends Entity {
         System.out.println("Welcome! "+this.name+"! Your journey begins now.\n");
     }
 
+    //manipulação gold
     public void addGold(int gold){
         this.gold += gold;
     }
@@ -80,6 +90,15 @@ public abstract class Hero extends Entity {
         this.gold -= gold;
     }
 
+
+    //Manipulação Inventario
+    public void addItem(Item item) {
+        inventory.add(item);
+    }
+
+    public void removeItem(Item item) {
+        inventory.remove(item);
+    }
 
 }
 
