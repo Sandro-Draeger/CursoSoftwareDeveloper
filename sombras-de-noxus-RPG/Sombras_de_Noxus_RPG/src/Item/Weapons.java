@@ -10,4 +10,8 @@ public class Weapons extends Item{
         super(name, type, effect, price);
         this.ableToUse = ableToUse;
     }
+
+    public ClassType getAbleToUse() {
+        return ableToUse;
+    }
 }

@@ -7,10 +7,11 @@
     <list default="true" id="b884a7f7-b454-441b-973d-f5d25e8db36e" name="Changes" comment="Ajustes nas classes e finalização dos exercivios de BD">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/Tavern/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/Tavern/Shop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/Tavern/Tavern.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/Tavern/Tavern.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Character/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Character/Hero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/GameHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/GameHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Item/Weapons.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Item/Weapons.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/untitled/Character/Hero.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/Character/Hero.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/Item/Weapons.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/Item/Weapons.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

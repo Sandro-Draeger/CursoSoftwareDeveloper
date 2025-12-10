@@ -2,9 +2,13 @@ package Tavern;
 
 import Item.Item;
 import Character.Hero;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+
+import Item.Consumable;
+import Item.Weapons;
 
 import Item.Item;
 
@@ -28,7 +32,8 @@ public class Shop extends Tavern {
 
         return result;
     }
-//exibir loja
+
+    //exibir loja
     public static void showShop(Shop shop, Hero hero) {
         Scanner sc = new Scanner(System.in);
         System.out.println("\n===== WELCOME TO THE SHOP =====\n");
@@ -37,7 +42,7 @@ public class Shop extends Tavern {
 
         for (int i = 0; i < todayStock.size(); i++) {
             Item item = todayStock.get(i);
-            System.out.println((i + 1) + " - " + item.getName() + "|" + item.getEffect() +" (" + item.getPrice() + "nc)");
+            System.out.println((i + 1) + " - " + item.getName() + "|" + item.getEffect() + " (" + item.getPrice() + "nc)");
         }
 
         System.out.println("\nYou have: " + hero.getGold() + "nc");
@@ -63,12 +68,34 @@ public class Shop extends Tavern {
 
         Item selectedItem = todayStock.get(index);
 
-        if (selectedItem.getPrice() <= hero.getGold()) {
-            hero.setGold(hero.getGold() - selectedItem.getPrice());
-            hero.getInventory().add(selectedItem);
-            System.out.println(selectedItem.getName()+"added to your inventory");
-        } else {
-            System.out.println("You don't have enough Noxian crowns.");
+        if (selectedItem instanceof Consumable) {
+
+            if (selectedItem.getPrice() <= hero.getGold()) {
+                hero.setGold(hero.getGold() - selectedItem.getPrice());
+                hero.getInventory().add(selectedItem);
+                System.out.println(selectedItem.getName() + " added to your inventory");
+            } else {
+                System.out.println("You don't have enough Noxian crowns.");
+            }
+
+        } else if (selectedItem instanceof Weapons) {
+
+            Weapons weapon = (Weapons) selectedItem;
+
+            if (weapon.getAbleToUse().equals(hero.getPlayer())) {
+
+                if (selectedItem.getPrice() <= hero.getGold()) {
+                    hero.setGold(hero.getGold() - selectedItem.getPrice());
+                    hero.getInventory().add(selectedItem);
+                    System.out.println(selectedItem.getName() + " added to your inventory"); //TODO: Modificar para Upgrade e adicionar status ao jogador;
+                } else {
+                    System.out.println("You don't have enough Noxian crowns.");
+                }
+
+            } else {
+                System.out.println("You cannot wield this weapon! Required class: "
+                        + weapon.getAbleToUse());
+            }
         }
 
     }

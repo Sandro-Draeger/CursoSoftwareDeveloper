@@ -33,6 +33,18 @@ public abstract class Hero extends Entity {
         this.gold = gold;
     }
 
+    public ClassType getPlayer() {
+        return player;
+    }
+
+    public String getSpecialAbility() {
+        return specialAbility;
+    }
+
+    public int getAbilityDamage() {
+        return abilityDamage;
+    }
+
     public void heroDetails(){
         System.out.println("============STATUS============");
         System.out.println("* "+this.player);

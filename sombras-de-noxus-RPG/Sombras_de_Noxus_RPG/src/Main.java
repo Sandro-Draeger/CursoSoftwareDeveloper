@@ -23,7 +23,7 @@ public class Main {
         Consumable smallAttackBuff = new Consumable("Small Attack Increase", ItemType.ATTACK, 10, 40);
         Consumable bigAttackBuff = new Consumable("Big Attack Increase", ItemType.ATTACK, 20, 80);
 
-        // Legionnaire weapons
+        // Legionnaire weapons TODO: UPGRADE DE ITENS
         Weapons longSword = new Weapons("Long Sword", ItemType.ATTACK, 10, 100, ClassType.LEGIONNAIRE);
         Weapons greatAxe = new Weapons("Great Axe", ItemType.ATTACK, 18, 220, ClassType.LEGIONNAIRE);
 
@@ -83,6 +83,8 @@ public class Main {
 
         // escolher o nome
         player.chooseYourName();
+
+        player.setGold(200);
 
         // Mostra o detalhameno do personagem escolhido
         player.heroDetails();
