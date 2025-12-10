@@ -1,5 +1,5 @@
 package Enums;
 
 public enum ItemType {
-    HEAL, ATTACK
+    HEAL, ATTACK, ABILITY_DAMAGE
 }

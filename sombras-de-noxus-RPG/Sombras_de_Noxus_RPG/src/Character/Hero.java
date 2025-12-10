@@ -6,12 +6,18 @@ public abstract class Hero extends Entity {
     public ClassType player;
     public String specialAbility;
     public int abilityDamage;
+    public int gold;
 
-    public Hero(String name, int hp, int attack, ClassType player, String specialAbility, int abilityDamage) {
+    public Hero(String name, int hp, int attack, ClassType player, String specialAbility, int abilityDamage, int gold) {
         super(name, hp, attack);
         this.player = player;
         this.specialAbility = specialAbility;
         this.abilityDamage = abilityDamage;
+        this.gold = gold;
+    }
+
+    public int getGold() {
+        return gold;
     }
 
     public void heroDetails(){
@@ -21,6 +27,7 @@ public abstract class Hero extends Entity {
         System.out.println("* "+this.attack+" (atk)");
         System.out.println("* "+this.specialAbility+" (special attack)");
         System.out.println("* "+this.abilityDamage+" (special damage)");
+        System.out.println("* "+this.gold+" nc(Noxian Crowns)");
         System.out.println("==============================");
     }
 
@@ -32,7 +39,7 @@ public abstract class Hero extends Entity {
         System.out.println("[1] - Legionnaire");
         System.out.println("[2] - Bloody Mage");
         System.out.println("[3] - Crimson Archer");
-        System.out.println("[4] - Vanguard");
+        System.out.println("[4] - Red Bastion");
 
         int choose = input.nextInt();
 
@@ -63,6 +70,14 @@ public abstract class Hero extends Entity {
         String newName = input.next();
         setName(newName);
         System.out.println("Welcome! "+this.name+"! Your journey begins now.\n");
+    }
+
+    public void addGold(int gold){
+        this.gold += gold;
+    }
+
+    public void removeGold(int gold){
+        this.gold -= gold;
     }
 
 

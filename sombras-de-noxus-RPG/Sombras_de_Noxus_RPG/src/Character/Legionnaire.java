@@ -4,7 +4,7 @@ import Enums.ClassType;
 public class Legionnaire extends Hero {
 
     public Legionnaire() {
-        super("Legionnaire", 120, 30, ClassType.LEGIONNAIRE, "Demolish Strike", 50);
+        super("Legionnaire", 120, 30, ClassType.LEGIONNAIRE, "Demolish Strike", 50, 0);
     }
 
     @Override
