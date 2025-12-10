@@ -12,20 +12,19 @@ public abstract class Tavern {
 
     public static void showTavernMenu(Hero hero) {
         System.out.println("============================================================");
-        System.out.println("                 WELCOME TO THE NOXIAN HEARTH");
-        System.out.println("                        TAVERN, BRAVE " + hero.getName() + "!");
-        System.out.println("============================================================\n");
-
-        System.out.println("                 What would you like to do, warrior?\n");
-
-        System.out.println("                     [1] Enter the Shop");
-        System.out.println("                     [2] Gambling Games");
-        System.out.println("                     [3] Accept Missions");
-
-
+        System.out.println("                  WELCOME TO THE NOXIAN HEARTH");
+        System.out.println("                    TAVERN, BRAVE " + hero.getName() + "!");
         System.out.println("============================================================");
-        System.out.print("                     Choose an option: ");
+        System.out.println();
+        System.out.println("                  What would you like to do, warrior?");
+        System.out.println();
+        System.out.println("                        [1] Enter the Shop");
+        System.out.println("                        [2] Gambling Games");
+        System.out.println("                        [3] Accept Missions");
+        System.out.println();
         System.out.println("============================================================");
+        System.out.print  ("                        Choose an option: ");
+
     }
 
 

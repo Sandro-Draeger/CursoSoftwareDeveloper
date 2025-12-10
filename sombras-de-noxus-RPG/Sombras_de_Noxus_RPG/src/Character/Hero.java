@@ -29,6 +29,10 @@ public abstract class Hero extends Entity {
         return inventory;
     }
 
+    public void setGold(int gold) {
+        this.gold = gold;
+    }
+
     public void heroDetails(){
         System.out.println("============STATUS============");
         System.out.println("* "+this.player);
@@ -39,6 +43,20 @@ public abstract class Hero extends Entity {
         System.out.println("* "+this.gold+" nc(Noxian Crowns)");
         System.out.println("==============================");
     }
+
+    public void heroInventory() {
+        System.out.println("============ Inventory ============");
+
+        for (Item item : this.inventory) {
+            System.out.println("Name:   " + item.getName());
+            System.out.println("Effect: " + item.getEffect());
+            System.out.println("Type:   " + item.getType());
+            System.out.println("-----------------------------------");
+        }
+
+        System.out.println("===================================");
+    }
+
 
     // Função para definir a classe do personagem para o restante do game através de um imput do player.
     public static Hero chooseCharacter() {

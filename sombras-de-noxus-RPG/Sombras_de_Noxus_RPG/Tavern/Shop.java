@@ -4,6 +4,7 @@ import Item.Item;
 import Character.Hero;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 import Item.Item;
 
@@ -29,6 +30,7 @@ public class Shop extends Tavern {
     }
 //exibir loja
     public static void showShop(Shop shop, Hero hero) {
+        Scanner sc = new Scanner(System.in);
         System.out.println("\n===== WELCOME TO THE SHOP =====\n");
 
         ArrayList<Item> todayStock = shop.randomItems();
@@ -39,6 +41,36 @@ public class Shop extends Tavern {
         }
 
         System.out.println("\nYou have: " + hero.getGold() + "nc");
+
+        //compra do player
+        System.out.print("\nChoose an item (1-" + todayStock.size() + "), or 0 to exit: ");
+
+        int choice = sc.nextInt();
+
+        if (choice == 0) {
+            System.out.println("Leaving shop!");
+            return;
+        }
+
+        // Ajusta índice começando em 0
+        int index = choice - 1;
+
+        // Validação
+        if (index < 0 || index >= todayStock.size()) {
+            System.out.println("Invalid choice!");
+            return;
+        }
+
+        Item selectedItem = todayStock.get(index);
+
+        if (selectedItem.getPrice() <= hero.getGold()) {
+            hero.setGold(hero.getGold() - selectedItem.getPrice());
+            hero.getInventory().add(selectedItem);
+            System.out.println(selectedItem.getName()+"added to your inventory");
+        } else {
+            System.out.println("You don't have enough Noxian crowns.");
+        }
+
     }
 
 
