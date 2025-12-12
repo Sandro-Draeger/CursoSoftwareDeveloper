@@ -82,7 +82,7 @@ public class Mission extends Tavern{
                 default:
                     System.out.println("Invalid choice!");
             }
-            
+
             if (enemy.getHp() <= 0) {
                 System.out.println("You defeated " + enemy.getName() + "!");
                 battleOver = true;

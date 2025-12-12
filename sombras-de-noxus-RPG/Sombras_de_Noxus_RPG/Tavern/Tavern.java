@@ -47,28 +47,31 @@ public abstract class Tavern {
         System.out.println("[1] Yes, I'm in  |  [2] No, I'm out\n");
 
         int choice = input.nextInt();
+        if (hero.getGold() < 15) {
+            System.out.println("Not enough noxian crowns to play!");
+        } else {
+            switch (choice) {
+                case 1:
+                    if (gamblingResult()) {
+                        hero.setGold(hero.getGold() + 60);
+                        System.out.println("\nVictory! Your bet was right, warrior! You earned 60 noxian crowns. You now have " + hero.getGold() + " nc\n");
+                    } else {
+                        hero.setGold(hero.getGold() - 15);
+                        System.out.println("\nYou lost... luck was not on your side this time. You now have " + hero.getGold() + " nc\n");
+                    }
+                    Thread.sleep(2000);
+                    tavernMenu(shop, hero);
+                    break;
 
-        switch (choice) {
-            case 1:
-                if (gamblingResult()) {
-                    hero.setGold(hero.getGold() + 60);
-                    System.out.println("\nVictory! Your bet was right, warrior! You earned 60 noxian crowns. You now have " + hero.getGold() + " nc\n");
-                } else {
-                    hero.setGold(hero.getGold() - 15);
-                    System.out.println("\nYou lost... luck was not on your side this time. You now have " + hero.getGold() + " nc\n");
-                }
-                Thread.sleep(2000);
-                tavernMenu(shop, hero);
-                break;
+                case 2:
+                    tavernMenu(shop, hero);
+                    break;
 
-            case 2:
-                tavernMenu(shop, hero);
-                break;
-
-            default:
-                System.out.println("Invalid option.\n");
-                tavernMenu(shop, hero);
-                break;
+                default:
+                    System.out.println("Invalid option.\n");
+                    tavernMenu(shop, hero);
+                    break;
+            }
         }
     }
 
