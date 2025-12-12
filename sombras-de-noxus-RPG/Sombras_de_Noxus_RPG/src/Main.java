@@ -23,28 +23,29 @@ public class Main {
         Consumable smallAttackBuff = new Consumable("Small Attack Increase", ItemType.ATTACK, 10, 40);
         Consumable bigAttackBuff = new Consumable("Big Attack Increase", ItemType.ATTACK, 20, 80);
 
-// Legionnaire upgrades
-        Weapons crimsonCoating = new Weapons("Crimson Coating", ItemType.ATTACK, 8, 180, ClassType.LEGIONNAIRE);
-        Weapons blackSteelEdge = new Weapons("Blacksteel Edge", ItemType.ATTACK, 12, 260, ClassType.LEGIONNAIRE);
-        Weapons martialEssence = new Weapons("Martial Essence", ItemType.ATTACK, 18, 340, ClassType.LEGIONNAIRE);
+// Legionnaire – Sword Upgrades
+        Weapons swordUpgrade1 = new Weapons("Sword Upgrade I - Damage Boost", ItemType.ATTACK, 10, 180, ClassType.LEGIONNAIRE);
+        Weapons swordUpgrade2 = new Weapons("Sword Upgrade II - Sharpness Boost", ItemType.ATTACK, 15, 260, ClassType.LEGIONNAIRE);
+        Weapons swordUpgrade3 = new Weapons("Sword Upgrade III - Enhanced Blade", ItemType.ATTACK, 20, 340, ClassType.LEGIONNAIRE);
 
-// Bloody Mage upgrades
-        Weapons dragonBloodCore = new Weapons("Dragonblood Core", ItemType.ATTACK, 8, 180, ClassType.BLOODY_MAGE);
-        Weapons arcaneInfusion = new Weapons("Arcane Infusion", ItemType.ATTACK, 12, 260, ClassType.BLOODY_MAGE);
-        Weapons crimsonHeart = new Weapons("Crimson Heart", ItemType.ATTACK, 18, 340, ClassType.BLOODY_MAGE);
+// Bloody Mage – Staff Upgrades
+        Weapons staffUpgrade1 = new Weapons("Staff Upgrade I - Power Core", ItemType.ATTACK, 10, 180, ClassType.BLOODY_MAGE);
+        Weapons staffUpgrade2 = new Weapons("Staff Upgrade II - Arcane Channeling", ItemType.ATTACK, 15, 260, ClassType.BLOODY_MAGE);
+        Weapons staffUpgrade3 = new Weapons("Staff Upgrade III - Enhanced Focus", ItemType.ATTACK, 20, 340, ClassType.BLOODY_MAGE);
 
-// Crimson Archer upgrades
-        Weapons fireArrows = new Weapons("Fire Arrows", ItemType.ATTACK, 8, 180, ClassType.CRIMSON_ARCHER);
-        Weapons silverArrows = new Weapons("Silver Arrows", ItemType.ATTACK, 12, 260, ClassType.CRIMSON_ARCHER);
-        Weapons crimsonString = new Weapons("Crimson String", ItemType.ATTACK, 18, 340, ClassType.CRIMSON_ARCHER);
+// Crimson Archer – Bow Upgrades
+        Weapons bowUpgrade1 = new Weapons("Bow Upgrade I - Fire-Tipped Arrows", ItemType.ATTACK, 10, 180, ClassType.CRIMSON_ARCHER);
+        Weapons bowUpgrade2 = new Weapons("Bow Upgrade II - Silver-Tipped Arrows", ItemType.ATTACK, 15, 260, ClassType.CRIMSON_ARCHER);
+        Weapons bowUpgrade3 = new Weapons("Bow Upgrade III - Reinforced String", ItemType.ATTACK, 20, 340, ClassType.CRIMSON_ARCHER);
 
-// Red Bastion upgrades
-        Weapons bloodstoneReinforcement = new Weapons("Bloodstone Reinforcement", ItemType.ATTACK, 8, 150, ClassType.RED_BASTION);
-        Weapons runicPlating = new Weapons("Runic Plating", ItemType.ATTACK, 12, 220, ClassType.RED_BASTION);
-        Weapons impactCore = new Weapons("Impact Core", ItemType.ATTACK, 18, 300, ClassType.RED_BASTION);
+// Red Bastion – Shield Upgrades
+        Weapons shieldUpgrade1 = new Weapons("Shield Upgrade I - Reinforced Plating", ItemType.ATTACK, 10, 150, ClassType.RED_BASTION);
+        Weapons shieldUpgrade2 = new Weapons("Shield Upgrade II - Runic Layer", ItemType.ATTACK, 15, 220, ClassType.RED_BASTION);
+        Weapons shieldUpgrade3 = new Weapons("Shield Upgrade III - Impact Boost", ItemType.ATTACK, 20, 300, ClassType.RED_BASTION);
 
-// Universal upgrade
-        Weapons crimsonEssence = new Weapons("Crimson Essence", ItemType.ATTACK, 10, 200, null);
+// Universal
+        Weapons universalUpgrade = new Weapons("Universal Upgrade - Crimson Essence", ItemType.ATTACK, 12, 200, null);
+
 
 
         //Declaração da loja e adicição dos itens
@@ -54,19 +55,20 @@ public class Main {
         shop.add(bigHealPotion);
         shop.add(smallAttackBuff);
         shop.add(bigAttackBuff);
-        shop.add(crimsonCoating);
-        shop.add(blackSteelEdge);
-        shop.add(martialEssence);
-        shop.add(dragonBloodCore);
-        shop.add(arcaneInfusion);
-        shop.add(crimsonHeart);
-        shop.add(fireArrows);
-        shop.add(silverArrows);
-        shop.add(crimsonString);
-        shop.add(bloodstoneReinforcement);
-        shop.add(runicPlating);
-        shop.add(impactCore);
-        shop.add(crimsonEssence);
+        shop.add(swordUpgrade1);
+        shop.add(swordUpgrade2);
+        shop.add(swordUpgrade3);
+        shop.add(staffUpgrade1);
+        shop.add(staffUpgrade2);
+        shop.add(staffUpgrade3);
+        shop.add(bowUpgrade1);
+        shop.add(bowUpgrade2);
+        shop.add(bowUpgrade3);
+        shop.add(shieldUpgrade1);
+        shop.add(shieldUpgrade2);
+        shop.add(shieldUpgrade3);
+        shop.add(universalUpgrade);
+
 
         //Adicionar a Array a loja da Taverna
         Shop actualShop = new Shop(shop);

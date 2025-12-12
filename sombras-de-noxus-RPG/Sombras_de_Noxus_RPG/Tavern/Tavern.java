@@ -31,7 +31,7 @@ public abstract class Tavern {
 
     }
 
-    public static void gamblingGames(Shop shop, Hero hero) {
+    public static void gamblingGames(Shop shop, Hero hero) throws InterruptedException {
         Scanner input = new Scanner(System.in);
 
         System.out.println("\nIt costs 15nc to try your luck and role the dice!");
@@ -43,11 +43,13 @@ public abstract class Tavern {
         switch (choice) {
             case 1:
                 if (gamblingResult()) {
-                    System.out.println("\nVictory! Your bet was right, warrior! You earned 60 noxian crowns. Your now have "+hero.getGold()+" nc\n");
+                    System.out.println("\nVictory! Your bet was right, warrior! You earned 60 noxian crowns. Your now have " + hero.getGold() + " nc\n");
                     hero.setGold(hero.getGold() + 60);
                 } else {
                     System.out.println("\nYou lost... luck was not on your side this time.\n");
+                    hero.setGold(hero.getGold() - 15);
                 }
+                Thread.sleep(2000);
                 tavernMenu(shop, hero);
                 break;
 
@@ -63,7 +65,7 @@ public abstract class Tavern {
     }
 
 
-    public static boolean gamblingResult() {
+    public static boolean gamblingResult() throws InterruptedException {
         Scanner input = new Scanner(System.in);
         boolean result = false;
 
@@ -72,18 +74,18 @@ public abstract class Tavern {
 
         Random r = new Random();
 
+        Thread.sleep(2000);
         int dice = r.nextInt(6) + 1;
         System.out.println("The dice strikes the table and reveals: " + dice);
 
         if (betNum == dice) {
             result = true;
         }
-
         return result;
     }
 
 
-    public static void tavernMenu(Shop shop, Hero hero) {
+    public static void tavernMenu(Shop shop, Hero hero) throws InterruptedException {
         Scanner input = new Scanner(System.in);
         int option = -1;
 

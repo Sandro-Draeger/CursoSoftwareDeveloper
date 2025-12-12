@@ -45,13 +45,22 @@ public class Shop extends Tavern {
 
             for (int i = 0; i < todayStock.size(); i++) {
                 Item item = todayStock.get(i);
+
+                System.out.print((i + 1) + " - " + item.getName());
+                System.out.print(" | Effect: +" + item.getEffect());
+
                 if (item instanceof Weapons) {
-                    System.out.println((i + 1) + " - " + item.getName() + "|" + item.getEffect() + "|" + item.getClass() + " (" + item.getPrice() + "nc)");
-                } else {
-                    System.out.println((i + 1) + " - " + item.getName() + "|" + item.getEffect() + "|" + " (" + item.getPrice() + "nc)");
+                    Weapons w = (Weapons) item;
+                    if (w.getAbleToUse() != null) {
+                        System.out.print(" | Class: " + w.getAbleToUse());
+                    } else {
+                        System.out.print(" | Class: All");
+                    }
                 }
 
+                System.out.println(" | Price: " + item.getPrice() + "nc");
             }
+
 
             System.out.println("\nYou have: " + hero.getGold() + "nc");
 
