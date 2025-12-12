@@ -1,9 +1,11 @@
 package Character;
 import Enums.ClassType;
+import Item.Weapons;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 import Item.Item;
+import Item.Consumable;
 
 public abstract class Hero extends Entity {
     public ClassType player;
@@ -131,5 +133,28 @@ public abstract class Hero extends Entity {
         inventory.remove(item);
     }
 
+    //ações de batalha
+    public void attackEnemy(NPC enemy) {
+        enemy.hp -= this.attack;
+        System.out.println("You dealt " + this.attack + " damage!");
+    }
+
+    public void takeDamage(int damage) {
+        this.hp -= damage;
+        System.out.println("You received " + damage + " damage!");
+    }
+
+    public void useConsumable(Item potion){
+        if (potion instanceof Consumable && this.inventory.contains(potion)){
+            this.hp += potion.getEffect();
+        }
+    }
+    
+    public void useSpecialAtk(NPC enemy){
+        enemy.hp -= this.abilityDamage;
+        System.out.println("You dealt " + this.abilityDamage + " damage with your special ability");
+    }
 }
+
+
 

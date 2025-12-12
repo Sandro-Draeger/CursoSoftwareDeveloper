@@ -1,5 +1,5 @@
 import Character.Hero;
-import Character.Boss;
+import Character.NPC;
 import Enums.ClassType;
 import Enums.ItemType;
 import Item.Consumable;
@@ -76,12 +76,12 @@ public class Main {
         actualShop.randomItems();
 
         //Instanciar os Boss\s
-        Boss boss1 = new Boss("Noxian Brute", 190, 14, 1);
-        Boss boss2 = new Boss("Crimson Goliath", 240, 18, 2);
-        Boss boss3 = new Boss("Black Rose Enforcer", 295, 21, 3);
-        Boss boss4 = new Boss("Vladimir, The Crimson Reaper", 350, 24, 4);
-        Boss boss5 = new Boss("LeBlanc, The Pale Sorceress", 410, 28, 5);
-        Boss boss6 = new Boss("Mordekaiser, The Iron Revenant", 520, 34, 6);
+        NPC NPC1 = new NPC("Noxian Brute", 190, 14, 1);
+        NPC NPC2 = new NPC("Crimson Goliath", 240, 18, 2);
+        NPC NPC3 = new NPC("Black Rose Enforcer", 295, 21, 3);
+        NPC NPC4 = new NPC("Vladimir, The Crimson Reaper", 350, 24, 4);
+        NPC NPC5 = new NPC("LeBlanc, The Pale Sorceress", 410, 28, 5);
+        NPC NPC6 = new NPC("Mordekaiser, The Iron Revenant", 520, 34, 6);
 
 // =====================
 // Game Start
