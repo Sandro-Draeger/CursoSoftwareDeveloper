@@ -12,21 +12,29 @@ import Character.Hero;
 public abstract class Tavern {
 
     public static void showTavernMenu(Hero hero) {
-        System.out.println("============================================================");
-        System.out.println("                  WELCOME TO THE NOXIAN HEARTH");
-        System.out.println("                    TAVERN, BRAVE " + hero.getName() + "!");
-        System.out.println("============================================================");
+        final String RESET = "\u001B[0m";
+        final String RED = "\u001B[31m";
+        final String YELLOW = "\u001B[33m";
+        final String CYAN = "\u001B[36m";
+        final String WHITE = "\u001B[37m";
+
         System.out.println();
-        System.out.println("                  What would you like to do, warrior?");
+        System.out.println(RED + "                   ============================================" + RESET);
+        System.out.println(RED + "                            N O X I A N   H E A R T H" + RESET);
+        System.out.println(RED + "                                 T A V E R N" + RESET);
+        System.out.println(RED + "                   ============================================" + RESET);
         System.out.println();
-        System.out.println("                        [1] Enter the Shop");
-        System.out.println("                        [2] Gambling Games");
-        System.out.println("                        [3] Accept Missions");
-        System.out.println("                        [4] Inspect your Inventory");
-        System.out.println("                        [5] Review your current Status");
+        System.out.println("                        " + CYAN + "What will you do, " + YELLOW + hero.getName() + CYAN + "?" + RESET);
         System.out.println();
-        System.out.println("============================================================");
-        System.out.print("                        Choose an option: ");
+        System.out.println("                            " + YELLOW + "[1]" + WHITE + " Enter the Shop" + RESET);
+        System.out.println("                            " + YELLOW + "[2]" + WHITE + " Gambling Games" + RESET);
+        System.out.println("                            " + YELLOW + "[3]" + WHITE + " Accept Missions" + RESET);
+        System.out.println("                            " + YELLOW + "[4]" + WHITE + " Inspect Inventory" + RESET);
+        System.out.println("                            " + YELLOW + "[5]" + WHITE + " Review Status" + RESET);
+        System.out.println("                            " + YELLOW + "[0]" + WHITE + " Leave the Tavern" + RESET);
+        System.out.println();
+        System.out.println(RED + "                   ============================================" + RESET);
+        System.out.println("                            " + CYAN + "Choose an option:" + RESET);
         System.out.println();
 
     }
