@@ -1,6 +1,7 @@
 package Tavern;
 import java.util.Scanner;
 import Character.Hero;
+import Character.NPC;
 
 public class Mission extends Tavern{
 
@@ -43,6 +44,58 @@ public class Mission extends Tavern{
                 System.out.println("Invalid choice, great warrior. Choose a valid journey.");
                 break;
         }
+    }
 
+    public static void startBattle(Hero hero, NPC enemy) {
+        Scanner sc = new Scanner(System.in);
+        boolean battleOver = false;
+
+        System.out.println("A wild " + enemy.getName() + " appeared!");
+
+        while (!battleOver) {
+            System.out.println("\n--- Battle Menu ---");
+            System.out.println("1. Attack");
+            System.out.println("2. Special Ability");
+            System.out.println("3. Use Potion");
+            System.out.println("4. Flee");
+            System.out.print("Choose your action: ");
+            int choice = sc.nextInt();
+
+            switch (choice) {
+                case 1: // Attack
+                    hero.attackEnemy(enemy);
+                    break;
+
+                case 2: // Special Ability
+                    hero.useSpecialAtk(enemy);
+                    break;
+
+                case 3: // Use Potion
+              //TODO: adicionar uso de poçoes
+                    break;
+
+                case 4: // Flee
+                    System.out.println("You run from battle! Coward!");
+                    battleOver = true;
+                    break;
+
+                default:
+                    System.out.println("Invalid choice!");
+            }
+            
+            if (enemy.getHp() <= 0) {
+                System.out.println("You defeated " + enemy.getName() + "!");
+                battleOver = true;
+            }
+
+
+            hero.takeDamage(enemy.getAttack());
+            if (hero.getHp() <= 0) {
+                System.out.println("You have been defeated!");
+                battleOver = true;
+            }
+        }
     }
 }
+
+
