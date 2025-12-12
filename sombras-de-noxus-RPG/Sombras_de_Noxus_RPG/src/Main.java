@@ -107,6 +107,9 @@ public class Main {
 
         Tavern.tavernMenu(actualShop, player);
 
+        player.heroDetails();
+        player.heroInventory();
+
 
     }
 }

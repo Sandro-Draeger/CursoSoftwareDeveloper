@@ -1,5 +1,6 @@
 package Tavern;
 
+import java.util.Random;
 import java.util.Scanner;
 
 import Item.Item;
@@ -23,18 +24,59 @@ public abstract class Tavern {
         System.out.println("                        [3] Accept Missions");
         System.out.println();
         System.out.println("============================================================");
-        System.out.print  ("                        Choose an option: ");
+        System.out.print("                        Choose an option: ");
 
     }
 
-    public void gamblingGames(){
+    public static void gamblingGames(Shop shop, Hero hero) {
         Scanner input = new Scanner(System.in);
-        System.out.println("It costs 15nc to try your luck!");
+
+        System.out.println("\nIt costs 15nc to try your luck and role the dice!");
         System.out.println("Will you take the gamble?");
-        System.out.println("[1] Yes, I'm in  |  [2] No, I'm out");
+        System.out.println("[1] Yes, I'm in  |  [2] No, I'm out\n");
+
         int choice = input.nextInt();
 
-        switch ()
+        switch (choice) {
+            case 1:
+                if (gamblingResult()) {
+                    System.out.println("Victory! Your bet was right, warrior! You earned 60 noxian crowns.\n");
+                    hero.setGold(hero.getGold() + 60);
+                } else {
+                    System.out.println("You lost... luck was not on your side this time.\n");
+                }
+                tavernMenu(shop, hero);
+                break;
+
+            case 2:
+                tavernMenu(shop, hero);
+                break;
+
+            default:
+                System.out.println("Invalid option.\n");
+                tavernMenu(shop, hero);
+                break;
+        }
+    }
+
+
+    public static boolean gamblingResult() {
+        Scanner input = new Scanner(System.in);
+        boolean result = false;
+
+        System.out.println("Place your bet, warrior! Choose a number between 1 and 6:");
+        int betNum = input.nextInt();
+
+        Random r = new Random();
+
+        int dice = r.nextInt(6) + 1;
+        System.out.println("The dice strikes the table and reveals: " + dice);
+
+        if (betNum == dice) {
+            result = true;
+        }
+
+        return result;
     }
 
 
@@ -47,7 +89,8 @@ public abstract class Tavern {
             case 1:
                 Shop.showShop(shop, hero);
                 break;
-            case 2: //gambling games
+            case 2:
+                gamblingGames(shop, hero);
                 break;
             case 3: //missions
                 break;
