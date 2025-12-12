@@ -51,11 +51,11 @@ public abstract class Tavern {
         switch (choice) {
             case 1:
                 if (gamblingResult()) {
-                    System.out.println("\nVictory! Your bet was right, warrior! You earned 60 noxian crowns. Your now have " + hero.getGold() + " nc\n");
                     hero.setGold(hero.getGold() + 60);
+                    System.out.println("\nVictory! Your bet was right, warrior! You earned 60 noxian crowns. You now have " + hero.getGold() + " nc\n");
                 } else {
-                    System.out.println("\nYou lost... luck was not on your side this time.\n");
                     hero.setGold(hero.getGold() - 15);
+                    System.out.println("\nYou lost... luck was not on your side this time. You now have " + hero.getGold() + " nc\n");
                 }
                 Thread.sleep(2000);
                 tavernMenu(shop, hero);

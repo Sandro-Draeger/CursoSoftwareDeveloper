@@ -100,7 +100,6 @@ public class Main {
         // Mostra o detalhameno do personagem escolhido
         player.heroDetails();
 
-        GameHelper.printDivider();
 
         Thread.sleep(2000);
 
