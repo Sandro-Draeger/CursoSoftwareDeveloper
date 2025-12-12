@@ -23,24 +23,29 @@ public class Main {
         Consumable smallAttackBuff = new Consumable("Small Attack Increase", ItemType.ATTACK, 10, 40);
         Consumable bigAttackBuff = new Consumable("Big Attack Increase", ItemType.ATTACK, 20, 80);
 
-        // Legionnaire weapons TODO: UPGRADE DE ITENS
-        Weapons longSword = new Weapons("Long Sword", ItemType.ATTACK, 10, 100, ClassType.LEGIONNAIRE);
-        Weapons greatAxe = new Weapons("Great Axe", ItemType.ATTACK, 18, 220, ClassType.LEGIONNAIRE);
+// Legionnaire upgrades
+        Weapons crimsonCoating = new Weapons("Crimson Coating", ItemType.ATTACK, 8, 180, ClassType.LEGIONNAIRE);
+        Weapons blackSteelEdge = new Weapons("Blacksteel Edge", ItemType.ATTACK, 12, 260, ClassType.LEGIONNAIRE);
+        Weapons martialEssence = new Weapons("Martial Essence", ItemType.ATTACK, 18, 340, ClassType.LEGIONNAIRE);
 
-        // Bloody Mage weapons
-        Weapons crystalStaff = new Weapons("Crystal Staff", ItemType.ATTACK, 12, 120, ClassType.BLOODY_MAGE);
-        Weapons bloodChannelerStaff = new Weapons("Blood Channeler Staff", ItemType.ATTACK, 20, 260, ClassType.BLOODY_MAGE);
+// Bloody Mage upgrades
+        Weapons dragonBloodCore = new Weapons("Dragonblood Core", ItemType.ATTACK, 8, 180, ClassType.BLOODY_MAGE);
+        Weapons arcaneInfusion = new Weapons("Arcane Infusion", ItemType.ATTACK, 12, 260, ClassType.BLOODY_MAGE);
+        Weapons crimsonHeart = new Weapons("Crimson Heart", ItemType.ATTACK, 18, 340, ClassType.BLOODY_MAGE);
 
-        // Crimson Archer weapons
-        Weapons recurveBow = new Weapons("Recurve Bow", ItemType.ATTACK, 12, 120, ClassType.CRIMSON_ARCHER);
-        Weapons carmineLongbow = new Weapons("Carmine Longbow", ItemType.ATTACK, 18, 220, ClassType.CRIMSON_ARCHER);
+// Crimson Archer upgrades
+        Weapons fireArrows = new Weapons("Fire Arrows", ItemType.ATTACK, 8, 180, ClassType.CRIMSON_ARCHER);
+        Weapons silverArrows = new Weapons("Silver Arrows", ItemType.ATTACK, 12, 260, ClassType.CRIMSON_ARCHER);
+        Weapons crimsonString = new Weapons("Crimson String", ItemType.ATTACK, 18, 340, ClassType.CRIMSON_ARCHER);
 
-        // Red Bastion weapons
-        Weapons ironMace = new Weapons("Iron Mace", ItemType.ATTACK, 8, 80, ClassType.RED_BASTION);
-        Weapons towerHammer = new Weapons("Tower Hammer", ItemType.ATTACK, 14, 180, ClassType.RED_BASTION);
+// Red Bastion upgrades
+        Weapons bloodstoneReinforcement = new Weapons("Bloodstone Reinforcement", ItemType.ATTACK, 8, 150, ClassType.RED_BASTION);
+        Weapons runicPlating = new Weapons("Runic Plating", ItemType.ATTACK, 12, 220, ClassType.RED_BASTION);
+        Weapons impactCore = new Weapons("Impact Core", ItemType.ATTACK, 18, 300, ClassType.RED_BASTION);
 
-        // Universal weapon (usable by all classes)
-        Weapons crimsonOrb = new Weapons("Crimson Orb", ItemType.ATTACK, 8, 90, null);
+// Universal upgrade
+        Weapons crimsonEssence = new Weapons("Crimson Essence", ItemType.ATTACK, 10, 200, null);
+
 
 
         //Declaração da loja e adicição dos itens
@@ -50,15 +55,19 @@ public class Main {
         shop.add(bigHealPotion);
         shop.add(smallAttackBuff);
         shop.add(bigAttackBuff);
-        shop.add(longSword);
-        shop.add(greatAxe);
-        shop.add(crystalStaff);
-        shop.add(bloodChannelerStaff);
-        shop.add(recurveBow);
-        shop.add(carmineLongbow);
-        shop.add(ironMace);
-        shop.add(towerHammer);
-        shop.add(crimsonOrb);
+        shop.add(crimsonCoating);
+        shop.add(blackSteelEdge);
+        shop.add(martialEssence);
+        shop.add(dragonBloodCore);
+        shop.add(arcaneInfusion);
+        shop.add(crimsonHeart);
+        shop.add(fireArrows);
+        shop.add(silverArrows);
+        shop.add(crimsonString);
+        shop.add(bloodstoneReinforcement);
+        shop.add(runicPlating);
+        shop.add(impactCore);
+        shop.add(crimsonEssence);
 
         //Adicionar a Array a loja da Taverna
         Shop actualShop = new Shop(shop);
@@ -80,6 +89,7 @@ public class Main {
 
         // Jogador escolhe a classe
         Hero player = Hero.chooseCharacter();
+        //TODO: Notificar o jogador sobre a arma que esta usando e que pode ter futuros upgrades.
 
         // escolher o nome
         player.chooseYourName();
@@ -96,6 +106,7 @@ public class Main {
         GameHelper.printTavernInit();
 
         Tavern.tavernMenu(actualShop, player);
+
 
     }
 }

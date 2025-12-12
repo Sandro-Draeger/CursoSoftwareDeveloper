@@ -86,8 +86,8 @@ public class Shop extends Tavern {
 
                 if (selectedItem.getPrice() <= hero.getGold()) {
                     hero.setGold(hero.getGold() - selectedItem.getPrice());
-                    hero.getInventory().add(selectedItem);
-                    System.out.println(selectedItem.getName() + " added to your inventory"); //TODO: Modificar para Upgrade e adicionar status ao jogador;
+                    hero.setAttack(hero.getAttack() + selectedItem.getEffect());
+                    System.out.println(selectedItem.getName() + " upgraded your weapon in "+selectedItem.getEffect()+"++ atk");
                 } else {
                     System.out.println("You don't have enough Noxian crowns.");
                 }

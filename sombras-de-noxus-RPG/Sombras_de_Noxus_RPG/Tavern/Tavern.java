@@ -27,6 +27,16 @@ public abstract class Tavern {
 
     }
 
+    public void gamblingGames(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("It costs 15nc to try your luck!");
+        System.out.println("Will you take the gamble?");
+        System.out.println("[1] Yes, I'm in  |  [2] No, I'm out");
+        int choice = input.nextInt();
+
+        switch ()
+    }
+
 
     public static void tavernMenu(Shop shop, Hero hero) {
         Scanner input = new Scanner(System.in);
