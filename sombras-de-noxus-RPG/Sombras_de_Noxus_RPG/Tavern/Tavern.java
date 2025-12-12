@@ -22,9 +22,12 @@ public abstract class Tavern {
         System.out.println("                        [1] Enter the Shop");
         System.out.println("                        [2] Gambling Games");
         System.out.println("                        [3] Accept Missions");
+        System.out.println("                        [4] Inspect your Inventory");
+        System.out.println("                        [5] Review your current Status");
         System.out.println();
         System.out.println("============================================================");
         System.out.print("                        Choose an option: ");
+        System.out.println();
 
     }
 
@@ -40,10 +43,10 @@ public abstract class Tavern {
         switch (choice) {
             case 1:
                 if (gamblingResult()) {
-                    System.out.println("Victory! Your bet was right, warrior! You earned 60 noxian crowns.\n");
+                    System.out.println("\nVictory! Your bet was right, warrior! You earned 60 noxian crowns. Your now have "+hero.getGold()+" nc\n");
                     hero.setGold(hero.getGold() + 60);
                 } else {
-                    System.out.println("You lost... luck was not on your side this time.\n");
+                    System.out.println("\nYou lost... luck was not on your side this time.\n");
                 }
                 tavernMenu(shop, hero);
                 break;
@@ -82,20 +85,30 @@ public abstract class Tavern {
 
     public static void tavernMenu(Shop shop, Hero hero) {
         Scanner input = new Scanner(System.in);
-        showTavernMenu(hero);
-        int option = input.nextInt();
+        int option = -1;
 
-        switch (option) {
-            case 1:
-                Shop.showShop(shop, hero);
-                break;
-            case 2:
-                gamblingGames(shop, hero);
-                break;
-            case 3: //missions
-                break;
-            default:
-                System.out.println("Inlavid option, choose again.\n");
+        while (option != 3) {
+            showTavernMenu(hero);
+            option = input.nextInt();
+
+            switch (option) {
+                case 1:
+                    Shop.showShop(shop, hero);
+                    break;
+                case 2:
+                    gamblingGames(shop, hero);
+                    break;
+                case 3: //missions
+                    break;
+                case 4:
+                    hero.heroInventory();
+                    break;
+                case 5:
+                    hero.heroDetails();
+                    break;
+                default:
+                    System.out.println("Inlavid option, choose again.\n");
+            }
         }
 
 

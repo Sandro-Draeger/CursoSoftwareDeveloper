@@ -47,7 +47,6 @@ public class Main {
         Weapons crimsonEssence = new Weapons("Crimson Essence", ItemType.ATTACK, 10, 200, null);
 
 
-
         //Declaração da loja e adicição dos itens
         ArrayList shop = new ArrayList<>();
         shop.add(smallHealPotion);
@@ -92,7 +91,7 @@ public class Main {
         //TODO: Notificar o jogador sobre a arma que esta usando e que pode ter futuros upgrades.
 
         // escolher o nome
-        player.chooseYourName();
+        // player.chooseYourName();
 
         player.setGold(200);
 
@@ -106,9 +105,6 @@ public class Main {
         GameHelper.printTavernInit();
 
         Tavern.tavernMenu(actualShop, player);
-
-        player.heroDetails();
-        player.heroInventory();
 
 
     }

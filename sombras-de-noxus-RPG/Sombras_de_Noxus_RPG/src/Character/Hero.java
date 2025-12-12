@@ -80,7 +80,8 @@ public abstract class Hero extends Entity {
         System.out.println("[3] - Crimson Archer");
         System.out.println("[4] - Red Bastion");
 
-        int choose = input.nextInt();
+        //int choose = input.nextInt();
+        int choose = 1; //TODO: AJUSTAR
 
         switch (choose) {
             case 1:
