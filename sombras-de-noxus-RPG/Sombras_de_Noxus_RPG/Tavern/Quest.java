@@ -3,7 +3,7 @@ import java.util.Scanner;
 import Character.Hero;
 import Character.NPC;
 
-public class Mission extends Tavern{
+public abstract class Quest extends Tavern{
 
     public static void missionMenu(Hero hero){
         Scanner input = new Scanner(System.in);
@@ -46,36 +46,52 @@ public class Mission extends Tavern{
         }
     }
 
-    public static void startBattle(Hero hero, NPC enemy) {
+    public static void startBattle(Hero hero, NPC enemy) throws InterruptedException {
         Scanner sc = new Scanner(System.in);
         boolean battleOver = false;
+        int heroMaxHp = hero.getHp();
+        int enemyMaxHp = enemy.getHp();
 
-        System.out.println("A wild " + enemy.getName() + " appeared!");
+        System.out.println("\n===================================");
+        System.out.println("           A BATTLE BEGINS");
+        System.out.println("===================================");
+        System.out.println("A wild " + enemy.getName() + " appeared!\n");
 
         while (!battleOver) {
-            System.out.println("\n--- Battle Menu ---");
+
+            System.out.println("----------- STATUS -----------");
+            System.out.println("Hero HP:  " + hero.getHp() + " / " + heroMaxHp+"max");
+            System.out.println("Enemy HP: " + enemy.getHp() + " / " + enemyMaxHp+"max");
+            System.out.println("--------------------------------\n");
+
+            System.out.println("----------- BATTLE MENU -----------");
             System.out.println("1. Attack");
             System.out.println("2. Special Ability");
             System.out.println("3. Use Potion");
-            System.out.println("4. Flee");
+            System.out.println("4. Run");
             System.out.print("Choose your action: ");
+
             int choice = sc.nextInt();
 
+            System.out.println("\n-------------------------------------");
+
             switch (choice) {
-                case 1: // Attack
+                case 1:
+                    System.out.println("You attack!");
                     hero.attackEnemy(enemy);
                     break;
 
-                case 2: // Special Ability
+                case 2:
+                    System.out.println("You use "+hero.specialAbility);
                     hero.useSpecialAtk(enemy);
                     break;
 
-                case 3: // Use Potion
-              //TODO: adicionar uso de poçoes
+                case 3:
+                    hero.useConsumable();
                     break;
 
-                case 4: // Flee
-                    System.out.println("You run from battle! Coward!");
+                case 4:
+                    System.out.println("You have run from the battle.");
                     battleOver = true;
                     break;
 
@@ -83,17 +99,26 @@ public class Mission extends Tavern{
                     System.out.println("Invalid choice!");
             }
 
-            if (enemy.getHp() <= 0) {
-                System.out.println("You defeated " + enemy.getName() + "!");
-                battleOver = true;
-            }
+            System.out.println("\nWaiting for enemy response...");
+            Thread.sleep(900);
 
-
+            System.out.println("\n" + enemy.getName() + " attacks!");
             hero.takeDamage(enemy.getAttack());
-            if (hero.getHp() <= 0) {
-                System.out.println("You have been defeated!");
+            Thread.sleep(900);
+
+            if (enemy.getHp() <= 0) {
+                System.out.println("\nYou have defeated " + enemy.getName() + "!");
+                System.out.println("===================================");
                 battleOver = true;
             }
+
+            if (hero.getHp() <= 0) {
+                System.out.println("\nYou have been defeated...");
+                System.out.println("===================================");
+                battleOver = true;
+            }
+
+            System.out.println("-------------------------------------\n");
         }
     }
 }

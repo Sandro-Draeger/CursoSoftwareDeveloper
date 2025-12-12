@@ -1,12 +1,6 @@
 package Tavern;
-
 import java.util.Random;
 import java.util.Scanner;
-
-import Item.Item;
-
-import java.util.ArrayList;
-
 import Character.Hero;
 
 public abstract class Tavern {

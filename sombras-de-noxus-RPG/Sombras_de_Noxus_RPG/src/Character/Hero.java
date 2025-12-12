@@ -1,5 +1,6 @@
 package Character;
 import Enums.ClassType;
+import Enums.ItemType;
 import Item.Weapons;
 
 import java.util.ArrayList;
@@ -56,19 +57,6 @@ public abstract class Hero extends Entity {
         System.out.println("* "+this.abilityDamage+" (special damage)");
         System.out.println("* "+this.gold+" nc(Noxian Crowns)");
         System.out.println("==============================");
-    }
-
-    public void heroInventory() {
-        System.out.println("============ Inventory ============");
-
-        for (Item item : this.inventory) {
-            System.out.println("Name:   " + item.getName());
-            System.out.println("Effect: " + item.getEffect());
-            System.out.println("Type:   " + item.getType());
-            System.out.println("-----------------------------------");
-        }
-
-        System.out.println("===================================");
     }
 
 
@@ -133,6 +121,19 @@ public abstract class Hero extends Entity {
         inventory.remove(item);
     }
 
+    public void heroInventory() {
+        System.out.println("============ Inventory ============");
+
+        for (int i = 0; i < this.inventory.size(); i++) {
+            Item item = this.inventory.get(i);
+
+            System.out.println("[" + (i + 1) + "] | Name: " + item.getName() + " | Effect: " + item.getEffect() + " | Type: " + item.getType());
+            System.out.println("-----------------------------------");
+        }
+
+        System.out.println("===================================");
+    }
+
     //ações de batalha
     public void attackEnemy(NPC enemy) {
         enemy.hp -= this.attack;
@@ -144,10 +145,24 @@ public abstract class Hero extends Entity {
         System.out.println("You received " + damage + " damage!");
     }
 
-    public void useConsumable(Item potion){
-        heroInventory(); //TODO: fazer seleção do item
-        if (this.inventory.contains(potion)){
-            this.hp += potion.getEffect();
+    public void useConsumable(){
+        Scanner input = new Scanner(System.in);
+        heroInventory();
+        if (this.inventory.isEmpty()) {
+            System.out.println("You don't have any items to use.");
+
+        } else {
+            System.out.println("Choose one of your items to use:");
+
+
+        int index = input.nextInt()-1;
+        Item itemSelected = this.inventory.get(index);
+
+        if (itemSelected.getType() == ItemType.HEAL) {
+            this.hp += itemSelected.getEffect();
+        } else {
+            this.attack += itemSelected.getEffect();
+        }
         }
     }
 

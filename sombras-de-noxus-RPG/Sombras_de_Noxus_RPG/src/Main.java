@@ -4,7 +4,7 @@ import Enums.ClassType;
 import Enums.ItemType;
 import Item.Consumable;
 import Item.Weapons;
-import Tavern.Tavern;
+import Tavern.Quest;
 import Tavern.Shop;
 
 import java.util.ArrayList;
@@ -95,17 +95,12 @@ public class Main {
         // escolher o nome
         // player.chooseYourName();
 
-        player.setGold(200);
+        player.setGold(400);
 
         // Mostra o detalhameno do personagem escolhido
         player.heroDetails();
 
-
-        Thread.sleep(2000);
-
-        GameHelper.printTavernInit();
-
-        Tavern.tavernMenu(actualShop, player);
+        Quest.startBattle(player, NPC1);
 
 
     }
