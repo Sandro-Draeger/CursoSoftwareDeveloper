@@ -51,7 +51,6 @@ public abstract class Quest extends Tavern{
         boolean battleOver = false;
         int heroMaxHp = hero.getHp();
         int enemyMaxHp = enemy.getHp();
-        boolean enemyUseSpecial = false;
 
         System.out.println("\n===================================");
         System.out.println("           A BATTLE BEGINS");
@@ -95,6 +94,7 @@ public abstract class Quest extends Tavern{
                 case 4:
                     System.out.println("You have run from the battle.");
                     battleOver = true;
+                    Quest.missionMenu(hero);
                     break;
 
                 default:
@@ -105,7 +105,7 @@ public abstract class Quest extends Tavern{
             Thread.sleep(900);
 
 
-            if (!enemyUseSpecial && Math.random() < 0.30) {
+            if (Math.random() < 0.20) {
                 enemy.useSpecialAtk(hero);
             } else {
                 enemy.attackEnemy(hero);
