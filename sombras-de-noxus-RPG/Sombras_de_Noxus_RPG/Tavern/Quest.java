@@ -57,7 +57,6 @@ public abstract class Quest extends Tavern{
         System.out.println("===================================");
         System.out.println("A wild " + enemy.getName() + " appeared!\n");
 
-
         while (!battleOver) {
 
             System.out.println("----------- STATUS -----------");
@@ -65,6 +64,7 @@ public abstract class Quest extends Tavern{
             System.out.println("Enemy HP: " + enemy.getHp() + " / " + enemyMaxHp+"max");
             System.out.println("--------------------------------\n");
 
+            //Player Turn
             System.out.println("----------- BATTLE MENU -----------");
             System.out.println("1. Attack");
             System.out.println("2. Special Ability");
@@ -94,15 +94,23 @@ public abstract class Quest extends Tavern{
                 case 4:
                     System.out.println("You have run from the battle.");
                     battleOver = true;
-                    Quest.missionMenu(hero);
-                    break;
+                    Quest.missionMenu(hero); //TODO: Quando o usuario estiver dentro da Quest, tiro ele da luta mas mantenho na missao.
+                    return;
 
                 default:
                     System.out.println("Invalid choice!");
             }
 
+            if (enemy.getHp() <= 0) {
+                System.out.println("\nYou have defeated " + enemy.getName() + "!");
+                System.out.println("===================================");
+                battleOver = true;
+                return;
+            }
+
+            //Enemy Turn
             System.out.println("\nWaiting for enemy response...");
-            Thread.sleep(900);
+            Thread.sleep(1000);
 
 
             if (Math.random() < 0.20) {
@@ -111,14 +119,8 @@ public abstract class Quest extends Tavern{
                 enemy.attackEnemy(hero);
             }
 
+            Thread.sleep(1000);
 
-            Thread.sleep(900);
-
-            if (enemy.getHp() <= 0) {
-                System.out.println("\nYou have defeated " + enemy.getName() + "!");
-                System.out.println("===================================");
-                battleOver = true;
-            }
 
             if (hero.getHp() <= 0) {
                 System.out.println("\nYou have been defeated...");
