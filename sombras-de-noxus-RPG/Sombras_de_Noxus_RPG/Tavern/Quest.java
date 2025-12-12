@@ -51,11 +51,13 @@ public abstract class Quest extends Tavern{
         boolean battleOver = false;
         int heroMaxHp = hero.getHp();
         int enemyMaxHp = enemy.getHp();
+        boolean enemyUseSpecial = false;
 
         System.out.println("\n===================================");
         System.out.println("           A BATTLE BEGINS");
         System.out.println("===================================");
         System.out.println("A wild " + enemy.getName() + " appeared!\n");
+
 
         while (!battleOver) {
 
@@ -102,8 +104,14 @@ public abstract class Quest extends Tavern{
             System.out.println("\nWaiting for enemy response...");
             Thread.sleep(900);
 
-            System.out.println("\n" + enemy.getName() + " attacks!");
-            hero.takeDamage(enemy.getAttack());
+
+            if (!enemyUseSpecial && Math.random() < 0.30) {
+                enemy.useSpecialAtk(hero);
+            } else {
+                enemy.attackEnemy(hero);
+            }
+
+
             Thread.sleep(900);
 
             if (enemy.getHp() <= 0) {

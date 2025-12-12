@@ -69,19 +69,43 @@ public class Main {
         shop.add(shieldUpgrade3);
         shop.add(universalUpgrade);
 
-
         //Adicionar a Array a loja da Taverna
         Shop actualShop = new Shop(shop);
         //itens random
         actualShop.randomItems();
 
+
+
         //Instanciar os Boss\s
-        NPC NPC1 = new NPC("Noxian Brute", 190, 14, 1);
-        NPC NPC2 = new NPC("Crimson Goliath", 240, 18, 2);
-        NPC NPC3 = new NPC("Black Rose Enforcer", 295, 21, 3);
-        NPC NPC4 = new NPC("Vladimir, The Crimson Reaper", 350, 24, 4);
-        NPC NPC5 = new NPC("LeBlanc, The Pale Sorceress", 410, 28, 5);
-        NPC NPC6 = new NPC("Mordekaiser, The Iron Revenant", 520, 34, 6);
+
+// MISSÃO 1
+        NPC BanditScout = new NPC("Bandit Scout", 55, 6, "quick stab", 10, 1);
+        NPC BanditBruiser = new NPC("Bandit Bruiser", 90, 10, "heavy punch", 18, 1);
+
+// MISSÃO 2
+        NPC CrimsonAcolyte = new NPC("Crimson Acolyte", 70, 8, "blood bolt", 15, 1);
+        NPC BloodLeech = new NPC("Blood Leech", 40, 5, "life drain", 8, 1);
+        NPC AcolyteOfVladimir = new NPC("Acolyte of Vladimir", 140, 12, "blood slash", 25, 2);
+
+// MISSÃO 3
+        NPC ToxicSludge = new NPC("Toxic Sludge", 130, 11, "acid spit", 22, 2);
+        NPC CorruptedBeast = new NPC("Corrupted Beast", 190, 14, "wild maul", 28, 2);
+        NPC ChemBaronRenegadeCaptain = new NPC("Chem-Baron Renegade Captain", 260, 18, "toxic cleaver", 40, 3);
+
+// MISSÃO 4
+        NPC ArcaneWraith = new NPC("Arcane Wraith", 150, 14, "arcane burn", 28, 2);
+        NPC ZaunSentinelArmor = new NPC("Zaun Sentinel Armor", 220, 16, "gauntlet smash", 32, 3);
+        NPC BrokenHexCoreGolem = new NPC("Broken Hex Core Golem", 320, 20, "core burst", 45, 3);
+
+// MISSÃO 5
+        NPC CrimsonDrake = new NPC("Crimson Drake", 180, 16, "ember spit", 30, 2);
+        NPC RaptorBloodfang = new NPC("Raptor Bloodfang", 170, 18, "razor dive", 32, 3);
+        NPC ElderRedDrake = new NPC("Elder Red Drake", 360, 24, "inferno roar", 55, 4);
+
+// MISSÃO FINAL
+        NPC VladimirBoss = new NPC("Vladimir – Trifarix of Strength", 420, 26, "blood spear", 60, 4);
+        NPC LeBlancBoss = new NPC("LeBlanc – Trifarix of Cunning", 340, 22, "illusory strike", 45, 4);
+        NPC MordekaiserBoss = new NPC("Mordekaiser – Trifarix of Fear", 520, 30, "iron mace", 75, 5);
 
 // =====================
 // Game Start
@@ -100,7 +124,7 @@ public class Main {
         // Mostra o detalhameno do personagem escolhido
         player.heroDetails();
 
-        Quest.startBattle(player, NPC1);
+        Quest.startBattle(player, CrimsonDrake);
 
 
     }
