@@ -10,8 +10,6 @@ import java.util.Scanner;
 import Item.Consumable;
 import Item.Weapons;
 
-import Item.Item;
-
 public class Shop extends Tavern {
     private ArrayList<Item> allItems;
 
