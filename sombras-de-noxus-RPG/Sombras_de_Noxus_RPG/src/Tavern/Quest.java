@@ -1,15 +1,18 @@
 package Tavern;
+
 import java.util.Scanner;
+
 import Character.Hero;
 import Character.NPC;
 import Item.Item;
 import helper.GameHelper;
+
 import java.util.Scanner;
 
 
-public abstract class Quest extends Tavern{
+public abstract class Quest extends Tavern {
 
-    public static void questMenu(Hero hero){
+    public static void questMenu(Hero hero) {
         Scanner input = new Scanner(System.in);
         System.out.println("Great warrior " + hero.getName() + ", the path awaits. Choose your next journey.");
         GameHelper.printNoxusMap();
@@ -66,8 +69,8 @@ public abstract class Quest extends Tavern{
         while (!battleOver) {
 
             System.out.println("----------- STATUS -----------");
-            System.out.println("Hero HP:  " + hero.getHp() + " / " + heroMaxHp+"max");
-            System.out.println("Enemy HP: " + enemy.getHp() + " / " + enemyMaxHp+"max");
+            System.out.println("Hero HP:  " + hero.getHp() + " / " + heroMaxHp + "max");
+            System.out.println("Enemy HP: " + enemy.getHp() + " / " + enemyMaxHp + "max");
             System.out.println("--------------------------------\n");
 
             //Player Turn
@@ -89,7 +92,7 @@ public abstract class Quest extends Tavern{
                     break;
 
                 case 2:
-                    System.out.println("You use "+hero.specialAbility);
+                    System.out.println("You use " + hero.specialAbility);
                     hero.useSpecialAtk(enemy);
                     break;
 
@@ -146,55 +149,64 @@ public abstract class Quest extends Tavern{
         Scanner input = new Scanner(System.in);
         boolean startQuest = false; //validação se chegou a iniciar a quest.
         boolean endQuest = false; //validação se completou a quest ou nao.
+        int currentHp = hero.getHp();
 
         //if and else para mudar a msg
-        System.out.println("msg iniciail"); //TODO: Traduzir para o ingles e ajustar os textos de marcação.
+        if (startQuest) {
+            System.out.println("You return to the dusty roads of Noxus. The sky still hangs heavy and dark, and the wind smells of iron and gunpowder. The memory of your previous defeat lingers, but the bandits are still out there. Steel yourself; this time, survival depends on sharper wits and greater courage.\n");
+        } else {
+            System.out.println("You advance along the dusty roads of Noxus. The sky is heavy and dark, and the wind carries the scent of iron and gunpowder. Rumors speak of bandits attacking unwary travelers. Prepare yourself; survival depends on speed and cunning.\n");
+        }
 
-        System.out.println("escolha de caminhos, tipo esquerda, direita ou em frente");
+        System.out.println("You reach a fork in the road. Which path will you take?");
+        System.out.println("[1] Left | [2] Right | [3] Straight ahead\n");
         int choice = input.nextInt();
 
-        switch (choice){
+        switch (choice) {
             case 1:
-                System.out.println("você foi pego de surpresa por um vandalo Noxiano, você receber 30 de dano");
+                System.out.println("You are caught off guard by a Noxian vandal! You take 30 damage.");
                 hero.takeDamage(30);
-                System.out.println("HP atual: "+hero.getHp());
+                System.out.println("Current HP: " + hero.getHp() + "\n");
                 break;
             case 2:
-                System.out.println("você encontrou com um aldeao ferido, aceita ajuda-lo?");
-                System.out.println("[1] Sim | [2] Não");
+                System.out.println("You encounter a wounded villager. Do you help him?");
+                System.out.println("[1] Yes | [2] No");
                 int option = input.nextInt();
-                if (option==1){
-                    System.out.println("ganhou 50 noxian cronws de recompensa");
-                hero.addGold(50);
+                if (option == 1) {
+                    System.out.println("The villager thanks you and rewards you with 50 Noxian Crowns.");
+                    hero.addGold(50);
                 } else {
-                    System.out.println("o aldeao morreu, mas você segue sua jornada");
+                    System.out.println("The villager dies, but you continue on your journey.");
                 }
                 break;
             case 3:
-                System.out.println("você encontrou um baú com 15 noxian cronws");
+                System.out.println("You find a small chest containing 15 Noxian Crowns.");
                 hero.addGold(15);
                 break;
             default:
-                System.out.println("Opção invalida");
+                System.out.println("Invalid Option");
                 break;
         }
 
         //batalha contra o primeiro inimigo
-        System.out.println("você encontrou o "+enemy1.getName()+" se prepare para lutar...");
+        System.out.println("A rustle in the bushes catches your attention. " + enemy1.getName() + " emerges, quick and deadly. Prepare for battle!\n");
+
         startBattle(hero, enemy1);
         startQuest = true;
-        if (startBattle(hero, enemy1)){
-            System.out.println("boa jogador, vc ganhou sua primeira batalha, seu hp foi restaurado para seguir sua jornada.");
-            hero.setHp(hero.getHp()); //TODO: Rever se isso restaura a vida do player
+        if (startBattle(hero, enemy1)) {
+            System.out.println("Well done! You defeated the Bandit Scout. Your wounds are healed, and your journey continues.");
+            hero.setHp(currentHp);
         } else {
-            System.out.println("boa tentativa, deseja tentar novamente, ou voltar a Taverna?");
-            System.out.println("[1] Repetir Batalha | [2] Voltar a Taverna");
+            System.out.println("You fought bravely, but the Bandit Scout overpowered you. What will you do?");
+            System.out.println("[1] Retry Battle | [2] Return to the Tavern");
             choice = input.nextInt();
-            switch (choice){
-                case 1: startBattle(hero, enemy1);
-                break;
-                case 2: tavernMenu(shop, hero);
-                break;
+            switch (choice) {
+                case 1:
+                    startBattle(hero, enemy1);
+                    break;
+                case 2:
+                    tavernMenu(shop, hero);
+                    break;
             }
         }
     }
