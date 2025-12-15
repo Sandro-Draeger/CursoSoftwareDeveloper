@@ -2,6 +2,7 @@ package Tavern;
 import java.util.Scanner;
 import Character.Hero;
 import Character.NPC;
+import Item.Item;
 import helper.GameHelper;
 import java.util.Scanner;
 
@@ -50,9 +51,10 @@ public abstract class Quest extends Tavern{
         }
     }
 
-    public static void startBattle(Hero hero, NPC enemy) throws InterruptedException {
+    public static boolean startBattle(Hero hero, NPC enemy) throws InterruptedException {
         Scanner sc = new Scanner(System.in);
         boolean battleOver = false;
+        boolean playerWin = false;
         int heroMaxHp = hero.getHp();
         int enemyMaxHp = enemy.getHp();
 
@@ -99,7 +101,7 @@ public abstract class Quest extends Tavern{
                     System.out.println("You have run from the battle.");
                     battleOver = true;
                     Quest.questMenu(hero); //TODO: Quando o usuario estiver dentro da Quest, tiro ele da luta mas mantenho na missao.
-                    return;
+                    return playerWin;
 
                 default:
                     System.out.println("Invalid choice!");
@@ -109,7 +111,8 @@ public abstract class Quest extends Tavern{
                 System.out.println("\nYou have defeated " + enemy.getName() + "!");
                 System.out.println("===================================");
                 battleOver = true;
-                return;
+                playerWin = true;
+                return playerWin;
             }
 
             //Enemy Turn
@@ -134,17 +137,66 @@ public abstract class Quest extends Tavern{
 
             System.out.println("-------------------------------------\n");
         }
+        return playerWin;
     }
+
+
     //quest01
-    public static void borderOfNoxus(){
+    public static void borderOfNoxus(Hero hero, NPC enemy1, NPC enemy2, Shop shop) throws InterruptedException {
         Scanner input = new Scanner(System.in);
+        boolean startQuest = false; //validação se chegou a iniciar a quest.
         boolean endQuest = false; //validação se completou a quest ou nao.
+
+        //if and else para mudar a msg
         System.out.println("msg iniciail");
-        System.out.println("escolha de caminhos, tipo esquerda ou direita");
+
+        System.out.println("escolha de caminhos, tipo esquerda, direita ou em frente");
         int choice = input.nextInt();
 
-        
+        switch (choice){
+            case 1:
+                System.out.println("você foi pego de surpresa por um vandalo Noxiano, você receber 30 de dano");
+                hero.takeDamage(30);
+                System.out.println("HP atual: "+hero.getHp());
+                break;
+            case 2:
+                System.out.println("você encontrou com um aldeao ferido, aceita ajuda-lo?");
+                System.out.println("[1] Sim | [2] Não");
+                int option = input.nextInt();
+                if (option==1){
+                    System.out.println("ganhou 50 noxian cronws de recompensa");
+                hero.addGold(50);
+                } else {
+                    System.out.println("o aldeao morreu, mas você segue sua jornada");
+                }
+                break;
+            case 3:
+                System.out.println("você encontrou um baú com 15 noxian cronws");
+                hero.addGold(15);
+                break;
+            default:
+                System.out.println("Opção invalida");
+                break;
+        }
 
+        //batalha contra o primeiro inimigo
+        System.out.println("você encontrou o "+enemy1.getName()+" se prepare para lutar...");
+        startBattle(hero, enemy1);
+        startQuest = true;
+        if (startBattle(hero, enemy1)){
+            System.out.println("boa jogador, vc ganhou sua primeira batalha, seu hp foi restaurado para seguir sua jornada.");
+            hero.setHp(hero.getHp());
+        } else {
+            System.out.println("boa tentativa, deseja tentar novamente, ou voltar a Taverna?");
+            System.out.println("[1] Repetir Batalha | [2] Voltar a Taverna");
+            choice = input.nextInt();
+            switch (choice){
+                case 1: startBattle(hero, enemy1);
+                break;
+                case 2: tavernMenu(shop, hero);
+                break;
+            }
+        }
     }
 }
 
