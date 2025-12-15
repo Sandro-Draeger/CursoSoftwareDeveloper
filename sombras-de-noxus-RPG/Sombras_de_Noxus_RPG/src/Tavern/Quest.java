@@ -131,7 +131,6 @@ public abstract class Quest extends Tavern {
 
             Thread.sleep(1000);
 
-
             if (hero.getHp() <= 0) {
                 System.out.println("\nYou have been defeated...");
                 System.out.println("===================================");
