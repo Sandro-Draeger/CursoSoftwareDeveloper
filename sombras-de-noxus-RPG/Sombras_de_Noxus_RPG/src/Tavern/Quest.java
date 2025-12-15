@@ -2,12 +2,16 @@ package Tavern;
 import java.util.Scanner;
 import Character.Hero;
 import Character.NPC;
+import helper.GameHelper;
+import java.util.Scanner;
+
 
 public abstract class Quest extends Tavern{
 
-    public static void missionMenu(Hero hero){
+    public static void questMenu(Hero hero){
         Scanner input = new Scanner(System.in);
         System.out.println("Great warrior " + hero.getName() + ", the path awaits. Choose your next journey.");
+        GameHelper.printNoxusMap();
         int choice = input.nextInt();
 
         switch (choice) {
@@ -94,7 +98,7 @@ public abstract class Quest extends Tavern{
                 case 4:
                     System.out.println("You have run from the battle.");
                     battleOver = true;
-                    Quest.missionMenu(hero); //TODO: Quando o usuario estiver dentro da Quest, tiro ele da luta mas mantenho na missao.
+                    Quest.questMenu(hero); //TODO: Quando o usuario estiver dentro da Quest, tiro ele da luta mas mantenho na missao.
                     return;
 
                 default:
@@ -131,6 +135,19 @@ public abstract class Quest extends Tavern{
             System.out.println("-------------------------------------\n");
         }
     }
+    //quest01
+    public static void borderOfNoxus(){
+        Scanner input = new Scanner(System.in);
+        boolean endQuest = false; //validação se completou a quest ou nao.
+        System.out.println("msg iniciail");
+        System.out.println("escolha de caminhos, tipo esquerda ou direita");
+        int choice = input.nextInt();
+
+        
+
+    }
 }
+
+
 
 

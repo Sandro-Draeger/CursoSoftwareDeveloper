@@ -1,4 +1,6 @@
-import Character.Hero;
+package helper;
+
+
 
 public class GameHelper {
 

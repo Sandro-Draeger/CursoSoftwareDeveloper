@@ -106,7 +106,7 @@ public abstract class Tavern {
                     gamblingGames(shop, hero);
                     break;
                 case 3:
-                    Quest.missionMenu(hero);
+                    Quest.questMenu(hero);
                     break;
                 case 4:
                     hero.heroInventory();
@@ -118,7 +118,5 @@ public abstract class Tavern {
                     System.out.println("Inlavid option, choose again.\n");
             }
         }
-
-
     }
 }

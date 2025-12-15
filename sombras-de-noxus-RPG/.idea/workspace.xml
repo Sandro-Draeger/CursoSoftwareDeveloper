@@ -5,11 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b884a7f7-b454-441b-973d-f5d25e8db36e" name="Changes" comment="Ajustes nas classes e finalização dos exercivios de BD">
+      <change beforePath="$PROJECT_DIR$/../PromacaoWeb/Sandro.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PromacaoWeb/index.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Item/Consumable.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Item/Consumable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Item/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Item/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Item/Shop.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/GameHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/helper/GameHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Tavern/Quest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Tavern/Quest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Tavern/Tavern.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sombras_de_Noxus_RPG/src/Tavern/Tavern.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/GameHelper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/Tavern/Shop.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/Tavern/Shop.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/Tavern/Tavern.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/Tavern/Tavern.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,21 +52,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/sdevpt19/Desktop/PromacaoWeb/sombras-de-noxus-RPG",
-    "onboarding.tips.debug.path": "C:/Users/sdevpt19/Desktop/PromacaoWeb/sombras-de-noxus-RPG/untitled/src/Main.java",
-    "settings.editor.selected.configurable": "preferences.rainbow.brackets.color"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/sdevpt19/Desktop/PromacaoWeb/sombras-de-noxus-RPG&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/sdevpt19/Desktop/PromacaoWeb/sombras-de-noxus-RPG/untitled/src/Main.java&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.rainbow.brackets.color&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\sdevpt19\Desktop\PromacaoWeb\sombras-de-noxus-RPG\src" />
