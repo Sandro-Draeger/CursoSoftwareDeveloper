@@ -148,7 +148,7 @@ public abstract class Quest extends Tavern{
         boolean endQuest = false; //validação se completou a quest ou nao.
 
         //if and else para mudar a msg
-        System.out.println("msg iniciail");
+        System.out.println("msg iniciail"); //TODO: Traduzir para o ingles e ajustar os textos de marcação.
 
         System.out.println("escolha de caminhos, tipo esquerda, direita ou em frente");
         int choice = input.nextInt();
@@ -185,7 +185,7 @@ public abstract class Quest extends Tavern{
         startQuest = true;
         if (startBattle(hero, enemy1)){
             System.out.println("boa jogador, vc ganhou sua primeira batalha, seu hp foi restaurado para seguir sua jornada.");
-            hero.setHp(hero.getHp());
+            hero.setHp(hero.getHp()); //TODO: Rever se isso restaura a vida do player
         } else {
             System.out.println("boa tentativa, deseja tentar novamente, ou voltar a Taverna?");
             System.out.println("[1] Repetir Batalha | [2] Voltar a Taverna");

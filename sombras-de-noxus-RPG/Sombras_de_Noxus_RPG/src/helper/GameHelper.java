@@ -70,7 +70,7 @@ public class GameHelper {
 
 // LEGEND
         System.out.println(
-                "\n===================== LEGEND =====================\n" +
+                "\n===================== LEGEND =====================\n" + //TODO: ALTERAR NOME
                         "[1] " + GRAY + "BORDERS OF NOXUS — BANDIT REBELLION" + RESET + "\n" +
                         "[2] " + GRAY + "BLOOD RITUAL — ACOLYTE OF VLADIMIR" + RESET + "\n" +
                         "[3] " + RED  + "IMMORTAL BASTION SWAMP — CHEM-BARON CAPTAIN" + RESET + "\n" +
