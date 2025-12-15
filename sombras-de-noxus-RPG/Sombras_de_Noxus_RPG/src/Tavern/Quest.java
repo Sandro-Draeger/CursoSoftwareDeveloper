@@ -146,12 +146,12 @@ public abstract class Quest extends Tavern {
     //quest01
     public static void borderOfNoxus(Hero hero, NPC enemy1, NPC enemy2, Shop shop) throws InterruptedException {
         Scanner input = new Scanner(System.in);
-        boolean startQuest = false; //validação se chegou a iniciar a quest.
-        boolean endQuest = false; //validação se completou a quest ou nao.
-        int currentHp = hero.getHp();
+        boolean startedQuest = false; //validação se chegou a iniciar a quest.
+        boolean endedQuest = false; //validação se completou a quest ou nao.
+        int fullHp = hero.getHp();
 
         //if and else para mudar a msg
-        if (startQuest) {
+        if (startedQuest) {
             System.out.println("You return to the dusty roads of Noxus. The sky still hangs heavy and dark, and the wind smells of iron and gunpowder. The memory of your previous defeat lingers, but the bandits are still out there. Steel yourself; this time, survival depends on sharper wits and greater courage.\n");
         } else {
             System.out.println("You advance along the dusty roads of Noxus. The sky is heavy and dark, and the wind carries the scent of iron and gunpowder. Rumors speak of bandits attacking unwary travelers. Prepare yourself; survival depends on speed and cunning.\n");
@@ -191,10 +191,10 @@ public abstract class Quest extends Tavern {
         System.out.println("A rustle in the bushes catches your attention. " + enemy1.getName() + " emerges, quick and deadly. Prepare for battle!\n");
 
         startBattle(hero, enemy1);
-        startQuest = true;
+        startedQuest = true;
         if (startBattle(hero, enemy1)) {
             System.out.println("Well done! You defeated the Bandit Scout. Your wounds are healed, and your journey continues.");
-            hero.setHp(currentHp);
+            hero.setHp(fullHp);
         } else {
             System.out.println("You fought bravely, but the Bandit Scout overpowered you. What will you do?");
             System.out.println("[1] Retry Battle | [2] Return to the Tavern");
