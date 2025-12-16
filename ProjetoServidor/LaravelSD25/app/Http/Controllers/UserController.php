@@ -1,6 +1,9 @@
 <?php
 
+
+
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -14,7 +17,12 @@ class UserController extends Controller
 
     public function listUsers(){
         $usersThatWillComeFromDB = ['Manuela', 'Vitor','Alexandre', 'Bruno'];
-        return view('users.all_users', compact('usersThatWillComeFromDB'));
+
+        $usersFromDB = db::table('users')->get();
+
+
+
+        return view('users.all_users', compact('usersThatWillComeFromDB', 'usersFromDB'));
     }
 
 
@@ -23,6 +31,22 @@ class UserController extends Controller
         //no futuro carregamos dados da base de dados (query À BD)
         $users = ['Francisco', 'Luís','Rafaela', 'Maria'];
         return $users;
+    }
+
+    private function insertUserIntoDB(){
+    DB::table('users')->updateOrinsert(
+            ['email' =>'teste1@gmail.com'],
+            [
+            'name' =>'Joao',
+            'updated_at'=>now(),
+            'password' => '1234444'
+        ]);
+    }
+    private function deleteUser(){
+
+        DB::table('users')
+        ->where('email', 'sara@gmail.com')
+        ->delete();
     }
 
 }

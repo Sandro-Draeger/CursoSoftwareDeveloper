@@ -20,13 +20,13 @@ public function home()
     return view('homepage', compact('myName', 'userData', 'cesaeInfo'));
 }
 
-public function getCesaeInfo()
+private function getCesaeInfo()
 {
     return [
-        'name'    => 'Cesae',
-        'address' => 'rua tal',
-        'email'   => 'cesae@cesae.pt'
-    ];
+            'name' => 'Cesae',
+            'address' => 'Rua Ciríaco Cardoso 186, 4150-212 Porto',
+            'email' => 'cesae@cesae.pt'
+        ];
 }
 
         public function hello(){

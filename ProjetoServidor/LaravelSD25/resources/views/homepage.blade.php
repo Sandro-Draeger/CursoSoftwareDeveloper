@@ -10,7 +10,7 @@
     @endif
 
      <p>{{$userData['name']}} {{$userData['age']}}</p>
-     <p>{{$cesaeInfo['name']}}</p>
+     <p>{{$cesaeInfo['name']}} {{$cesaeInfo['email']}}  {{$cesaeInfo['address']}}</p>
 
     <img src="{{ asset('images/1lemur.jpg') }}" alt="Lemure Image">
     <ul>
