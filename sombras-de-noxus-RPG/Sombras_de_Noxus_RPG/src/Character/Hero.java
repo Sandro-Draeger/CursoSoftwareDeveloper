@@ -1,10 +1,12 @@
 package Character;
+
 import Enums.ClassType;
 import Enums.ItemType;
 import Item.Weapons;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import Item.Item;
 import Item.Consumable;
 
@@ -28,6 +30,7 @@ public abstract class Hero extends Entity {
     public int getGold() {
         return gold;
     }
+
     public ArrayList<Item> getInventory() {
         return inventory;
     }
@@ -48,14 +51,14 @@ public abstract class Hero extends Entity {
         return abilityDamage;
     }
 
-    public void heroDetails(){
+    public void heroDetails() {
         System.out.println("============STATUS============");
-        System.out.println("* "+this.player);
-        System.out.println("* "+this.hp+" (hp)");
-        System.out.println("* "+this.attack+" (atk)");
-        System.out.println("* "+this.specialAbility+" (special attack)");
-        System.out.println("* "+this.abilityDamage+" (special damage)");
-        System.out.println("* "+this.gold+" nc(Noxian Crowns)");
+        System.out.println("* " + this.player);
+        System.out.println("* " + this.hp + " (hp)");
+        System.out.println("* " + this.attack + " (atk)");
+        System.out.println("* " + this.specialAbility + " (special attack)");
+        System.out.println("* " + this.abilityDamage + " (special damage)");
+        System.out.println("* " + this.gold + " nc(Noxian Crowns)");
         System.out.println("==============================");
     }
 
@@ -93,21 +96,22 @@ public abstract class Hero extends Entity {
 
 
     }
+
     // função para que o usuário possa personalizar seu nickName no jogo
-    public void chooseYourName(){
+    public void chooseYourName() {
         Scanner input = new Scanner(System.in);
         System.out.println("\nNow brave hero, tell us the name that shall echo through legends:");
         String newName = input.next();
         setName(newName);
-        System.out.println("Welcome! "+this.name+"! Your journey begins now.\n");
+        System.out.println("Welcome! " + this.name + "! Your journey begins now.\n");
     }
 
     //manipulação gold
-    public void addGold(int gold){
+    public void addGold(int gold) {
         this.gold += gold;
     }
 
-    public void removeGold(int gold){
+    public void removeGold(int gold) {
         this.gold -= gold;
     }
 
@@ -145,7 +149,7 @@ public abstract class Hero extends Entity {
         System.out.println("You received " + damage + " damage!");
     }
 
-    public void useConsumable(){
+    public void useConsumable() {
         Scanner input = new Scanner(System.in);
         heroInventory();
         if (this.inventory.isEmpty()) {
@@ -155,18 +159,18 @@ public abstract class Hero extends Entity {
             System.out.println("Choose one of your items to use:");
 
 
-        int index = input.nextInt()-1;
-        Item itemSelected = this.inventory.get(index);
+            int index = input.nextInt() - 1;
+            Item itemSelected = this.inventory.get(index);
 
-        if (itemSelected.getType() == ItemType.HEAL) {
-            this.hp += itemSelected.getEffect();
-        } else {
-            this.attack += itemSelected.getEffect();
-        }
+            if (itemSelected.getType() == ItemType.HEAL) {
+                this.hp += itemSelected.getEffect();
+            } else {
+                this.attack += itemSelected.getEffect();
+            }
         }
     }
 
-    public void useSpecialAtk(NPC enemy){
+    public void useSpecialAtk(NPC enemy) {
         enemy.hp -= this.abilityDamage;
         System.out.println("You dealt " + this.abilityDamage + " damage with your special ability");
     }

@@ -1,4 +1,6 @@
-import Character.Hero;
+package helper;
+
+
 
 public class GameHelper {
 
@@ -19,7 +21,7 @@ public class GameHelper {
     public static void printNoxusMap() {
         // NOXIAN COLOR PALETTE
         String RED = "\u001B[31m";
-        String DARK_RED = "\u001B[38;5;88m"; // deeper red for TRIFARIX
+        String DARK_RED = "\u001B[38;5;88m";
         String GRAY = "\u001B[37m";
         String GREEN = "\u001B[32m";
         String RESET = "\u001B[0m";
@@ -68,7 +70,7 @@ public class GameHelper {
 
 // LEGEND
         System.out.println(
-                "\n===================== LEGEND =====================\n" +
+                "\n===================== SUMMARY =====================\n" +
                         "[1] " + GRAY + "BORDERS OF NOXUS — BANDIT REBELLION" + RESET + "\n" +
                         "[2] " + GRAY + "BLOOD RITUAL — ACOLYTE OF VLADIMIR" + RESET + "\n" +
                         "[3] " + RED  + "IMMORTAL BASTION SWAMP — CHEM-BARON CAPTAIN" + RESET + "\n" +

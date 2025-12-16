@@ -6,6 +6,7 @@ import Item.Consumable;
 import Item.Weapons;
 import Tavern.Quest;
 import Tavern.Shop;
+import Tavern.Tavern;
 
 import java.util.ArrayList;
 
@@ -117,14 +118,17 @@ public class Main {
         //TODO: Notificar o jogador sobre a arma que esta usando e que pode ter futuros upgrades.
 
         // escolher o nome
-        // player.chooseYourName();
+        player.chooseYourName();
 
         player.setGold(400);
 
         // Mostra o detalhameno do personagem escolhido
         player.heroDetails();
 
-        Quest.startBattle(player, CrimsonDrake);
+
+        Tavern.tavernMenu(actualShop, player);
+
+        //Quest.startBattle(player, CrimsonDrake);
 
 
     }
