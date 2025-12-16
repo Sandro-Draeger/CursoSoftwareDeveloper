@@ -12,7 +12,10 @@ Route::get('/welcome/{name}', [UtilController::class, 'welcome'])->name('welcome
 
 
 //rota nova para o formulário
-Route::get('/form',  [UserController::class, 'form'])->name('form');
+Route::get('/add-user',  [UserController::class, 'addUser'])->name('user.add');
+
+//rota nova para o formulário
+Route::get('/all-users',  [UserController::class, 'listUsers'])->name('user.all');
 
 
 Route::fallback(function () {

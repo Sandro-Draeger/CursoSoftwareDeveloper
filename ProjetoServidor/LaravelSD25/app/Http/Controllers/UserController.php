@@ -6,14 +6,25 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function form(){
-    return view('users.formpage');
+    public function addUser(){
+        $users = $this->getAllUsers();
+
+        return view('users.add_user', compact('users'));
     }
 
-    public function addForm(){
-        $users = ['Francisco', 'Ana', 'Maria', 'João'];
+    public function listUsers(){
+        $usersThatWillComeFromDB = ['Manuela', 'Vitor','Alexandre', 'Bruno'];
+        return view('users.all_users', compact('usersThatWillComeFromDB'));
+    }
 
-        return view('users.formpage', compact('users'));
+
+    private function getAllUsers(){
+
+        //no futuro carregamos dados da base de dados (query À BD)
+        $users = ['Francisco', 'Luís','Rafaela', 'Maria'];
+        return $users;
+    }
+
 }
-}
+
 
