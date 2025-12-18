@@ -11,6 +11,9 @@
         <li><a href="{{ route('user.all') }}">Adicionar Alunos</a></li>
         <li><a href="{{ route('tasks.add') }}">Adicionar Tasks</a></li>
         <li><a href="{{ route('task.all') }}">Visualizar Tasks</a></li>
+        <br>
+        <li><a href="{{ route('gift.add') }}">Adicionar Gifts</a></li>
+        <li><a href="{{ route('gift.all') }}">Visualizar Gift List</a></li>
     </ul>
 
 @endsection
