@@ -4,8 +4,9 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -16,13 +17,20 @@ class UserController extends Controller
     }
 
     public function listUsers(){
-        $usersThatWillComeFromDB = ['Manuela', 'Vitor','Alexandre', 'Bruno'];
+        
 
-        $usersFromDB = db::table('users')->get();
-
+        $usersFromDB = db::table('users')
+        ->get();
 
 
         return view('users.all_users', compact('usersThatWillComeFromDB', 'usersFromDB'));
+    }
+
+    public function viewUser($id){
+
+        $user = User::where('id', $id)->first();
+
+        return view('users.view_user', compact('user'));
     }
 
 
@@ -33,20 +41,40 @@ class UserController extends Controller
         return $users;
     }
 
-    private function insertUserIntoDB(){
-    DB::table('users')->updateOrinsert(
-            ['email' =>'teste1@gmail.com'],
-            [
-            'name' =>'Joao',
-            'updated_at'=>now(),
-            'password' => '1234444'
-        ]);
-    }
-    private function deleteUser(){
+    public function storeUser(Request $request){
+        //dd($request->all());
 
-        DB::table('users')
-        ->where('email', 'sara@gmail.com')
+           //validar se os dados recebidos estão em conformidade com a BAse de dados
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users|email',
+            'password' =>'min:8|required'
+        ]);
+
+        //inserir user na base de dados
+        User::insert([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+              return redirect()->route('user.add')->with('message', 'User adicionado com sucesso!');
+
+    }
+
+
+    public function deleteUser($id){
+
+        //se tiver tasks associadas, apaga
+        Db::table('tasks')
+        ->where('user_id', $id)
         ->delete();
+
+         DB::table('users')
+        ->where('id', $id)
+        ->delete();
+
+
+        return back();
     }
 
 }
