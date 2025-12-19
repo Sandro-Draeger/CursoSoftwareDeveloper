@@ -12,7 +12,8 @@ import java.util.Scanner;
 
 public abstract class Quest extends Tavern {
 
-    public static void questMenu(Hero hero) {
+
+    public static void questMenu(Hero hero, Shop shop) throws InterruptedException {
         Scanner input = new Scanner(System.in);
         System.out.println("Great warrior " + hero.getName() + ", the path awaits. Choose your next journey.");
         GameHelper.printNoxusMap();
@@ -20,8 +21,7 @@ public abstract class Quest extends Tavern {
 
         switch (choice) {
 
-            case 1: // Mission 1 TODO: Desenhar cada sala e suas sequencias de eventos.
-                // código da missão 1
+            case 1: borderOfNoxus(hero, shop);
                 break;
 
             case 2: // Mission 2
@@ -103,7 +103,6 @@ public abstract class Quest extends Tavern {
                 case 4:
                     System.out.println("You have run from the battle.");
                     battleOver = true;
-                    Quest.questMenu(hero); //TODO: Quando o usuario estiver dentro da Quest, tiro ele da luta mas mantenho na missao.
                     return playerWin;
 
                 default:
@@ -144,11 +143,15 @@ public abstract class Quest extends Tavern {
 
 
     //quest01
-    public static void borderOfNoxus(Hero hero, NPC enemy1, NPC enemy2, Shop shop) throws InterruptedException {
+    public static void borderOfNoxus(Hero hero, Shop shop) throws InterruptedException {
         Scanner input = new Scanner(System.in);
         boolean startedQuest = false; //validação se chegou a iniciar a quest.
         boolean endedQuest = false; //validação se completou a quest ou nao.
         int fullHp = hero.getHp();
+
+        //enemies
+        NPC BanditScout = new NPC("Bandit Scout", 55, 6, "quick stab", 10, 1);
+        NPC BanditBruiser = new NPC("Bandit Bruiser", 90, 10, "heavy punch", 18, 1);
 
         //if and else para mudar a msg
         if (startedQuest) {
@@ -163,8 +166,8 @@ public abstract class Quest extends Tavern {
 
         switch (choice) {
             case 1:
-                System.out.println("You are caught off guard by a Noxian vandal! You take 30 damage.");
-                hero.takeDamage(30);
+                System.out.println("You are caught off guard by a Noxian vandal! You receive 30 damage");
+                hero.setHp(fullHp-30);
                 System.out.println("Current HP: " + hero.getHp() + "\n");
                 break;
             case 2:
@@ -187,26 +190,33 @@ public abstract class Quest extends Tavern {
                 break;
         }
 
-        //batalha contra o primeiro inimigo
-        System.out.println("A rustle in the bushes catches your attention. " + enemy1.getName() + " emerges, quick and deadly. Prepare for battle!\n");
+        Thread.sleep(1000);
 
-        startBattle(hero, enemy1);
-        startedQuest = true;
-        if (startBattle(hero, enemy1)) {
-            System.out.println("Well done! You defeated the Bandit Scout. Your wounds are healed, and your journey continues.");
-            hero.setHp(fullHp);
-        } else {
-            System.out.println("You fought bravely, but the Bandit Scout overpowered you. What will you do?");
-            System.out.println("[1] Retry Battle | [2] Return to the Tavern");
-            choice = input.nextInt();
-            switch (choice) {
-                case 1:
-                    startBattle(hero, enemy1);
-                    break;
-                case 2:
-                    tavernMenu(shop, hero);
-                    break;
-            }
+        //batalha contra o primeiro inimigo
+        System.out.println("A rustle in the bushes catches your attention. " + BanditScout.getName() + " emerges, quick and deadly. Prepare for battle!\n");
+        System.out.println("[1]Lets go! |[2] I prefer to run");
+        choice = input.nextInt();
+        switch (choice){
+            case 1:
+                startBattle(hero, BanditScout);
+                startedQuest = true;
+                if (startBattle(hero, BanditScout)) {
+                    System.out.println("Well done! You defeated the Bandit Scout. Your wounds are healed, and your journey continues.");
+                    hero.setHp(fullHp);
+                } else {
+                    System.out.println("You fought bravely, but the Bandit Scout overpowered you. What will you do?");
+                    System.out.println("[1] Retry Battle | [2] Return to the Tavern");
+                    choice = input.nextInt();
+                    switch (choice) {
+                        case 1:
+                            startBattle(hero, BanditScout);
+                            break;
+                        case 2:
+                            tavernMenu(shop, hero);
+                            break;
+                    }
+                }
+            case 2: tavernMenu(shop, hero);
         }
     }
 }

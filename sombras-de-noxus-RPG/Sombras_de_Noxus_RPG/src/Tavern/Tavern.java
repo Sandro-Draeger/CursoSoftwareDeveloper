@@ -2,6 +2,8 @@ package Tavern;
 import java.util.Random;
 import java.util.Scanner;
 import Character.Hero;
+import Tavern.Quest;
+import Character.NPC;
 
 public abstract class Tavern {
 
@@ -54,8 +56,7 @@ public abstract class Tavern {
                         System.out.println("\nYou lost... luck was not on your side this time. You now have " + hero.getGold() + " nc\n");
                     }
                     Thread.sleep(2000);
-                    tavernMenu(shop, hero);
-                    break;
+                    return;
 
                 case 2:
                     tavernMenu(shop, hero);
@@ -106,7 +107,7 @@ public abstract class Tavern {
                     gamblingGames(shop, hero);
                     break;
                 case 3:
-                    Quest.questMenu(hero);
+                    Quest.questMenu(hero, shop);
                     break;
                 case 4:
                     hero.heroInventory();
