@@ -5,8 +5,8 @@ public class NPC extends Entity{
     public String specialAbility;
     public int abilityDamage;
 
-    public NPC(String name, int hp, int attack, String specialAbility, int abilityDamage, int difficulty) {
-        super(name, hp, attack);
+    public NPC(String name, int hp, int maxHp, int attack, String specialAbility, int abilityDamage, int difficulty) {
+        super(name, hp, maxHp, attack);
         this.difficulty = difficulty;
         this.specialAbility = specialAbility;
         this.abilityDamage = abilityDamage;

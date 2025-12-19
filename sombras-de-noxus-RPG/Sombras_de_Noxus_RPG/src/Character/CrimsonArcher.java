@@ -5,7 +5,7 @@ import Enums.ClassType;
 public class CrimsonArcher extends Hero{
 
     public CrimsonArcher() {
-        super("Crimson Archer", 110, 20, ClassType.CRIMSON_ARCHER,
+        super("Crimson Archer", 110, 110, 20, ClassType.CRIMSON_ARCHER,
                 "Hail of Arrows", 60, 0);
     }
 

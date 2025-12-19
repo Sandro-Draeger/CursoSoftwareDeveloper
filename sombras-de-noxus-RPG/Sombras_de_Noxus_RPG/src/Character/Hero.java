@@ -18,8 +18,8 @@ public abstract class Hero extends Entity {
     public ArrayList<Item> inventory;
 
 
-    public Hero(String name, int hp, int attack, ClassType player, String specialAbility, int abilityDamage, int gold) {
-        super(name, hp, attack);
+    public Hero(String name, int hp, int maxHp, int attack, ClassType player, String specialAbility, int abilityDamage, int gold) {
+        super(name, hp, maxHp, attack);
         this.player = player;
         this.specialAbility = specialAbility;
         this.abilityDamage = abilityDamage;
@@ -164,8 +164,10 @@ public abstract class Hero extends Entity {
 
             if (itemSelected.getType() == ItemType.HEAL) {
                 this.hp += itemSelected.getEffect();
+                System.out.println("You drink a healing potion and recover "+itemSelected.getEffect()+"hp");
             } else {
                 this.attack += itemSelected.getEffect();
+                System.out.println("Your weapon has been permanently enhanced. Each strike now carries "+itemSelected.getEffect()+"+ and increase your strength"); //TODO aumentar a força ao comprar e nao adicionar ao inventario
             }
         }
     }
