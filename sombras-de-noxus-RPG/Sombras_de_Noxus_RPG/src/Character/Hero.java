@@ -158,16 +158,12 @@ public abstract class Hero extends Entity {
         } else {
             System.out.println("Choose one of your items to use:");
 
-
             int index = input.nextInt() - 1;
             Item itemSelected = this.inventory.get(index);
 
             if (itemSelected.getType() == ItemType.HEAL) {
                 this.hp += itemSelected.getEffect();
                 System.out.println("You drink a healing potion and recover "+itemSelected.getEffect()+"hp");
-            } else {
-                this.attack += itemSelected.getEffect();
-                System.out.println("Your weapon has been permanently enhanced. Each strike now carries "+itemSelected.getEffect()+"+ and increase your strength"); //TODO aumentar a força ao comprar e nao adicionar ao inventario
             }
         }
     }

@@ -40,7 +40,7 @@ public class Riddle {
                     add("Louse");
                     add("Flea");
                     add("Ant");
-                }} //TODO Adicionar numeros para o usuario selecionar / lembrar dos indices +1
+                }}
         ));
 
         riddles.add(new Riddle("What gets bigger the more you take away?", 2,
@@ -132,7 +132,6 @@ public class Riddle {
         int index = random.nextInt(riddles.size());
         return riddles.get(index);
     }
-    // TODO Funcao para validar resposta do usuario / parametro um int retorna um bollean
 
     }
 

@@ -141,8 +141,9 @@ public class Main {
         // Mostra o detalhameno do personagem escolhido
         player.heroDetails();
 
+        Quest.riddleBattle(player,BloodLeech);
 
-        Tavern.tavernMenu(actualShop, player);
+        //Tavern.tavernMenu(actualShop, player);
 
         //Quest.startBattle(player, CrimsonDrake);
 

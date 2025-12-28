@@ -139,147 +139,75 @@ public abstract class Quest {
         }
     }
 
-    public ArrayList<Riddle> initRiddles() {
-
-        ArrayList<Riddle> riddles = new ArrayList<>();
-
-        riddles.add(new Riddle("What walks with its feet on its head?", 1,
-                new ArrayList<>() {{
-                    add("Louse");
-                    add("Flea");
-                    add("Ant");
-                }}
-        ));
-
-        riddles.add(new Riddle("What gets bigger the more you take away?", 2,
-                new ArrayList<>() {{
-                    add("Bag");
-                    add("Hole");
-                    add("Void");
-                }}
-        ));
-
-        riddles.add(new Riddle("What is born big and dies small?", 3,
-                new ArrayList<>() {{
-                    add("Candle");
-                    add("Tree");
-                    add("Pencil");
-                }}
-        ));
-
-        riddles.add(new Riddle("What has a mouth but does not speak, and a bed but does not sleep?", 1,
-                new ArrayList<>() {{
-                    add("River");
-                    add("Cave");
-                    add("Valley");
-                }}
-        ));
-
-        riddles.add(new Riddle("What goes up when the rain comes down?", 2,
-                new ArrayList<>() {{
-                    add("Cloud");
-                    add("Umbrella");
-                    add("River");
-                }}
-        ));
-
-        riddles.add(new Riddle("What passes in front of the sun without casting a shadow?", 3,
-                new ArrayList<>() {{
-                    add("Cloud");
-                    add("Bird");
-                    add("Wind");
-                }}
-        ));
-
-        riddles.add(new Riddle("What runs but never leaves its place?", 1,
-                new ArrayList<>() {{
-                    add("Clock");
-                    add("River");
-                    add("Person");
-                }}
-        ));
-
-        riddles.add(new Riddle("What has teeth but cannot eat?", 2,
-                new ArrayList<>() {{
-                    add("Dog");
-                    add("Comb");
-                    add("Saw");
-                }}
-        ));
-
-        riddles.add(new Riddle("What can be seen by everyone but cannot be touched?", 1,
-                new ArrayList<>() {{
-                    add("Shadow");
-                    add("Air");
-                    add("Light");
-                }}
-        ));
-
-        riddles.add(new Riddle("What creature walks on four legs in the morning, two at noon, and three in the evening?", 3,
-                new ArrayList<>() {{
-                    add("Animal");
-                    add("Old man");
-                    add("Human");
-                }}
-        ));
-
-        return riddles;
-    }
 
     public static void riddleBattle(Hero hero, NPC enemy) throws InterruptedException {
-        Scanner sc = new Scanner(System.in);
-        boolean battleOver = false;
+        Scanner input = new Scanner(System.in);
         ArrayList<Riddle> riddles = Riddle.initRiddles();
-
+        enemy.setMaxHp(hero.getMaxHp());
+        enemy.setHp(hero.getHp()); //ambos teram as mesmas chances de ganhar, como nao tem poção, a vida do player será o parametro
 
         System.out.println("\n===================================");
-        System.out.println("           RIDDLE");
+        System.out.println("           RIDDLE BATTLE");
         System.out.println("===================================");
         System.out.println("A wild " + enemy.getName() + " appeared!\n");
+        System.out.println("The enemy does not fight with weapons, but with knowledge." +
+                "\nIt will challenge you with riddles.\nFor each correct answer, the enemy suffers 30 damage." +
+                "\nFor each wrong answer, you suffer 30 damage.\nNo potions, abilities, or items can be used in this trial." +
+                "\nChoose wisely — intelligence is your only weapon.");
 
-        while (!battleOver) {
 
+        while (true) {
+
+            // STATUS
             System.out.println("----------- STATUS -----------");
-            System.out.println("Hero HP:  " + hero.getHp() + " / " + hero.getMaxHp() + "max");
-            System.out.println("Enemy HP: " + enemy.getHp() + " / " + enemy.getMaxHp() + "max");
+            System.out.println("Hero HP:  " + hero.getHp() + " / " + hero.getMaxHp() + " max");
+            System.out.println("Enemy HP: " + enemy.getHp() + " / " + enemy.getMaxHp() + " max");
             System.out.println("--------------------------------\n");
 
-            //Enemy Turn
+            // ENEMY TURN
             Riddle riddle = Riddle.getRandomRiddle(riddles);
-            //TODO criar dialogo para explicar o funcionamento da batalha.
+
             System.out.println(riddle.getQuestion());
 
-            //Player Turn
-            System.out.print("\nYour answer (or type 'run' to flee): "); //TODO digitar 0 para sair
+            for (int i = 0; i < riddle.getOptions().size(); i++) {
+                System.out.println((i + 1) + ". " + riddle.getOptions().get(i));
+            }
 
+            System.out.print("\nChoose your answer (1-3) or 0 to flee: ");
+            int playerAnswer = input.nextInt();
+
+            // FUGIR
+            if (playerAnswer == 0) {
+                System.out.println("You fled from the riddle battle!");
+                return;
+            }
 
             System.out.println("\nWaiting for enemy response...");
-            Thread.sleep(1000);
+            Thread.sleep(800);
 
-
-
-
-            if (enemy.getHp() <= 0) {
-                System.out.println("===================================");
-                battleOver = true;
-                break;
-            }
-
-
-
-
-            if (Math.random() < 0.20) {
-                enemy.useSpecialAtk(hero);
+            // CHECK ANSWER (1–3)
+            if (playerAnswer == riddle.getAnswer()) {
+                System.out.println("Correct answer!");
+                enemy.setHp(enemy.getHp() - 30);
+                System.out.println("You outsmart the enemy and deal 30 damage.");
             } else {
-                enemy.attackEnemy(hero);
+                System.out.println("Wrong answer!");
+                hero.takeDamage(30);
             }
 
-            Thread.sleep(1000);
+            Thread.sleep(800);
+
+            // END CONDITIONS
+            if (enemy.getHp() <= 0) {
+                System.out.println("\nYou defeated " + enemy.getName() + " with intelligence!");
+                System.out.println("===================================");
+                return;
+            }
 
             if (hero.getHp() <= 0) {
                 System.out.println("\nYou have been defeated...");
                 System.out.println("===================================");
-                battleOver = true;
+                return;
             }
 
             System.out.println("-------------------------------------\n");
@@ -293,7 +221,6 @@ public abstract class Quest {
     public static void borderOfNoxus(Hero hero, Shop shop) throws InterruptedException {
         Scanner input = new Scanner(System.in);
         boolean startedQuest = false; //validação se chegou a iniciar a quest.
-        boolean endedQuest = false; //validação se completou a quest ou nao.
         int fullHp = hero.getHp();
 
         //enemies
@@ -449,7 +376,6 @@ public abstract class Quest {
                                     + "The road grows quiet once more. Your wounds are tended, and victory is yours."
                     );
                     hero.setHp(fullHp);
-                    endedQuest = true;
                     Thread.sleep(1000);
                     questMenu(hero, shop);
 
