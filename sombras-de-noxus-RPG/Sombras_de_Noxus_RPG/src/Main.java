@@ -4,9 +4,8 @@ import Enums.ClassType;
 import Enums.ItemType;
 import Item.Consumable;
 import Item.Weapons;
-import Tavern.Quest;
-import Tavern.Shop;
-import Tavern.Tavern;
+import Game.Quest;
+import Game.Shop;
 
 import java.util.ArrayList;
 

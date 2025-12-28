@@ -1,4 +1,4 @@
-package Tavern;
+package Game;
 
 import Item.Item;
 import Character.Hero;

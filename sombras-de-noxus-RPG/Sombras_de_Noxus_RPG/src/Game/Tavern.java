@@ -1,9 +1,7 @@
-package Tavern;
+package Game;
 import java.util.Random;
 import java.util.Scanner;
 import Character.Hero;
-import Tavern.Quest;
-import Character.NPC;
 
 public abstract class Tavern {
 

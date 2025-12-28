@@ -1,4 +1,4 @@
-package Tavern;
+package Game;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -6,12 +6,9 @@ import java.util.Scanner;
 
 import Character.Hero;
 import Character.NPC;
-import Item.Item;
 import helper.GameHelper;
 
-import java.util.Scanner;
-
-import static Tavern.Tavern.tavernMenu;
+import static Game.Tavern.tavernMenu;
 
 
 public abstract class Quest {

@@ -1,6 +1,4 @@
-package Tavern;
-
-import Item.Item;
+package Game;
 
 import java.util.ArrayList;
 import java.util.Random;
