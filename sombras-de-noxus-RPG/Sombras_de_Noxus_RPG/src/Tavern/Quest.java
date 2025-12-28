@@ -1,5 +1,6 @@
 package Tavern;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import Character.Hero;
@@ -9,8 +10,10 @@ import helper.GameHelper;
 
 import java.util.Scanner;
 
+import static Tavern.Tavern.tavernMenu;
 
-public abstract class Quest extends Tavern {
+
+public abstract class Quest {
 
 
     public static void questMenu(Hero hero, Shop shop) throws InterruptedException {
@@ -136,6 +139,155 @@ public abstract class Quest extends Tavern {
         }
     }
 
+    public ArrayList<Riddle> initRiddles() {
+
+        ArrayList<Riddle> riddles = new ArrayList<>();
+
+        riddles.add(new Riddle("What walks with its feet on its head?", 1,
+                new ArrayList<>() {{
+                    add("Louse");
+                    add("Flea");
+                    add("Ant");
+                }}
+        ));
+
+        riddles.add(new Riddle("What gets bigger the more you take away?", 2,
+                new ArrayList<>() {{
+                    add("Bag");
+                    add("Hole");
+                    add("Void");
+                }}
+        ));
+
+        riddles.add(new Riddle("What is born big and dies small?", 3,
+                new ArrayList<>() {{
+                    add("Candle");
+                    add("Tree");
+                    add("Pencil");
+                }}
+        ));
+
+        riddles.add(new Riddle("What has a mouth but does not speak, and a bed but does not sleep?", 1,
+                new ArrayList<>() {{
+                    add("River");
+                    add("Cave");
+                    add("Valley");
+                }}
+        ));
+
+        riddles.add(new Riddle("What goes up when the rain comes down?", 2,
+                new ArrayList<>() {{
+                    add("Cloud");
+                    add("Umbrella");
+                    add("River");
+                }}
+        ));
+
+        riddles.add(new Riddle("What passes in front of the sun without casting a shadow?", 3,
+                new ArrayList<>() {{
+                    add("Cloud");
+                    add("Bird");
+                    add("Wind");
+                }}
+        ));
+
+        riddles.add(new Riddle("What runs but never leaves its place?", 1,
+                new ArrayList<>() {{
+                    add("Clock");
+                    add("River");
+                    add("Person");
+                }}
+        ));
+
+        riddles.add(new Riddle("What has teeth but cannot eat?", 2,
+                new ArrayList<>() {{
+                    add("Dog");
+                    add("Comb");
+                    add("Saw");
+                }}
+        ));
+
+        riddles.add(new Riddle("What can be seen by everyone but cannot be touched?", 1,
+                new ArrayList<>() {{
+                    add("Shadow");
+                    add("Air");
+                    add("Light");
+                }}
+        ));
+
+        riddles.add(new Riddle("What creature walks on four legs in the morning, two at noon, and three in the evening?", 3,
+                new ArrayList<>() {{
+                    add("Animal");
+                    add("Old man");
+                    add("Human");
+                }}
+        ));
+
+        return riddles;
+    }
+
+    public static void riddleBattle(Hero hero, NPC enemy) throws InterruptedException {
+        Scanner sc = new Scanner(System.in);
+        boolean battleOver = false;
+        ArrayList<Riddle> riddles = Riddle.initRiddles();
+
+
+        System.out.println("\n===================================");
+        System.out.println("           RIDDLE");
+        System.out.println("===================================");
+        System.out.println("A wild " + enemy.getName() + " appeared!\n");
+
+        while (!battleOver) {
+
+            System.out.println("----------- STATUS -----------");
+            System.out.println("Hero HP:  " + hero.getHp() + " / " + hero.getMaxHp() + "max");
+            System.out.println("Enemy HP: " + enemy.getHp() + " / " + enemy.getMaxHp() + "max");
+            System.out.println("--------------------------------\n");
+
+            //Enemy Turn
+            Riddle riddle = Riddle.getRandomRiddle(riddles);
+            //TODO criar dialogo para explicar o funcionamento da batalha.
+            System.out.println(riddle.getQuestion());
+
+            //Player Turn
+            System.out.print("\nYour answer (or type 'run' to flee): "); //TODO digitar 0 para sair
+
+
+            System.out.println("\nWaiting for enemy response...");
+            Thread.sleep(1000);
+
+
+
+
+            if (enemy.getHp() <= 0) {
+                System.out.println("===================================");
+                battleOver = true;
+                break;
+            }
+
+
+
+
+            if (Math.random() < 0.20) {
+                enemy.useSpecialAtk(hero);
+            } else {
+                enemy.attackEnemy(hero);
+            }
+
+            Thread.sleep(1000);
+
+            if (hero.getHp() <= 0) {
+                System.out.println("\nYou have been defeated...");
+                System.out.println("===================================");
+                battleOver = true;
+            }
+
+            System.out.println("-------------------------------------\n");
+        }
+    }
+
+
+
 
     //quest01
     public static void borderOfNoxus(Hero hero, Shop shop) throws InterruptedException {
@@ -216,6 +368,7 @@ public abstract class Quest extends Tavern {
                 }
             case 2: tavernMenu(shop, hero);
         }
+
         Thread.sleep(1000);
 
         if (startedQuest) {
@@ -325,7 +478,6 @@ public abstract class Quest extends Tavern {
                 tavernMenu(shop, hero);
                 break;
         }
-
 
     }
 }
