@@ -1,6 +1,7 @@
 package Tavern;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 import Character.Hero;
@@ -24,11 +25,12 @@ public abstract class Quest {
 
         switch (choice) {
 
-            case 1: borderOfNoxus(hero, shop);
+            case 1:
+                borderOfNoxus(hero, shop);
                 break;
 
-            case 2: // Mission 2
-                // código da missão 2
+            case 2:
+                bloodRitual(hero, shop);
                 break;
 
             case 3: // Mission 3
@@ -47,7 +49,8 @@ public abstract class Quest {
                 // código da missão 6
                 break;
 
-            case 7: tavernMenu(shop, hero);
+            case 7:
+                tavernMenu(shop, hero);
                 break;
 
             default:
@@ -59,7 +62,6 @@ public abstract class Quest {
     public static void startBattle(Hero hero, NPC enemy) throws InterruptedException {
         Scanner sc = new Scanner(System.in);
         boolean battleOver = false;
-
 
 
         System.out.println("\n===================================");
@@ -215,8 +217,6 @@ public abstract class Quest {
     }
 
 
-
-
     //quest01
     public static void borderOfNoxus(Hero hero, Shop shop) throws InterruptedException {
         Scanner input = new Scanner(System.in);
@@ -267,16 +267,15 @@ public abstract class Quest {
         Thread.sleep(1000);
 
 
-
         //batalha contra o primeiro inimigo
         System.out.println("A rustle in the bushes catches your attention. " + BanditScout.getName() + " emerges, quick and deadly. Prepare for battle!\n");
         System.out.println("[1]Lets go! |[2] I prefer to run");
         choice = input.nextInt();
-        switch (choice){
+        switch (choice) {
             case 1:
                 startBattle(hero, BanditScout);
                 startedQuest = true;
-                if (hero.getHp()>0) {
+                if (hero.getHp() > 0) {
                     System.out.println("Well done! You defeated the Bandit Scout. Your wounds are healed, and your journey continues.");
                     hero.setHp(fullHp);
                     break;
@@ -293,7 +292,8 @@ public abstract class Quest {
                             break;
                     }
                 }
-            case 2: tavernMenu(shop, hero);
+            case 2:
+                tavernMenu(shop, hero);
         }
 
         Thread.sleep(1000);
@@ -386,16 +386,14 @@ public abstract class Quest {
                     System.out.println("[1] Challenge him again | [2] Retreat to the Tavern");
                     choice = input.nextInt();
 
-                    switch (choice) {
-                        case 1:
-                            startBattle(hero, BanditBruiser);
-                            break;
-                        case 2:
-                            tavernMenu(shop, hero);
-                            break;
+                    if (choice == 1) {
+                        startBattle(hero, BanditBruiser);
+                    } else {
+                        tavernMenu(shop, hero);
                     }
                 }
                 break;
+
 
             case 2:
                 System.out.println(
@@ -406,6 +404,194 @@ public abstract class Quest {
         }
 
     }
+
+    //quest02
+    public static void bloodRitual(Hero hero, Shop shop) throws InterruptedException {
+
+        Scanner input = new Scanner(System.in);
+        boolean startedQuest = false;
+        int fullHp = hero.getHp();
+
+        // Enemies
+        NPC CrimsonAcolyte = new NPC("Crimson Acolyte", 70, 70, 8, "blood bolt", 15, 1);
+        NPC BloodLeech = new NPC("Blood Leech", 40, 40, 5, "life drain", 8, 1);
+        NPC AcolyteOfVladimir = new NPC("Acolyte of Vladimir", 140, 140, 12, "blood slash", 25, 2);
+
+        // Intro
+        if (startedQuest) {
+            System.out.println(
+                    "Once again, you feel the pull of dark magic beneath Noxus. "
+                            + "The metallic scent of blood fills the air, and whispers of the Crimson Circle echo in your mind.\n"
+            );
+        } else {
+            System.out.println(
+                    "Beneath the iron streets of Noxus, rumors speak of a forbidden gathering. "
+                            + "The Crimson Circle prepares a ritual — fueled by blood and devotion. "
+                            + "Those who vanish near the old catacombs are never seen again.\n"
+            );
+        }
+
+        Thread.sleep(1000);
+
+        // RANDOM EVENT (replaces first choice)
+        Random random = new Random();
+        int randomEvent = random.nextInt(3) + 1;
+
+        System.out.println(
+                "You move deeper into the underground halls of Noxus, the air heavy with blood magic...\n"
+        );
+
+        switch (randomEvent) {
+
+            case 1:
+                System.out.println(
+                        "Forbidden chants echo through the tunnels.\n"
+                                + "Before you can react, a surge of blood magic erupts toward you!"
+                );
+                hero.takeDamage(25);
+                System.out.println("Current HP: " + hero.getHp() + "\n");
+                break;
+
+            case 2:
+                System.out.println(
+                        "A fresh trail of blood stains the stone floor.\n"
+                                + "Following it, you discover a pouch dropped by fleeing cultists."
+                );
+                hero.addGold(30);
+                System.out.println("You gain 30 Noxian Crowns.\n");
+                break;
+
+            case 3:
+                System.out.println(
+                        "You remain hidden in the shadows.\n"
+                                + "The cultists pass by unaware, leaving a few scattered coins behind."
+                );
+                hero.addGold(15);
+                System.out.println("You gain 15 Noxian Crowns.\n");
+                break;
+        }
+
+        Thread.sleep(1000);
+
+        // First battle
+        System.out.println(
+                "A hooded figure slowly turns toward you. "
+                        + CrimsonAcolyte.getName()
+                        + " raises his hand as blood begins to swirl around him.\n"
+        );
+        System.out.println("[1] Confront him | [2] Retreat to safety");
+
+        int choice = input.nextInt();
+
+        switch (choice) {
+            case 1:
+                startBattle(hero, CrimsonAcolyte);
+                startedQuest = true;
+
+                if (hero.getHp() > 0) {
+                    System.out.println(
+                            "The Crimson Acolyte collapses, his blood magic fading away. "
+                                    + "Your wounds close as you press forward."
+                    );
+                    hero.setHp(fullHp);
+                } else {
+                    System.out.println(
+                            "The acolyte overwhelms you with forbidden magic."
+                    );
+                    System.out.println("[1] Try again | [2] Return to the Tavern");
+                    choice = input.nextInt();
+
+                    if (choice == 1) {
+                        startBattle(hero, CrimsonAcolyte);
+                    } else {
+                        tavernMenu(shop, hero);
+                    }
+                }
+                break;
+
+            case 2:
+                tavernMenu(shop, hero);
+                break;
+        }
+
+        Thread.sleep(1000);
+
+        // Intermediate event
+        System.out.println(
+                "As you move forward, the blood beneath your feet begins to shift, alive with dark intent.\n"
+        );
+        System.out.println("How do you proceed?");
+        System.out.println("[1] Attempt to destroy it | [2] Move carefully through it\n");
+
+        choice = input.nextInt();
+
+        switch (choice) {
+            case 1:
+                System.out.println(
+                        "The blood reacts violently, forming sharp blades that tear into your armor!"
+                );
+                hero.takeDamage(20);
+                System.out.println("Current HP: " + hero.getHp() + "\n");
+                break;
+
+            case 2:
+                System.out.println(
+                        "From the pool of blood, a grotesque creature takes shape!"
+                );
+                startBattle(hero, BloodLeech);
+                if (hero.getHp() > 0) {
+                    hero.setHp(fullHp);
+                }
+                break;
+        }
+
+        Thread.sleep(1000);
+
+        // Final boss
+        System.out.println(
+                "At the heart of the ritual chamber stands a towering figure.\n"
+                        + "An "
+                        + AcolyteOfVladimir.getName()
+                        + " watches calmly, blood orbiting his body like a living weapon.\n"
+        );
+        System.out.println("[1] Interrupt the ritual | [2] Retreat to the Tavern");
+
+        choice = input.nextInt();
+
+        switch (choice) {
+            case 1:
+                startBattle(hero, AcolyteOfVladimir);
+
+                if (hero.getHp() > 0) {
+                    System.out.println(
+                            "With a final strike, the ritual collapses. "
+                                    + "The acolyte falls, and the Crimson Circle’s influence weakens — for now."
+                    );
+                    hero.setHp(fullHp);
+                    Thread.sleep(1000);
+                    questMenu(hero, shop);
+
+                } else {
+                    System.out.println(
+                            "The power granted by Vladimir’s teachings proves overwhelming."
+                    );
+                    System.out.println("[1] Challenge him again | [2] Retreat to the Tavern");
+                    choice = input.nextInt();
+
+                    if (choice == 1) {
+                        startBattle(hero, AcolyteOfVladimir);
+                    } else {
+                        tavernMenu(shop, hero);
+                    }
+                }
+                break;
+
+            case 2:
+                tavernMenu(shop, hero);
+                break;
+        }
+    }
+
 }
 
 
