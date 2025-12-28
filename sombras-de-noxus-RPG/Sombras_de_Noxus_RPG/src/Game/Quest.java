@@ -589,6 +589,166 @@ public abstract class Quest {
         }
     }
 
+    //quest03
+    public static void purgeImmortalBastionSwamp(Hero hero, Shop shop) throws InterruptedException {
+
+        Scanner input = new Scanner(System.in);
+        Random random = new Random();
+        int fullHp = hero.getHp();
+
+        // Enemies
+        NPC ToxicSludge = new NPC("Toxic Sludge", 130, 130, 11, "acid spit", 22, 2);
+        NPC CorruptedBeast = new NPC("Corrupted Beast", 190, 190, 14, "wild maul", 28, 2);
+        NPC ChemBaronRenegadeCaptain = new NPC(
+                "Chem-Baron Renegade Captain", 260, 260, 18, "toxic cleaver", 40, 3
+        );
+
+        System.out.println(
+                "You arrive at the swamps surrounding the Immortal Bastion.\n"
+                        + "The water is black, thick, and bubbling with chemical waste.\n"
+                        + "Noxus has attempted to purge this land before — without success.\n"
+        );
+
+        Thread.sleep(1000);
+
+        // evento inicial randomico
+        int introEvent = random.nextInt(3) + 1;
+
+        switch (introEvent) {
+            case 1:
+                System.out.println(
+                        "A toxic cloud rises from the swamp, burning your lungs!"
+                );
+                hero.takeDamage(30);
+                System.out.println("Current HP: " + hero.getHp() + "\n");
+                break;
+
+            case 2:
+                System.out.println(
+                        "You discover the remains of an old Noxian outpost.\n"
+                                + "Among the wreckage, a few Crowns still remain."
+                );
+                hero.addGold(35);
+                break;
+
+            case 3:
+                System.out.println(
+                        "An eerie silence allows you to mentally prepare for what lies ahead."
+                );
+                break;
+        }
+
+        Thread.sleep(1000);
+
+        // numero de batalhas possiveis
+        int encounters = random.nextInt(2) + 1;
+
+        for (int i = 1; i <= encounters; i++) {
+
+            NPC enemy;
+
+            int chances = random.nextInt(100);
+
+            if (chances < 60) {
+                enemy = ToxicSludge; // 60%
+            } else {
+                enemy = CorruptedBeast; // 40%
+            }
+
+            System.out.println(
+                    "Something stirs beneath the contaminated water...\n"
+                            + enemy.getName()
+                            + " rises from the swamp!\n"
+            );
+
+            System.out.println("[1] Fight | [2] Retreat to the Tavern");
+            int choice = input.nextInt();
+
+            if (choice == 2) {
+                tavernMenu(shop, hero);
+                return;
+            }
+
+            startBattle(hero, enemy);
+
+            if (hero.getHp() > 0) {
+                System.out.println(
+                        "You defeat the creature, but the swamp remains hostile."
+                );
+                hero.setHp(fullHp);
+            } else {
+                System.out.println(
+                        "You succumb to the swamp's toxic influence."
+                );
+                System.out.println("[1] Try again | [2] Retreat to the Tavern");
+                choice = input.nextInt();
+
+                if (choice == 1) {
+                    startBattle(hero, enemy);
+                } else {
+                    tavernMenu(shop, hero);
+                    return;
+                }
+            }
+
+            Thread.sleep(1000);
+        }
+
+        // chances de aparecer o boss ou nao
+        boolean bossAppears = random.nextInt(100) < 40;
+
+        if (!bossAppears) {
+            System.out.println(
+                    "After hours of struggle, the swamp finally grows quiet.\n"
+                            + "No dominant presence remains.\n"
+                            + "The purge was only partial, but sufficient for now."
+            );
+            questMenu(hero, shop);
+            return;
+        }
+
+        // Boss encounter
+        System.out.println(
+                "The ground trembles.\n"
+                        + "From the depths of the swamp emerges a man clad in chemical armor.\n"
+                        + ChemBaronRenegadeCaptain.getName()
+                        + " grips a blade dripping with toxins.\n"
+        );
+
+        System.out.println("[1] Confront the Captain | [2] Retreat to the Tavern");
+        int choice = input.nextInt();
+
+        if (choice == 2) {
+            tavernMenu(shop, hero);
+            return;
+        }
+
+        startBattle(hero, ChemBaronRenegadeCaptain);
+
+        if (hero.getHp() > 0) {
+            System.out.println(
+                    "With the fall of the Renegade Captain, chemical control over the swamp collapses.\n"
+                            + "Noxus reclaims part of the corrupted territory."
+            );
+            hero.setHp(fullHp);
+            Thread.sleep(1000);
+            questMenu(hero, shop);
+        } else {
+            System.out.println(
+                    "The Renegade Captain proves too powerful."
+            );
+            System.out.println("[1] Challenge him again | [2] Return to the Tavern");
+            choice = input.nextInt();
+
+            if (choice == 1) {
+                startBattle(hero, ChemBaronRenegadeCaptain);
+            } else {
+                tavernMenu(shop, hero);
+            }
+        }
+    }
+
+
 }
 
 
