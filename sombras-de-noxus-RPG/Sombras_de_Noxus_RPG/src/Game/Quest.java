@@ -75,6 +75,7 @@ public abstract class Quest {
     public static void startBattle(Hero hero, NPC enemy) throws InterruptedException {
         Scanner sc = new Scanner(System.in);
         boolean battleOver = false;
+        boolean specialAbilityUsed = false;
 
 
         System.out.println("\n===================================");
@@ -108,8 +109,14 @@ public abstract class Quest {
                     break;
 
                 case 2:
-                    System.out.println("You use " + hero.specialAbility);
-                    hero.useSpecialAtk(enemy);
+                    if(!specialAbilityUsed) {
+                        System.out.println("You use " + hero.specialAbility);
+                        hero.useSpecialAtk(enemy);
+                        specialAbilityUsed = true;
+                    } else {
+                        System.out.println("You already used your special ability.");
+                        hero.attackEnemy(enemy);
+                    }
                     break;
 
                 case 3:
@@ -118,7 +125,6 @@ public abstract class Quest {
 
                 case 4:
                     System.out.println("You have run from the battle.");
-                    battleOver = true;
                     return;
 
                 default:
@@ -127,7 +133,6 @@ public abstract class Quest {
 
             if (enemy.getHp() <= 0) {
                 System.out.println("===================================");
-                battleOver = true;
                 break;
             }
 
@@ -1405,7 +1410,7 @@ public abstract class Quest {
                                     + "The Final Trial must be faced again.\n"
                     );
 
-                    tavernMenu(shop, hero); 
+                    tavernMenu(shop, hero);
                     return;
 
                 default:
