@@ -69,6 +69,7 @@ public abstract class Hero extends Entity {
     public void heroDetails() {
         System.out.println("============STATUS============");
         System.out.println("* " + this.player);
+        System.out.println("* " + this.level);
         System.out.println("* " + this.hp + " (hp)");
         System.out.println("* " + this.attack + " (atk)");
         System.out.println("* " + this.specialAbility + " (special attack)");
@@ -77,8 +78,6 @@ public abstract class Hero extends Entity {
         System.out.println("==============================");
     }
 
-
-    // Função para definir a classe do personagem para o restante do game através de um imput do player.
     public static Hero chooseCharacter() {
         Scanner input = new Scanner(System.in);
 
@@ -88,8 +87,7 @@ public abstract class Hero extends Entity {
         System.out.println("[3] - Crimson Archer");
         System.out.println("[4] - Red Bastion");
 
-        //int choose = input.nextInt();
-        int choose = 1; //TODO: AJUSTAR
+        int choose = 0;
 
         switch (choose) {
             case 1:
@@ -108,11 +106,8 @@ public abstract class Hero extends Entity {
                 System.out.println("Invalid option, try again.\n");
                 return chooseCharacter();
         }
-
-
     }
 
-    // função para que o usuário possa personalizar seu nickName no jogo
     public void chooseYourName() {
         Scanner input = new Scanner(System.in);
         System.out.println("\nNow brave hero, tell us the name that shall echo through legends:");
@@ -121,7 +116,6 @@ public abstract class Hero extends Entity {
         System.out.println("Welcome! " + this.name + "! Your journey begins now.\n");
     }
 
-    //manipulação gold
     public void addGold(int gold) {
         this.gold += gold;
     }
@@ -130,8 +124,6 @@ public abstract class Hero extends Entity {
         this.gold -= gold;
     }
 
-
-    //Manipulação Inventario
     public void addItem(Item item) {
         inventory.add(item);
     }
@@ -153,7 +145,6 @@ public abstract class Hero extends Entity {
         System.out.println("===================================");
     }
 
-    //ações de batalha
     public void attackEnemy(NPC enemy) {
         enemy.hp -= this.attack;
         System.out.println("You dealt " + this.attack + " damage!");

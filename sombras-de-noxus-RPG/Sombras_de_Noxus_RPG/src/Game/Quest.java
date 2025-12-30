@@ -268,8 +268,8 @@ public abstract class Quest {
         switch (choice) {
             case 1:
                 System.out.println("A hidden thug ambushes you!");
-                hero.takeDamage(30);
-                System.out.println("Current HP: " + hero.getHp());
+                hero.removeGold(15);
+                System.out.println("He stoled 10 Noxian Crowns");
                 break;
 
             case 2:
@@ -864,6 +864,7 @@ public abstract class Quest {
         }
     }
 
+    //quest05
     public static void lostCitadelOfZaunMor(Hero hero, Shop shop) throws InterruptedException {
 
         Scanner input = new Scanner(System.in);
