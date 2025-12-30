@@ -51,6 +51,10 @@ public abstract class Hero extends Entity {
         return abilityDamage;
     }
 
+    public void setAbilityDamage(int abilityDamage) {
+        this.abilityDamage = abilityDamage;
+    }
+
     public void heroDetails() {
         System.out.println("============STATUS============");
         System.out.println("* " + this.player);
@@ -172,6 +176,43 @@ public abstract class Hero extends Entity {
         enemy.hp -= this.abilityDamage;
         System.out.println("You dealt " + this.abilityDamage + " damage with your special ability");
     }
+
+    public static void levelUp(Hero hero) {
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("\n=== COMBAT EXPERIENCE GAINED ===\n"
+                        + "Your trials have hardened you.\n"
+                        + "Choose how you evolve:\n");
+        System.out.println("[1] Increase Max HP (+20)");
+        System.out.println("[2] Increase Attack Damage (+5)");
+        System.out.println("[3] Increase Ability Damage (+8)");
+
+        int choice = input.nextInt();
+
+        switch (choice) {
+
+            case 1:
+                hero.setMaxHp(hero.getMaxHp() + 20);
+                hero.setHp(hero.getHp() + 20);
+                System.out.println("Your body endures more punishment. Max HP increased.");
+                break;
+
+            case 2:
+                hero.setAttack(hero.getAttack() + 5);
+                System.out.println("Your strikes grow deadlier. Attack Damage increased.");
+                break;
+
+            case 3:
+                hero.setAbilityDamage(hero.getAbilityDamage() + 8);
+                System.out.println("Your mastery of combat abilities deepens. Ability Damage increased.");
+                break;
+
+            default:
+                break;
+        }
+    }
+
 }
 
 

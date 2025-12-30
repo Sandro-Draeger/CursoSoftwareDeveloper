@@ -40,8 +40,8 @@ public abstract class Quest {
                 crimsonGorge(hero, shop);
                 break;
 
-            case 5: // Mission 5
-                // código da missão 5
+            case 5:
+                lostCitadelOfZaunMor(hero, shop);
                 break;
 
             case 6: // Mission 6
@@ -245,190 +245,137 @@ public abstract class Quest {
 
     //quest01
     public static void borderOfNoxus(Hero hero, Shop shop) throws InterruptedException {
+
         Scanner input = new Scanner(System.in);
-        boolean startedQuest = false; //validação se chegou a iniciar a quest.
         int fullHp = hero.getHp();
 
-        //enemies
         NPC BanditScout = new NPC("Bandit Scout", 55, 55, 6, "quick stab", 10, 1);
         NPC BanditBruiser = new NPC("Bandit Bruiser", 90, 90, 10, "heavy punch", 18, 1);
 
-        //if and else para mudar a msg
-        if (startedQuest) {
-            System.out.println("You return to the dusty roads of Noxus. The sky still hangs heavy and dark, and the wind smells of iron and gunpowder. The memory of your previous defeat lingers, but the bandits are still out there. Steel yourself; this time, survival depends on sharper wits and greater courage.\n");
-        } else {
-            System.out.println("You advance along the dusty roads of Noxus. The sky is heavy and dark, and the wind carries the scent of iron and gunpowder. Rumors speak of bandits attacking unwary travelers. Prepare yourself; survival depends on speed and cunning.\n");
-        }
+        System.out.println(
+                "You advance along the dusty roads of Noxus.\n"
+                        + "The sky hangs heavy, and rumors speak of bandits stalking travelers.\n"
+        );
 
-        System.out.println("You reach a fork in the road. Which path will you take?");
-        System.out.println("[1] Left | [2] Right | [3] Straight ahead\n");
+        Thread.sleep(1000);
+
+        // ================= FIRST EVENT =================
+        System.out.println("The road splits ahead. What do you do?");
+        System.out.println("[1] Take the left path | [2] Help a wounded villager | [3] Search the area");
+
         int choice = input.nextInt();
 
         switch (choice) {
             case 1:
-                System.out.println("You are caught off guard by a Noxian vandal!");
+                System.out.println("A hidden thug ambushes you!");
                 hero.takeDamage(30);
-                System.out.println("Current HP: " + hero.getHp() + "\n");
+                System.out.println("Current HP: " + hero.getHp());
                 break;
+
             case 2:
-                System.out.println("You encounter a wounded villager. Do you help him?");
-                System.out.println("[1] Yes | [2] No");
-                int option = input.nextInt();
-                if (option == 1) {
-                    System.out.println("The villager thanks you and rewards you with 50 Noxian Crowns.");
-                    hero.addGold(50);
-                } else {
-                    System.out.println("The villager dies, but you continue on your journey.");
-                }
+                System.out.println("The villager rewards your kindness.");
+                hero.addGold(50);
+                System.out.println("You receive 50 Noxias Crowns!");
                 break;
+
             case 3:
-                System.out.println("You find a small chest containing 15 Noxian Crowns.");
+                System.out.println("You find a small stash of Crowns.");
                 hero.addGold(15);
+                System.out.println("You receive 15 Noxias Crowns!");
                 break;
+
             default:
-                System.out.println("Invalid Option");
+                System.out.println("You hesitate and move on.");
                 break;
         }
 
         Thread.sleep(1000);
 
+        // ================= FIRST BATTLE =================
+        System.out.println("Movement in the bushes draws your attention.\n"
+                + BanditScout.getName() + " lunges at you!\n");
 
-        //batalha contra o primeiro inimigo
-        System.out.println("A rustle in the bushes catches your attention. " + BanditScout.getName() + " emerges, quick and deadly. Prepare for battle!\n");
-        System.out.println("[1]Lets go! |[2] I prefer to run");
+        System.out.println("[1] Fight | [2] Retreat");
         choice = input.nextInt();
-        switch (choice) {
-            case 1:
-                startBattle(hero, BanditScout);
-                startedQuest = true;
-                if (hero.getHp() > 0) {
-                    System.out.println("Well done! You defeated the Bandit Scout. Your wounds are healed, and your journey continues.");
-                    hero.setHp(fullHp);
-                    break;
-                } else {
-                    System.out.println("You fought bravely, but the Bandit Scout overpowered you. What will you do?");
-                    System.out.println("[1] Retry Battle | [2] Return to the Tavern");
-                    choice = input.nextInt();
-                    switch (choice) {
-                        case 1:
-                            startBattle(hero, BanditScout);
-                            break;
-                        case 2:
-                            tavernMenu(shop, hero);
-                            break;
-                    }
-                }
-            case 2:
-                tavernMenu(shop, hero);
+
+        if (choice == 2) {
+            tavernMenu(shop, hero);
+            return;
         }
+
+        startBattle(hero, BanditScout);
+
+        if (hero.getHp() <= 0) {
+            System.out.println("The bandit overwhelms you.");
+            tavernMenu(shop, hero);
+            return;
+        }
+
+        System.out.println("You defeat the scout and press onward.");
+        hero.setHp(fullHp);
 
         Thread.sleep(1000);
 
-        if (startedQuest) {
-            System.out.println(
-                    "The road ahead feels different now. The air is thicker, and every step echoes with the memory of battles fought. "
-                            + "You know stronger enemies lie ahead, and there will be no turning back this time.\n"
-            );
-        } else {
-            System.out.println(
-                    "You walk cautiously along a narrow path carved between broken stone and twisted iron. "
-                            + "Whispers of something powerful ahead make your grip tighten around your weapon.\n"
-            );
-        }
-
-        Thread.sleep(1000);
-
-        System.out.println("The path splits once more. A strange tension hangs in the air. What do you do?");
-        System.out.println("[1] Investigate the shadows | [2] Follow the distant noise | [3] Take a moment to prepare\n");
+        // ================= SECOND EVENT =================
+        System.out.println("Further ahead, tension fills the air.\n"
+                        + "What do you investigate?\n");
+        System.out.println("[1] Dark shadows | [2] Distant noise | [3] Rest briefly");
 
         choice = input.nextInt();
 
         switch (choice) {
             case 1:
-                System.out.println(
-                        "You step into the shadows, but a sudden trap snaps shut! Blades cut into your armor."
-                );
+                System.out.println("A trap snaps shut!");
                 hero.takeDamage(35);
-                System.out.println("Current HP: " + hero.getHp() + "\n");
+                System.out.println("Current HP: " + hero.getHp());
                 break;
 
             case 2:
-                System.out.println(
-                        "You follow the noise and find a dying soldier leaning against a broken banner."
-                );
-                System.out.println("[1] Offer aid | [2] Take what he has and leave");
-                int option = input.nextInt();
-                if (option == 1) {
-                    System.out.println(
-                            "With his last breath, the soldier hands you a pouch of Crowns."
-                    );
-                    hero.addGold(60);
-                } else {
-                    System.out.println(
-                            "You take the pouch without a word. The soldier's eyes fade as you walk away."
-                    );
-                    hero.addGold(25);
-                }
+                System.out.println("A dying soldier hands you his pouch.");
+                hero.addGold(60);
+                System.out.println("You receive 60 Noxias Crowns!");
                 break;
 
             case 3:
-                System.out.println(
-                        "You find a quiet spot to steady your breathing and find 20 Crowns."
-                );
+                System.out.println("You steady yourself and recover supplies.");
                 hero.addGold(20);
+                System.out.println("You receive 20 Noxias Crowns!");
                 break;
 
             default:
-                System.out.println("Your hesitation costs you precious time. Nothing happens.");
+                System.out.println("You move on cautiously.");
                 break;
         }
 
-        // batalha contra o boss final da missão 1
+        Thread.sleep(1000);
+
+        // ================= FINAL BOSS =================
         System.out.println(
-                "A heavy silence falls over the road. From the shadows steps "
+                "A massive figure steps onto the road.\n"
                         + BanditBruiser.getName()
-                        + ", towering and scarred, cracking his knuckles as he blocks your path.\n"
+                        + " blocks your path.\n"
         );
-        System.out.println("[1] Stand your ground | [2] Fall back to safety");
 
+        System.out.println("[1] Fight | [2] Retreat");
         choice = input.nextInt();
-        switch (choice) {
-            case 1:
-                startBattle(hero, BanditBruiser);
 
-                if (hero.getHp() > 0) {
-                    System.out.println(
-                            "Against all odds, you bring the Bandit Bruiser to his knees. "
-                                    + "The road grows quiet once more. Your wounds are tended, and victory is yours."
-                    );
-                    hero.setHp(fullHp);
-                    Thread.sleep(1000);
-                    questMenu(hero, shop);
-
-                } else {
-                    System.out.println(
-                            "The Bandit Bruiser proves overwhelming. You collapse, beaten but not broken."
-                    );
-                    System.out.println("[1] Challenge him again | [2] Retreat to the Tavern");
-                    choice = input.nextInt();
-
-                    if (choice == 1) {
-                        startBattle(hero, BanditBruiser);
-                    } else {
-                        tavernMenu(shop, hero);
-                    }
-                }
-                break;
-
-
-            case 2:
-                System.out.println(
-                        "You decide this is not the right moment. The Bandit Bruiser laughs as you retreat."
-                );
-                tavernMenu(shop, hero);
-                break;
+        if (choice == 2) {
+            tavernMenu(shop, hero);
+            return;
         }
 
+        startBattle(hero, BanditBruiser);
+
+        if (hero.getHp() > 0) {
+            System.out.println("The Bandit Bruiser falls.\n"
+                            + "The road is safe once more.");
+            hero.setHp(fullHp);
+            Hero.levelUp(hero);
+            questMenu(hero, shop);
+        } else {
+            System.out.println("You are forced to retreat.");
+            tavernMenu(shop, hero);
+        }
     }
 
     //quest02
@@ -594,6 +541,7 @@ public abstract class Quest {
                                     + "The acolyte falls, and the Crimson Circle’s influence weakens — for now."
                     );
                     hero.setHp(fullHp);
+                    Hero.levelUp(hero);
                     Thread.sleep(1000);
                     questMenu(hero, shop);
 
@@ -760,6 +708,7 @@ public abstract class Quest {
                             + "Noxus reclaims part of the corrupted territory."
             );
             hero.setHp(fullHp);
+            Hero.levelUp(hero);
             Thread.sleep(1000);
             questMenu(hero, shop);
         } else {
@@ -903,6 +852,7 @@ public abstract class Quest {
                                     + "the Crimson Gorge finally grows silent."
                     );
                     hero.setHp(fullHp);
+                    Hero.levelUp(hero);
                     questMenu(hero, shop);
                 } else {
                     System.out.println(
@@ -1058,6 +1008,7 @@ public abstract class Quest {
                             + "You emerge victorious from the Lost Citadel."
             );
             hero.setHp(fullHp);
+            Hero.levelUp(hero);
             questMenu(hero, shop);
         } else {
             System.out.println(
