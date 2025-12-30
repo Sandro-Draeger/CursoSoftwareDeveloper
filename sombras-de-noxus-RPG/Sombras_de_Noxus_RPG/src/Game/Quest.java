@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 import Character.Hero;
 import Character.NPC;
+import Enums.ItemType;
+import Item.Consumable;
 import helper.GameHelper;
 
 import static Game.Tavern.tavernMenu;
@@ -31,11 +33,11 @@ public abstract class Quest {
                 break;
 
             case 3:
-                purgeImmortalBastionSwamp(hero, shop);
+                immortalBastionSwamp(hero, shop);
                 break;
 
-            case 4: // Mission 4
-                // código da missão 4
+            case 4:
+                crimsonGorge(hero, shop);
                 break;
 
             case 5: // Mission 5
@@ -56,6 +58,21 @@ public abstract class Quest {
         }
     }
 
+    /**
+     * Starts a turn-based battle system between a hero and an enemy (NPC).
+     * <p>
+     * During the battle, the player can choose actions such as attacking,
+     * using special abilities, consuming items, or running away. The battle
+     * continues until the hero is defeated, the enemy is defeated, or the
+     * player chooses to flee.
+     * </p>
+     *
+     * @param hero  the player-controlled hero who participates in the battle
+     * @param enemy the enemy NPC faced by the hero
+     *
+     * @throws InterruptedException if the thread is interrupted during
+     *                              the pauses between turns (Thread.sleep)
+     */
     public static void startBattle(Hero hero, NPC enemy) throws InterruptedException {
         Scanner sc = new Scanner(System.in);
         boolean battleOver = false;
@@ -137,8 +154,21 @@ public abstract class Quest {
             System.out.println("-------------------------------------\n");
         }
     }
-
-
+    
+    /**
+     * Starts a riddle-based battle between a hero and an enemy (NPC).
+     * <p>
+     * Both participants have equal health. The enemy challenges the hero
+     * with riddles instead of physical attacks. Correct answers deal damage
+     * to the enemy, while wrong answers damage the hero. The battle ends when
+     * one side is defeated or the player chooses to flee.
+     * </p>
+     *
+     * @param hero  the player-controlled hero
+     * @param enemy the enemy NPC that presents the riddles
+     *
+     * @throws InterruptedException if the thread is interrupted during delays
+     */
     public static void riddleBattle(Hero hero, NPC enemy) throws InterruptedException {
         Scanner input = new Scanner(System.in);
         ArrayList<Riddle> riddles = Riddle.initRiddles();
@@ -590,7 +620,7 @@ public abstract class Quest {
     }
 
     //quest03
-    public static void purgeImmortalBastionSwamp(Hero hero, Shop shop) throws InterruptedException {
+    public static void immortalBastionSwamp(Hero hero, Shop shop) throws InterruptedException {
 
         Scanner input = new Scanner(System.in);
         Random random = new Random();
@@ -748,6 +778,142 @@ public abstract class Quest {
         }
     }
 
+    //quest04
+    public static void crimsonGorge(Hero hero, Shop shop) throws InterruptedException {
+        Scanner input = new Scanner(System.in);
+        Random random = new Random();
+        int fullHp = hero.getHp();
+
+        // Enemies
+        NPC ArcaneWraith = new NPC("Arcane Wraith", 150, 150, 14, "arcane burn", 28, 2);
+        NPC ZaunSentinelArmor = new NPC(
+                "Zaun Sentinel Armor", 220, 220, 16, "gauntlet smash", 32, 3
+        );
+        NPC BrokenHexCoreGolem = new NPC(
+                "Broken Hex Core Golem", 320, 320, 20, "core burst", 45, 3
+        );
+
+        //Bonus Itens
+        Consumable mediumHealPotion = new Consumable("Medium Heal Potion", ItemType.HEAL, 25, 30);
+
+        System.out.println(
+                "At the heart of the Crimson Gorge, two unstable paths reveal themselves.\n"
+                        + "One pulses with raw arcane energy.\n"
+                        + "The other echoes with Zaunite machinery.\n"
+        );
+        System.out.println("[1] Arcane Path | [2] Zaun Path");
+
+        int choice = input.nextInt();
+        int pathEvent = random.nextInt(2) + 1;
+
+        switch (choice) {
+
+            // ================= ARCANE PATH =================
+            case 1:
+                System.out.println(
+                        "You step into a chamber where crimson arcane forces distort reality.\n"
+                );
+
+                Thread.sleep(1000);
+
+                // ARCANE INTERMEDIATE ENCOUNTER (RIDDLE BATTLE)
+                System.out.println(
+                        "An Arcane Wraith materializes, but does not attack.\n"
+                                + "Its voice echoes directly into your mind...\n"
+                );
+
+                // faz com que a batalha só tenha tres perguntas.
+                hero.setMaxHp(90);
+                hero.setHp(90);
+
+                riddleBattle(hero, ArcaneWraith);
+
+                // Reward for solving the riddle
+                System.out.println(
+                        "The wraith dissipates, leaving arcane energy behind."
+                );
+                hero.addItem(mediumHealPotion);
+                System.out.println("A medium heal potion was add to your inventory.");
+                hero.setMaxHp(fullHp);
+                hero.setHp(fullHp);
+
+                Thread.sleep(1000);
+                break;
+
+            // ================= ZAUN PATH =================
+            case 2:
+                System.out.println(
+                        "You descend into a corridor filled with steam, pipes, and toxic residue.\n"
+                );
+
+                // Random Zaun Event
+                if (pathEvent == 1) {
+                    System.out.println(
+                            "A pressurized pipe bursts, spraying corrosive chemicals!"
+                    );
+                    hero.takeDamage(25);
+                    System.out.println("Current HP: " + hero.getHp());
+                } else {
+                    System.out.println(
+                            "You salvage usable chems from abandoned machinery."
+                    );
+                    hero.addGold(30);
+                    System.out.println("You gain 30 Noxian Crowns.");
+                }
+
+                Thread.sleep(1000);
+
+                // ZAUN INTERMEDIATE BATTLE
+                System.out.println(ZaunSentinelArmor.getName() + " activates, blocking your advance!\n");
+
+                startBattle(hero, ZaunSentinelArmor);
+
+                if (hero.getHp() <= 0) {
+                    System.out.println("The sentinel crushes you without mercy.");
+                    tavernMenu(shop, hero);
+                    return;
+                }
+                // Reward for victory
+                System.out.println("Well done Warrior, the sentinel collapses, its systems failing.");
+                hero.setHp(fullHp);
+                System.out.println("You recover your HP and obtain a Small Attack Increase potion, added to your inventory.");
+
+                Thread.sleep(1000);
+
+                //Encontro com o Boss final
+                System.out.println(
+                        "The Crimson Gorge trembles violently.\n"
+                                + "A massive construct rises from the depths.\n"
+                                + BrokenHexCoreGolem.getName()
+                                + " awakens, its Hex Core blazing uncontrollably.\n"
+                );
+
+                System.out.println("[1] Fight | [2] Retreat to the Tavern");
+                choice = input.nextInt();
+
+                if (choice == 2) {
+                    tavernMenu(shop, hero);
+                    return;
+                }
+
+                startBattle(hero, BrokenHexCoreGolem);
+
+                if (hero.getHp() > 0) {
+                    System.out.println(
+                            "With the destruction of the Hex Core Golem,\n"
+                                    + "the Crimson Gorge finally grows silent."
+                    );
+                    hero.setHp(fullHp);
+                    questMenu(hero, shop);
+                } else {
+                    System.out.println(
+                            "The golem's power proves overwhelming."
+                    );
+                    tavernMenu(shop, hero);
+                }
+
+        }
+    }
 
 }
 
