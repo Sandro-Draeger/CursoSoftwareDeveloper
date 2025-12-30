@@ -16,6 +16,7 @@ public abstract class Hero extends Entity {
     public int abilityDamage;
     public int gold;
     public ArrayList<Item> inventory;
+    public int level;
 
 
     public Hero(String name, int hp, int maxHp, int attack, ClassType player, String specialAbility, int abilityDamage, int gold) {
@@ -25,6 +26,7 @@ public abstract class Hero extends Entity {
         this.abilityDamage = abilityDamage;
         this.gold = gold;
         this.inventory = new ArrayList<>();
+        this.level = 0;
     }
 
     public int getGold() {
@@ -54,6 +56,15 @@ public abstract class Hero extends Entity {
     public void setAbilityDamage(int abilityDamage) {
         this.abilityDamage = abilityDamage;
     }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
 
     public void heroDetails() {
         System.out.println("============STATUS============");
@@ -167,7 +178,13 @@ public abstract class Hero extends Entity {
 
             if (itemSelected.getType() == ItemType.HEAL) {
                 this.hp += itemSelected.getEffect();
-                System.out.println("You drink a healing potion and recover "+itemSelected.getEffect()+"hp");
+                System.out.println("You drink a healing potion and recover "+itemSelected.getEffect()+" hp");
+                removeItem(itemSelected);
+            }
+            if (itemSelected.getType() == ItemType.ATTACK) {
+                this.attack += itemSelected.getEffect();
+                System.out.println("You drink a attack potion and increase "+itemSelected.getEffect()+" atk");
+                removeItem(itemSelected);
             }
         }
     }
@@ -181,9 +198,12 @@ public abstract class Hero extends Entity {
 
         Scanner input = new Scanner(System.in);
 
-        System.out.println("\n=== COMBAT EXPERIENCE GAINED ===\n"
-                        + "Your trials have hardened you.\n"
-                        + "Choose how you evolve:\n");
+        hero.setLevel(hero.getLevel() + 1);
+
+        System.out.println("\n=== LEVEL UP ===\n"
+                        + "You reached level " + hero.getLevel() + "!\n"
+                        + "Choose an attribute to improve:\n");
+
         System.out.println("[1] Increase Max HP (+20)");
         System.out.println("[2] Increase Attack Damage (+5)");
         System.out.println("[3] Increase Ability Damage (+8)");
