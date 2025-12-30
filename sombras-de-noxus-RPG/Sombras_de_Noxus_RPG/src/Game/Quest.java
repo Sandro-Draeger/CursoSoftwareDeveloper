@@ -243,7 +243,7 @@ public abstract class Quest {
 
     //=============== QUESTS ===============
 
-    //quest01
+
     public static void borderOfNoxus(Hero hero, Shop shop) throws InterruptedException {
 
         Scanner input = new Scanner(System.in);
@@ -1019,6 +1019,229 @@ public abstract class Quest {
         }
     }
 
+    //quest06
+    public static void finalTrial(Hero hero, Shop shop) throws InterruptedException {
+        Scanner input = new Scanner(System.in);
+
+        //enemies
+        NPC VladimirBoss = new NPC(
+                "Vladimir – Trifarix of Strength", 420, 420, 26, "blood spear", 60, 4
+        );
+        NPC LeBlancBoss = new NPC(
+                "LeBlanc – Trifarix of Cunning", 340, 340, 22, "illusory strike", 45, 4
+        );
+        NPC MordekaiserBoss = new NPC(
+                "Mordekaiser – Trifarix of Fear", 520, 520, 30, "iron mace", 75, 5
+        );
+
+        if (hero.getLevel() < 3) {
+            System.out.println(
+                    "You feel an overwhelming pressure before the Trial begins.\n"
+                            + "This path is reserved for proven warriors.\n"
+                            + "Reach at least Level 3 to face the Trifarix.\n"
+            );
+            questMenu(hero, shop);
+            return;
+        }
+
+        // =========================
+        // INTRO GERAL
+        // =========================
+        System.out.println(
+                "You step forward into the Final Trial.\n\n"
+                        + "This is not a mission.\n"
+                        + "This is not a conquest.\n\n"
+                        + "This is judgment.\n\n"
+                        + "Before you stand the Trifarix — the pillars of Noxian dominion.\n"
+                        + "Strength. Cunning. Fear.\n\n"
+                        + "There will be no retreat.\n"
+                        + "There will be no mercy.\n"
+                        + "You will face all three — or be erased.\n"
+        );
+        Thread.sleep(1500);
+
+        // =========================
+        // 1) VLADIMIR – STRENGTH
+        // =========================
+        System.out.println(
+                "The air grows heavy with the scent of iron.\n"
+                        + "Crimson sigils form as blood bends to unseen will.\n\n"
+                        + "A pale noble steps forward, eyes glowing with ancient power.\n"
+                        + "Vladimir — Trifarix of Strength.\n\n"
+                        + "\"Power is not taken. It is cultivated — in blood.\"\n"
+        );
+        Thread.sleep(1500);
+
+        startBattle(hero, VladimirBoss);
+
+        if (hero.getHp() <= 0) {
+            System.out.println(
+                    "Your strength is drained.\n"
+                            + "Vladimir turns away as your blood feeds the Trial.\n"
+            );
+            tavernMenu(shop, hero); // missão falhou, volta pra taverna
+            return;
+        }
+
+        // Derrota do Vladimir: ele é destruído pra sempre
+        System.out.println(
+                "Vladimir staggers.\n"
+                        + "The crimson sigils unravel as his form dissolves into a storm of blood.\n"
+                        + "For the first time, the Trifarix loses a pillar — and it will not return.\n"
+        );
+        Thread.sleep(1500);
+
+        // =========================
+        // 2) LEBLANC – CUNNING
+        // =========================
+        System.out.println(
+                "Slow applause echoes.\n"
+                        + "Reality fractures into layered illusions.\n\n"
+                        + "A figure emerges from deception itself.\n"
+                        + "LeBlanc — Trifarix of Cunning.\n\n"
+                        + "\"You seek truth?\"\n"
+                        + "\"Truth is the first lie you believed.\"\n"
+        );
+        Thread.sleep(1500);
+
+        riddleBattle(hero, LeBlancBoss);
+
+        if (hero.getHp() <= 0) {
+            System.out.println(
+                    "Your mind collapses beneath endless deception.\n"
+                            + "LeBlanc vanishes, her laughter lingering in the broken illusions.\n"
+            );
+            tavernMenu(shop, hero); // missão falhou, volta pra taverna
+            return;
+        }
+
+        // Derrota “normal” da LeBlanc
+        System.out.println(
+                "The illusions shatter.\n"
+                        + "LeBlanc's smile fades as her form scatters into mirrored fragments.\n"
+                        + "For now, Cunning yields — but you can feel her eyes on you still.\n"
+        );
+        Thread.sleep(1500);
+
+        // =========================
+        // 3) MORDEKAISER – FEAR (BOSS FINAL)
+        // =========================
+        System.out.println(
+                "The arena twists into a realm of cold iron and dying stars.\n"
+                        + "Each breath becomes a weight, each heartbeat a fading drum.\n\n"
+                        + "An armored colossus emerges, every step a funeral bell.\n"
+                        + "Mordekaiser — Trifarix of Fear.\n\n"
+                        + "\"All things kneel to death.\"\n"
+        );
+        Thread.sleep(1500);
+
+        startBattle(hero, MordekaiserBoss);
+
+        // =========================
+        // MORTE PARA MORDEKAISER → PROPOSTA
+        // =========================
+        if (hero.getHp() <= 0) {
+
+            System.out.println(
+                    "Your body collapses, shattered beneath iron and hatred.\n"
+                            + "Darkness claims your sight.\n\n"
+                            + "But death does not come.\n"
+            );
+            Thread.sleep(1500);
+
+            System.out.println(
+                    "Cold chains coil around your soul.\n"
+                            + "A voice echoes from beyond flesh and time.\n\n"
+                            + "\"You endured what countless warriors could not.\"\n"
+                            + "\"Kneel — and I shall spare you.\"\n\n"
+                            + "Mordekaiser extends his will.\n"
+                            + "He offers you a place among the Trifarix.\n"
+            );
+            Thread.sleep(1500);
+
+            System.out.println(
+                    "[1] Accept the Pact — Serve Mordekaiser\n"
+                            + "[2] Refuse — Face Oblivion\n"
+            );
+
+            int choice = input.nextInt();
+
+            switch (choice) {
+
+                case 1:
+                    System.out.println(
+                            "\nYou surrender your mortal defiance.\n"
+                                    + "Chains bind not your body — but your fate.\n\n"
+                                    + "Mordekaiser laughs.\n"
+                                    + "\"Rise. You are Trifarix now.\"\n"
+                    );
+                    Thread.sleep(1500);
+
+                    System.out.println(
+                            "The seat once held by Vladimir lies empty no longer.\n"
+                                    + "The Trifarix is remade:\n\n"
+                                    + "Mordekaiser.\n"
+                                    + "LeBlanc.\n"
+                                    + hero.getName() + ".\n\n"
+                                    + "Your name is carved into the iron will of Noxus — forever.\n"
+                    );
+                    Thread.sleep(1500);
+
+                    System.out.println("=== ENDING: TRIFARIX ASCENDANT ===");
+
+                    questMenu(hero, shop);
+                    return;
+
+                case 2:
+                    System.out.println(
+                            "\nYou defy him with your last breath.\n"
+                                    + "Mordekaiser tightens the chains.\n\n"
+                                    + "\"Then be forgotten.\"\n"
+                    );
+                    Thread.sleep(1500);
+
+                    System.out.println(
+                            "Your soul is crushed into the void between worlds.\n"
+                                    + "The Final Trial must be faced again.\n"
+                    );
+
+                    tavernMenu(shop, hero); // volta pra taverna, precisa recomeçar
+                    return;
+
+                default:
+                    System.out.println(
+                            "Your silence is taken as defiance.\n"
+                                    + "The chains tighten.\n"
+                    );
+                    tavernMenu(shop, hero);
+                    return;
+            }
+        }
+
+        // =========================
+        // VITÓRIA CONTRA MORDEKAISER → FINAL GLORIOSO
+        // =========================
+        System.out.println(
+                "The colossus staggers.\n"
+                        + "Cracks spread across his iron shell as stolen souls burst free in screams and song.\n\n"
+                        + "With a final blow, Mordekaiser falls.\n"
+                        + "Fear itself bows before you.\n"
+        );
+        Thread.sleep(1500);
+
+        System.out.println(
+                "Before you, the Trifarix lies broken.\n"
+                        + "Strength erased.\n"
+                        + "Cunning humbled.\n"
+                        + "Fear shattered.\n\n"
+                        + "Noxus will remember this day.\n"
+                        + "And it will remember your name: " + hero.getName() + ".\n"
+        );
+        Thread.sleep(1500);
+
+        System.out.println("=== ENDING: NOXIAN LEGEND ===");
+        questMenu(hero, shop); 
+    }
 
 }
 
