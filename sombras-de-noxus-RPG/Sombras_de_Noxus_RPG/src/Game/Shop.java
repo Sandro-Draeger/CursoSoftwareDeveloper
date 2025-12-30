@@ -33,7 +33,7 @@ public class Shop {
 
     //exibir loja
     public static void showShop(Shop shop, Hero hero) {
-        Scanner sc = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         int choice = -1;
 
         while (choice != 0) {
@@ -65,7 +65,7 @@ public class Shop {
             //compra do player
             System.out.print("\nChoose an item (1-" + todayStock.size() + "), or 0 to exit: ");
 
-            choice = sc.nextInt();
+            choice = input.nextInt();
 
             // Ajusta índice começando em 0
             int index = choice - 1;
