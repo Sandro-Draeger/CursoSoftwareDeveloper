@@ -2,13 +2,10 @@ package Character;
 
 import Enums.ClassType;
 import Enums.ItemType;
-import Item.Weapons;
-
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import Item.Item;
-import Item.Consumable;
+
 
 public abstract class Hero extends Entity {
     public ClassType player;
@@ -65,6 +62,45 @@ public abstract class Hero extends Entity {
         this.level = level;
     }
 
+    public static void showClassWeaponDetails(ClassType classType) {
+
+        System.out.println("=== SELECTED CLASS ===\n");
+
+        switch (classType) {
+
+            case LEGIONNAIRE:
+                System.out.println("Class: LEGIONNAIRE");
+                System.out.println("Weapon: Sword");
+                System.out.println("Description: Warrior specialized in close combat.");
+                System.out.println("During the game, the player can purchase weapon-specific upgrades in the shop.");
+                break;
+
+            case BLOODY_MAGE:
+                System.out.println("Class: BLOODY MAGE");
+                System.out.println("Weapon: Staff");
+                System.out.println("Description: Mage who uses arcane energy to attack enemies.");
+                System.out.println("During the game, the player can purchase weapon-specific upgrades in the shop.");
+                break;
+
+            case CRIMSON_ARCHER:
+                System.out.println("Class: CRIMSON ARCHER");
+                System.out.println("Weapon: Bow");
+                System.out.println("Description: Agile archer specialized in long-range attacks.");
+                System.out.println("During the game, the player can purchase weapon-specific upgrades in the shop.");
+                break;
+
+            case RED_BASTION:
+                System.out.println("Class: RED BASTION");
+                System.out.println("Weapon: Shield");
+                System.out.println("Description: Resilient defender who uses the shield as a weapon.");
+                System.out.println("During the game, the player can purchase weapon-specific upgrades in the shop.");
+                break;
+
+            default:
+                System.out.println("Unknown class.");
+                break;
+        }
+    }
 
     public void heroDetails() {
         System.out.println("============STATUS============");
@@ -87,7 +123,7 @@ public abstract class Hero extends Entity {
         System.out.println("[3] - Crimson Archer");
         System.out.println("[4] - Red Bastion");
 
-        int choose = 0;
+        int choose = input.nextInt();
 
         switch (choose) {
             case 1:

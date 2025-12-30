@@ -1240,7 +1240,7 @@ public abstract class Quest {
         Thread.sleep(1500);
 
         System.out.println("=== ENDING: NOXIAN LEGEND ===");
-        questMenu(hero, shop); 
+        questMenu(hero, shop);
     }
 
 }

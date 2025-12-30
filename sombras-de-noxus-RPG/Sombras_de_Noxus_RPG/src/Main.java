@@ -47,7 +47,6 @@ public class Main {
         Weapons universalUpgrade = new Weapons("Universal Upgrade - Crimson Essence", ItemType.ATTACK, 12, 200, null);
 
 
-
         //Declaração da loja e adicição dos itens
         ArrayList shop = new ArrayList<>();
         shop.add(smallHealPotion);
@@ -75,78 +74,32 @@ public class Main {
         actualShop.randomItems();
 
 
-
-        //Instanciar os Boss\s
-
-// MISSÃO 1
-        NPC BanditScout = new NPC("Bandit Scout", 55, 55, 6, "quick stab", 10, 1);
-        NPC BanditBruiser = new NPC("Bandit Bruiser", 90, 90, 10, "heavy punch", 18, 1);
-
-// MISSÃO 2
-        NPC CrimsonAcolyte = new NPC("Crimson Acolyte", 70, 70, 8, "blood bolt", 15, 1);
-        NPC BloodLeech = new NPC("Blood Leech", 40, 40, 5, "life drain", 8, 1);
-        NPC AcolyteOfVladimir = new NPC("Acolyte of Vladimir", 140, 140, 12, "blood slash", 25, 2);
-
-// MISSÃO 3
-        NPC ToxicSludge = new NPC("Toxic Sludge", 130, 130, 11, "acid spit", 22, 2);
-        NPC CorruptedBeast = new NPC("Corrupted Beast", 190, 190, 14, "wild maul", 28, 2);
-        NPC ChemBaronRenegadeCaptain = new NPC(
-                "Chem-Baron Renegade Captain", 260, 260, 18, "toxic cleaver", 40, 3
-        );
-
-// MISSÃO 4
-        NPC ArcaneWraith = new NPC("Arcane Wraith", 150, 150, 14, "arcane burn", 28, 2);
-        NPC ZaunSentinelArmor = new NPC(
-                "Zaun Sentinel Armor", 220, 220, 16, "gauntlet smash", 32, 3
-        );
-        NPC BrokenHexCoreGolem = new NPC(
-                "Broken Hex Core Golem", 320, 320, 20, "core burst", 45, 3
-        );
-
-// MISSÃO 5
-        NPC CrimsonDrake = new NPC("Crimson Drake", 180, 180, 16, "ember spit", 30, 2);
-        NPC RaptorBloodfang = new NPC(
-                "Raptor Bloodfang", 170, 170, 18, "razor dive", 32, 3
-        );
-        NPC ElderRedDrake = new NPC(
-                "Elder Red Drake", 360, 360, 24, "inferno roar", 55, 4
-        );
-
-// MISSÃO FINAL
-        NPC VladimirBoss = new NPC(
-                "Vladimir – Trifarix of Strength", 420, 420, 26, "blood spear", 60, 4
-        );
-        NPC LeBlancBoss = new NPC(
-                "LeBlanc – Trifarix of Cunning", 340, 340, 22, "illusory strike", 45, 4
-        );
-        NPC MordekaiserBoss = new NPC(
-                "Mordekaiser – Trifarix of Fear", 520, 520, 30, "iron mace", 75, 5
-        );
-
 // =====================
 // Game Start
 // =====================
 
-
-        // Jogador escolhe a classe
         Hero player = Hero.chooseCharacter();
-        //TODO: Notificar o jogador sobre a arma que esta usando e que pode ter futuros upgrades.
 
-        // escolher o nome
+        Thread.sleep(1500);
+
+        Hero.showClassWeaponDetails(player.getPlayer());
+
+        Thread.sleep(1500);
+
         player.chooseYourName();
 
+        Thread.sleep(1500);
+
+        System.out.println("You have received a starting bonus of 50 Noxian Crowns to begin your journey.");
         player.setGold(400);
 
-        // Mostra o detalhameno do personagem escolhido
+        Thread.sleep(1000);
+
         player.heroDetails();
 
-        Quest.riddleBattle(player,BloodLeech);
+        Thread.sleep(1000);
 
-        //Tavern.tavernMenu(actualShop, player);
-
-        //Quest.startBattle(player, CrimsonDrake);
-
-
+        Game.Tavern.tavernMenu(actualShop, player);
 
 
     }

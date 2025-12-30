@@ -9,6 +9,7 @@ public class BloodyMage extends Hero{
                 "Blood Tide", 70, 0);
     }
 
+
     @Override
     public void heroDetails() {
         super.heroDetails();
