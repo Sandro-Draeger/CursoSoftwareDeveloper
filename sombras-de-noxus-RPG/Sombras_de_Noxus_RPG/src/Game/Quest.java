@@ -69,7 +69,6 @@ public abstract class Quest {
      *
      * @param hero  the player-controlled hero who participates in the battle
      * @param enemy the enemy NPC faced by the hero
-     *
      * @throws InterruptedException if the thread is interrupted during
      *                              the pauses between turns (Thread.sleep)
      */
@@ -154,7 +153,7 @@ public abstract class Quest {
             System.out.println("-------------------------------------\n");
         }
     }
-    
+
     /**
      * Starts a riddle-based battle between a hero and an enemy (NPC).
      * <p>
@@ -166,7 +165,6 @@ public abstract class Quest {
      *
      * @param hero  the player-controlled hero
      * @param enemy the enemy NPC that presents the riddles
-     *
      * @throws InterruptedException if the thread is interrupted during delays
      */
     public static void riddleBattle(Hero hero, NPC enemy) throws InterruptedException {
@@ -243,6 +241,7 @@ public abstract class Quest {
         }
     }
 
+    //=============== QUESTS ===============
 
     //quest01
     public static void borderOfNoxus(Hero hero, Shop shop) throws InterruptedException {
@@ -914,6 +913,160 @@ public abstract class Quest {
 
         }
     }
+
+    public static void lostCitadelOfZaunMor(Hero hero, Shop shop) throws InterruptedException {
+
+        Scanner input = new Scanner(System.in);
+        Random random = new Random();
+        int fullHp = hero.getHp();
+
+        // Enemies
+        NPC CrimsonDrake = new NPC("Crimson Drake", 180, 180, 16, "ember spit", 30, 2);
+        NPC RaptorBloodfang = new NPC(
+                "Raptor Bloodfang", 170, 170, 18, "razor dive", 32, 3
+        );
+        NPC ElderRedDrake = new NPC(
+                "Elder Red Drake", 360, 360, 24, "inferno roar", 55, 4
+        );
+
+        //Itens
+        Consumable smallHealPotion = new Consumable("Small Heal Potion", ItemType.HEAL, 15, 15);
+        Consumable mediumHealPotion = new Consumable("Medium Heal Potion", ItemType.HEAL, 25, 30);
+        Consumable smallAttackBuff = new Consumable("Small Attack Increase", ItemType.ATTACK, 10, 40);
+        Consumable bigAttackBuff = new Consumable("Big Attack Increase", ItemType.ATTACK, 20, 80);
+
+
+        System.out.println("You stand before the ruins of Zaun-Mor — a lost citadel swallowed by fire and corruption.\n"
+                + "The air burns your lungs, and crimson-scaled creatures circle above.\n"
+                + "This place was not meant to be reclaimed.\n");
+
+        Thread.sleep(1000);
+
+
+        System.out.println("Within the shattered citadel, two paths remain accessible.\n");
+        System.out.println("[1] Ascend the shattered battlements | [2] Descend into the molten tunnels\n");
+
+        int choice = input.nextInt();
+        int randomEvent = random.nextInt(2) + 1;
+
+        switch (choice) {
+
+            case 1:
+                System.out.println("You climb the broken battlements, exposed to the burning sky.\n");
+
+                if (randomEvent == 1) {
+                    System.out.println("A sudden firestorm erupts across the towers!");
+                    hero.takeDamage(25);
+                    System.out.println("Current HP: " + hero.getHp());
+                } else {
+                    hero.addItem(smallHealPotion);
+                    System.out.println("Among the ruins, you discover a Small Heal Potion.\n"
+                            + "It has been added to your inventory.");
+                }
+                break;
+
+            case 2:
+                System.out.println("You descend into tunnels flooded with molten residue and toxic fumes.\n");
+
+                if (randomEvent == 1) {
+                    System.out.println("Toxic gases overwhelm you!");
+                    hero.takeDamage(20);
+                    System.out.println("Current HP: " + hero.getHp());
+
+                } else {
+                    hero.addGold(40);
+                    System.out.println("You scavenge an abandoned Zaunite cache.\n"
+                            + "You gain 40 Crowns.");
+                }
+                break;
+        }
+
+        Thread.sleep(1000);
+
+        // ================= FIRST BATTLE =================
+        NPC firstEnemy;
+
+        int randomEnemy = random.nextInt(2);
+
+        if (randomEnemy == 0) {
+            firstEnemy = CrimsonDrake;
+        } else {
+            firstEnemy = RaptorBloodfang;
+        }
+
+        System.out.println(firstEnemy.getName() + " descends upon you, claws tearing through the air!\n");
+
+        startBattle(hero, firstEnemy);
+
+        if (hero.getHp() <= 0) {
+            System.out.println("You fall beneath the beast's assault.");
+            tavernMenu(shop, hero);
+            return;
+        }
+
+        // ================= RESURRECTION MECHANIC =================
+        int resurrection = random.nextInt(100);
+
+        if (resurrection < 30) {
+            System.out.println("The creature collapses — but its body ignites in crimson flames!\n"
+                    + "It rises once more, driven by pure rage!\n");
+
+        } else {
+            System.out.println("The creature's body finally goes still.\n"
+                    + "It will not rise again.\n");
+        }
+
+        firstEnemy.setHp(firstEnemy.getMaxHp() / 2);
+        startBattle(hero, firstEnemy);
+
+        if (hero.getHp() <= 0) {
+            System.out.println("The resurrected beast finishes you.");
+            tavernMenu(shop, hero);
+        } else {
+            System.out.println("The creature's body finally goes still.\n"
+                    + "It will not rise again.\n");
+            // Reward after surviving
+            hero.addItem(mediumHealPotion);
+            System.out.println("You receive a Medium Heal Potion."
+                    + "It has been added to your inventory.");
+        }
+
+        Thread.sleep(1000);
+
+        // ================= FINAL BOSS =================
+        System.out.println(
+                "The citadel trembles violently.\n"
+                        + "A colossal shadow eclipses the crimson sky.\n"
+                        + ElderRedDrake.getName()
+                        + " descends, its inferno consuming all hope.\n"
+        );
+
+        System.out.println("[1] Face the Elder Drake | [2] Retreat to the Tavern");
+        choice = input.nextInt();
+
+        if (choice == 2) {
+            tavernMenu(shop, hero);
+            return;
+        }
+
+        startBattle(hero, ElderRedDrake);
+
+        if (hero.getHp() > 0) {
+            System.out.println(
+                    "With a final, earth-shattering roar, the Elder Red Drake collapses.\n"
+                            + "Zaun-Mor finally falls silent.\n"
+                            + "You emerge victorious from the Lost Citadel."
+            );
+            hero.setHp(fullHp);
+            questMenu(hero, shop);
+        } else {
+            System.out.println(
+                    "The Elder Drake incinerates all resistance."
+            );
+            tavernMenu(shop, hero);
+        }
+    }
+
 
 }
 
