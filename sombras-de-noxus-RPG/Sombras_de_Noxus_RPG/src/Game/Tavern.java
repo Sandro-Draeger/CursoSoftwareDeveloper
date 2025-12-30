@@ -25,7 +25,6 @@ public abstract class Tavern {
         System.out.println("                            " + YELLOW + "[3]" + WHITE + " Accept Missions" + RESET);
         System.out.println("                            " + YELLOW + "[4]" + WHITE + " Inspect Inventory" + RESET);
         System.out.println("                            " + YELLOW + "[5]" + WHITE + " Review Status" + RESET);
-        System.out.println("                            " + YELLOW + "[0]" + WHITE + " Leave the Tavern" + RESET);
         System.out.println();
         System.out.println(RED + "                   ============================================" + RESET);
         System.out.println("                            " + CYAN + "Choose an option:" + RESET);

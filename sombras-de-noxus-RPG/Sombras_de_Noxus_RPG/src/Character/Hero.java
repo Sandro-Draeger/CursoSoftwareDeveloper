@@ -104,13 +104,13 @@ public abstract class Hero extends Entity {
 
     public void heroDetails() {
         System.out.println("============STATUS============");
-        System.out.println("* " + this.player);
-        System.out.println("* " + this.level);
-        System.out.println("* " + this.hp + " (hp)");
-        System.out.println("* " + this.attack + " (atk)");
-        System.out.println("* " + this.specialAbility + " (special attack)");
-        System.out.println("* " + this.abilityDamage + " (special damage)");
-        System.out.println("* " + this.gold + " nc(Noxian Crowns)");
+        System.out.println("* Class: " + this.player);
+        System.out.println("* Level: " + this.level);
+        System.out.println("* HP: " + this.hp);
+        System.out.println("* Attack Damage: " + this.attack);
+        System.out.println("* Special Ability: " + this.specialAbility);
+        System.out.println("* Ability Damage: " + this.abilityDamage);
+        System.out.println("* Noxian Crowns: " + this.gold + " nc");
         System.out.println("==============================");
     }
 

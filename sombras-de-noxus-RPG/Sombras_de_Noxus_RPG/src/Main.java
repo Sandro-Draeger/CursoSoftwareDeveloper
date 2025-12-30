@@ -91,13 +91,13 @@ public class Main {
         Thread.sleep(1500);
 
         System.out.println("You have received a starting bonus of 50 Noxian Crowns to begin your journey.");
-        player.setGold(400);
+        player.setGold(50);
 
         Thread.sleep(1000);
 
         player.heroDetails();
 
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         Game.Tavern.tavernMenu(actualShop, player);
 
