@@ -30,8 +30,8 @@ public abstract class Quest {
                 bloodRitual(hero, shop);
                 break;
 
-            case 3: // Mission 3
-                // código da missão 3
+            case 3:
+                purgeImmortalBastionSwamp(hero, shop);
                 break;
 
             case 4: // Mission 4
@@ -612,9 +612,9 @@ public abstract class Quest {
         Thread.sleep(1000);
 
         // evento inicial randomico
-        int introEvent = random.nextInt(3) + 1;
+        int randomEvent = random.nextInt(3) + 1;
 
-        switch (introEvent) {
+        switch (randomEvent) {
             case 1:
                 System.out.println(
                         "A toxic cloud rises from the swamp, burning your lungs!"
@@ -695,9 +695,9 @@ public abstract class Quest {
         }
 
         // chances de aparecer o boss ou nao
-        boolean bossAppears = random.nextInt(100) < 40;
+        int bossAppears = random.nextInt(100);
 
-        if (!bossAppears) {
+        if (bossAppears < 40) {
             System.out.println(
                     "After hours of struggle, the swamp finally grows quiet.\n"
                             + "No dominant presence remains.\n"
