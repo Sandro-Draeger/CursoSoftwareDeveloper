@@ -78,4 +78,10 @@ public class GameHelper {
 
 
     }
+
+    public static void QuestComplete(){
+        System.out.println("========================================");
+        System.out.println("             QUEST COMPLETE             ");
+        System.out.println("========================================");
+    }
 }

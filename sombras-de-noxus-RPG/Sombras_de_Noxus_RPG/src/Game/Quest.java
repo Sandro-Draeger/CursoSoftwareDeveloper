@@ -15,6 +15,8 @@ import static Game.Tavern.tavernMenu;
 
 public abstract class Quest {
 
+    static boolean quest1Complete = false; //TODO fazer para as demais quests;
+    static boolean run = false;
 
     public static void questMenu(Hero hero, Shop shop) throws InterruptedException {
         Scanner input = new Scanner(System.in);
@@ -25,7 +27,15 @@ public abstract class Quest {
         switch (choice) {
 
             case 1:
-                borderOfNoxus(hero, shop);
+                if (!quest1Complete) {
+                    borderOfNoxus(hero, shop);
+                } else {
+                    System.out.println(
+                            "\nYou have already cleared the road of the bandit threat. " +
+                                    "The borders of Noxus now stand in peace.\n"
+                    );
+                    break;
+                }
                 break;
 
             case 2:
@@ -75,7 +85,7 @@ public abstract class Quest {
     public static void startBattle(Hero hero, NPC enemy) throws InterruptedException {
         Scanner sc = new Scanner(System.in);
         boolean battleOver = false;
-        boolean specialAbilityUsed = false;
+        run = false;
 
 
         System.out.println("\n===================================");
@@ -121,9 +131,10 @@ public abstract class Quest {
 
                 case 3:
                     hero.useConsumable();
-                    break;
+                    continue;
 
                 case 4:
+                    run = true;
                     System.out.println("You have run from the battle.");
                     return;
 
@@ -132,7 +143,9 @@ public abstract class Quest {
             }
 
             if (enemy.getHp() <= 0) {
-                System.out.println("===================================");
+                System.out.println("=================================   HEAL   ========================================");
+                System.out.println("Passive Activated: Heroic Bravery! Your wounds regenerate after a victorious battle.");
+                System.out.println("====================================================================================");
                 break;
             }
 
@@ -398,7 +411,7 @@ public abstract class Quest {
         System.out.println(
                 "\n========================================\n"
                         + "A massive figure steps onto the road.\n"
-                        + BanditBruiser.getName() + " blocks your path.\n"
+                        + "The Boss " + BanditBruiser.getName() + " blocks your path.\n"
                         + "========================================\n"
         );
 
@@ -410,25 +423,27 @@ public abstract class Quest {
         choice = input.nextInt();
 
         if (choice == 2) {
-            tavernMenu(shop, hero);
+            questMenu(hero, shop);
             return;
         }
 
         startBattle(hero, BanditBruiser);
 
-        if (hero.getHp() > 0) {
+        if (hero.getHp() > 0 || !run) {
             System.out.println(
                     "\nThe Bandit Bruiser falls.\n"
                             + "The road is safe once more.\n"
             );
+            GameHelper.QuestComplete();
             hero.setHp(fullHp);
             Hero.levelUp(hero);
+            quest1Complete = true;
             questMenu(hero, shop);
         } else {
             System.out.println(
                     "\nYou are forced to retreat.\n"
             );
-            tavernMenu(shop, hero);
+            questMenu(hero, shop);
         }
     }
 
@@ -748,6 +763,7 @@ public abstract class Quest {
                         "\nYou defeat the creature,\n"
                                 + "but the swamp remains hostile and unforgiving.\n"
                 );
+                enemy.setHp(enemy.getMaxHp());
                 hero.setHp(fullHp);
             } else {
                 System.out.println(
@@ -775,13 +791,15 @@ public abstract class Quest {
         // ================= BOSS CHANCE =================
         int bossAppears = random.nextInt(100);
 
-        if (bossAppears < 40) {
+        if (bossAppears > 60) {
             System.out.println(
                     "\nAfter hours of struggle,\n"
                             + "the swamp finally grows quiet.\n"
                             + "No dominant presence remains.\n\n"
                             + "The purge was only partial — but sufficient for now.\n"
             );
+            GameHelper.QuestComplete();//TODO adicionar em todos
+            Hero.levelUp(hero);
             questMenu(hero, shop);
             return;
         }
@@ -791,7 +809,7 @@ public abstract class Quest {
                 "\n========================================\n"
                         + "The ground trembles.\n"
                         + "From the depths of the swamp emerges a man clad in chemical armor.\n\n"
-                        + ChemBaronRenegadeCaptain.getName() + "\n"
+                        + "The Boss "+ChemBaronRenegadeCaptain.getName() + "\n"
                         + "grips a blade dripping with toxins.\n"
                         + "========================================\n"
         );
@@ -817,6 +835,7 @@ public abstract class Quest {
                             + "Noxus reclaims part of the corrupted territory.\n"
             );
             hero.setHp(fullHp);
+            GameHelper.QuestComplete();
             Hero.levelUp(hero);
             Thread.sleep(1000);
             questMenu(hero, shop);
