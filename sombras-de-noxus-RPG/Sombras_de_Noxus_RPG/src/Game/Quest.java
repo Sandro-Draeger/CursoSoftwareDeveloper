@@ -111,15 +111,11 @@ public abstract class Quest {
                     break;
 
                 case 2:
-                    Random specialAbility = new Random(100);
-                    int specialAbility = new Random(100);
-                    if(specialAbility < 70) {
+                    if (Math.random() < 0.70) {
                         System.out.println("You use " + hero.specialAbility);
                         hero.useSpecialAtk(enemy);
-                        specialAbilityUsed = true;
                     } else {
-                        System.out.println("You already used your special ability.");
-                        hero.attackEnemy(enemy);
+                        System.out.println("You tried to use your special attack, but it failed!");
                     }
                     break;
 
