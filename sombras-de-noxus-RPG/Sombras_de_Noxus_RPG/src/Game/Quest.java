@@ -171,6 +171,26 @@ public abstract class Quest {
             System.out.println("-------------------------------------\n");
         }
     }
+//TODO implementar em todos os  Boss
+    private static boolean checkBattleResult(Hero hero, Shop shop) throws InterruptedException {
+        if (run || hero.getHp() < 0) {
+            System.out.println(
+                    "\nYou are forced to retreat.\n"
+            );
+            hero.setHp(hero.getMaxHp());
+            questMenu(hero, shop);
+        } else {
+            System.out.println(
+                    "\nThe enemy falls.\n"
+                            + "You complete your mission.\n"
+            );
+            hero.setHp(hero.getMaxHp());
+            GameHelper.QuestComplete();
+            Hero.levelUp(hero);
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Starts a riddle-based battle between a hero and an enemy (NPC).
@@ -263,9 +283,7 @@ public abstract class Quest {
 
 
     public static void borderOfNoxus(Hero hero, Shop shop) throws InterruptedException {
-
         Scanner input = new Scanner(System.in);
-        int fullHp = hero.getHp();
 
         NPC BanditScout = new NPC("Bandit Scout", 55, 55, 6, "quick stab", 10, 1);
         NPC BanditBruiser = new NPC("Bandit Bruiser", 90, 90, 10, "heavy punch", 18, 1);
@@ -355,7 +373,7 @@ public abstract class Quest {
         System.out.println(
                 "\nYou defeat the scout and press onward.\n"
         );
-        hero.setHp(fullHp);
+        hero.setHp(hero.getMaxHp());
 
         Thread.sleep(1000);
 
@@ -429,24 +447,14 @@ public abstract class Quest {
 
         startBattle(hero, BanditBruiser);
 
-        if (hero.getHp() > 0 || !run) //TODO rever isso
-             {
-            System.out.println(
-                    "\nThe Bandit Bruiser falls.\n"
-                            + "The road is safe once more.\n"
-            );
-            GameHelper.QuestComplete();
-            hero.setHp(fullHp);
-            Hero.levelUp(hero);
+
+        if (checkBattleResult(hero, shop)){
             quest1Complete = true;
-            questMenu(hero, shop);
-        } else {
-            System.out.println(
-                    "\nYou are forced to retreat.\n"
-            );
-            questMenu(hero, shop);
         }
+
     }
+
+
 
 
     //quest02
@@ -809,7 +817,7 @@ public abstract class Quest {
                 "\n========================================\n"
                         + "The ground trembles.\n"
                         + "From the depths of the swamp emerges a man clad in chemical armor.\n\n"
-                        + "The Boss "+ChemBaronRenegadeCaptain.getName() + "\n"
+                        + "The Boss " + ChemBaronRenegadeCaptain.getName() + "\n"
                         + "grips a blade dripping with toxins.\n"
                         + "========================================\n"
         );
