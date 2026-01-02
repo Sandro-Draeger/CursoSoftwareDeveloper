@@ -429,7 +429,8 @@ public abstract class Quest {
 
         startBattle(hero, BanditBruiser);
 
-        if (hero.getHp() > 0 || !run) {
+        if (hero.getHp() > 0 || !run) //TODO rever isso
+             {
             System.out.println(
                     "\nThe Bandit Bruiser falls.\n"
                             + "The road is safe once more.\n"
@@ -536,7 +537,6 @@ public abstract class Quest {
         switch (choice) {
             case 1:
                 startBattle(hero, CrimsonAcolyte);
-                startedQuest = true;
 
                 if (hero.getHp() > 0) {
                     System.out.println(

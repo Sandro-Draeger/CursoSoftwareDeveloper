@@ -16,35 +16,35 @@ public class Main {
 
         // Healing potions
         Consumable smallHealPotion = new Consumable("Small Heal Potion", ItemType.HEAL, 15, 15);
-        Consumable mediumHealPotion = new Consumable("Medium Heal Potion", ItemType.HEAL, 25, 30);
-        Consumable bigHealPotion = new Consumable("Big Heal Potion", ItemType.HEAL, 40, 60);
+        Consumable mediumHealPotion = new Consumable("Medium Heal Potion", ItemType.HEAL, 25, 20);
+        Consumable bigHealPotion = new Consumable("Big Heal Potion", ItemType.HEAL, 30, 25);
 
         // Attack buff consumables (temporary; effect applied by battle code)
-        Consumable smallAttackBuff = new Consumable("Small Attack Increase", ItemType.ATTACK, 10, 40);
-        Consumable bigAttackBuff = new Consumable("Big Attack Increase", ItemType.ATTACK, 20, 80);
+        Consumable smallAttackBuff = new Consumable("Small Attack Increase", ItemType.ATTACK, 10, 30);
+        Consumable bigAttackBuff = new Consumable("Big Attack Increase", ItemType.ATTACK, 20, 60);
 
 // Legionnaire – Sword Upgrades
-        Weapons swordUpgrade1 = new Weapons("Sword Upgrade I - Damage Boost", ItemType.ATTACK, 10, 180, ClassType.LEGIONNAIRE);
-        Weapons swordUpgrade2 = new Weapons("Sword Upgrade II - Sharpness Boost", ItemType.ATTACK, 15, 260, ClassType.LEGIONNAIRE);
-        Weapons swordUpgrade3 = new Weapons("Sword Upgrade III - Enhanced Blade", ItemType.ATTACK, 20, 340, ClassType.LEGIONNAIRE);
+        Weapons swordUpgrade1 = new Weapons("Sword Upgrade I - Damage Boost", ItemType.ATTACK, 10, 100, ClassType.LEGIONNAIRE);
+        Weapons swordUpgrade2 = new Weapons("Sword Upgrade II - Sharpness Boost", ItemType.ATTACK, 15, 150, ClassType.LEGIONNAIRE);
+        Weapons swordUpgrade3 = new Weapons("Sword Upgrade III - Enhanced Blade", ItemType.ATTACK, 20, 200, ClassType.LEGIONNAIRE);
 
 // Bloody Mage – Staff Upgrades
-        Weapons staffUpgrade1 = new Weapons("Staff Upgrade I - Power Core", ItemType.ATTACK, 10, 180, ClassType.BLOODY_MAGE);
-        Weapons staffUpgrade2 = new Weapons("Staff Upgrade II - Arcane Channeling", ItemType.ATTACK, 15, 260, ClassType.BLOODY_MAGE);
-        Weapons staffUpgrade3 = new Weapons("Staff Upgrade III - Enhanced Focus", ItemType.ATTACK, 20, 340, ClassType.BLOODY_MAGE);
+        Weapons staffUpgrade1 = new Weapons("Staff Upgrade I - Power Core", ItemType.ATTACK, 10, 100, ClassType.BLOODY_MAGE);
+        Weapons staffUpgrade2 = new Weapons("Staff Upgrade II - Arcane Channeling", ItemType.ATTACK, 15, 150, ClassType.BLOODY_MAGE);
+        Weapons staffUpgrade3 = new Weapons("Staff Upgrade III - Enhanced Focus", ItemType.ATTACK, 20, 200, ClassType.BLOODY_MAGE);
 
 // Crimson Archer – Bow Upgrades
-        Weapons bowUpgrade1 = new Weapons("Bow Upgrade I - Fire-Tipped Arrows", ItemType.ATTACK, 10, 180, ClassType.CRIMSON_ARCHER);
-        Weapons bowUpgrade2 = new Weapons("Bow Upgrade II - Silver-Tipped Arrows", ItemType.ATTACK, 15, 260, ClassType.CRIMSON_ARCHER);
-        Weapons bowUpgrade3 = new Weapons("Bow Upgrade III - Reinforced String", ItemType.ATTACK, 20, 340, ClassType.CRIMSON_ARCHER);
+        Weapons bowUpgrade1 = new Weapons("Bow Upgrade I - Fire-Tipped Arrows", ItemType.ATTACK, 10, 100, ClassType.CRIMSON_ARCHER);
+        Weapons bowUpgrade2 = new Weapons("Bow Upgrade II - Silver-Tipped Arrows", ItemType.ATTACK, 15, 150, ClassType.CRIMSON_ARCHER);
+        Weapons bowUpgrade3 = new Weapons("Bow Upgrade III - Reinforced String", ItemType.ATTACK, 20, 200, ClassType.CRIMSON_ARCHER);
 
 // Red Bastion – Shield Upgrades
-        Weapons shieldUpgrade1 = new Weapons("Shield Upgrade I - Reinforced Plating", ItemType.ATTACK, 10, 150, ClassType.RED_BASTION);
-        Weapons shieldUpgrade2 = new Weapons("Shield Upgrade II - Runic Layer", ItemType.ATTACK, 15, 220, ClassType.RED_BASTION);
-        Weapons shieldUpgrade3 = new Weapons("Shield Upgrade III - Impact Boost", ItemType.ATTACK, 20, 300, ClassType.RED_BASTION);
+        Weapons shieldUpgrade1 = new Weapons("Shield Upgrade I - Reinforced Plating", ItemType.ATTACK, 10, 100, ClassType.RED_BASTION);
+        Weapons shieldUpgrade2 = new Weapons("Shield Upgrade II - Runic Layer", ItemType.ATTACK, 15, 150, ClassType.RED_BASTION);
+        Weapons shieldUpgrade3 = new Weapons("Shield Upgrade III - Impact Boost", ItemType.ATTACK, 20, 200, ClassType.RED_BASTION);
 
 // Universal
-        Weapons universalUpgrade = new Weapons("Universal Upgrade - Crimson Essence", ItemType.ATTACK, 12, 200, null);
+        Weapons universalUpgrade = new Weapons("Universal Upgrade - Crimson Essence", ItemType.ATTACK, 12, 110, null);
 
 
         //Declaração da loja e adicição dos itens
