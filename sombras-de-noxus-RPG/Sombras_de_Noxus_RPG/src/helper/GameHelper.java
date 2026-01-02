@@ -41,9 +41,9 @@ public class GameHelper {
                         " x                                                                                                           x\n" +
                         " xx          " + GRAY + "•BLOOD RITUAL•" + RESET + "                  " + GREEN + "•NOXUS HEART TAVERN•" + RESET + "                                      xxxx\n" +
                         "  xx                                                                                               xx x xx   \n" +
-                        "   xxx                                                " + GREEN + "▲" + RESET + "                                           xx         \n" +
-                        "     xx                                               " + GREEN + "│" + RESET + "                                           x          \n" +
-                        "       xx                                             " + GREEN + "│" + RESET + "                                           x          \n" +
+                        "   xxx                                                                                                                     xx         \n" +
+                        "     xx                                                                                                                     x          \n" +
+                        "       xx                                                                                                                   x          \n" +
                         "         xx                                                                                       xx         \n" +
                         "          xx                                                                                       x         \n" +
                         "           xx                                                                                      xx        \n" +
@@ -70,8 +70,9 @@ public class GameHelper {
                         "[2] " + GRAY + "BLOOD RITUAL — ACOLYTE OF VLADIMIR" + RESET + "\n" +
                         "[3] " + RED  + "IMMORTAL BASTION SWAMP — CHEM-BARON CAPTAIN" + RESET + "\n" +
                         "[4] " + RED  + "THE CRIMSON GORGE — ADVANCED DANGER ZONE" + RESET + "\n" +
-                        "[5] " + GRAY + "THE LOST CITADEL OF ZAUN-MOR — HIGH THREAT" + RESET + "\n" +
+                        "[5] " + RED + "THE LOST CITADEL OF ZAUN-MOR — HIGH THREAT" + RESET + "\n" +
                         "[6] " + DARK_RED + "TRIFARIX — FINAL TRIAL" + RESET + "\n" +
+                        "[7] " + GREEN + "NOXUS HEART TAVERN" + RESET + "\n" +
                         "==================================================\n"
         );
 

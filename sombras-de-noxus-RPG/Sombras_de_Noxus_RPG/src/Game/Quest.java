@@ -90,8 +90,10 @@ public abstract class Quest {
             System.out.println("Enemy HP: " + enemy.getHp() + " / " + enemy.getMaxHp() + "max");
             System.out.println("--------------------------------\n");
 
+            hero.heroDetails();
+
             //Player Turn
-            System.out.println("----------- BATTLE MENU -----------");
+            System.out.println("\n----------- BATTLE MENU -----------");
             System.out.println("1. Attack");
             System.out.println("2. Special Ability");
             System.out.println("3. Use Potion");
@@ -109,7 +111,9 @@ public abstract class Quest {
                     break;
 
                 case 2:
-                    if(!specialAbilityUsed) {
+                    Random specialAbility = new Random(100);
+                    int specialAbility = new Random(100);
+                    if(specialAbility < 70) {
                         System.out.println("You use " + hero.specialAbility);
                         hero.useSpecialAtk(enemy);
                         specialAbilityUsed = true;
