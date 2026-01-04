@@ -171,16 +171,22 @@ public abstract class Hero extends Entity {
     }
 
     public void heroInventory() {
-        System.out.println("============ Inventory ============");
 
-        for (int i = 0; i < this.inventory.size(); i++) {
-            Item item = this.inventory.get(i);
+        if(this.inventory.isEmpty()){
+            System.out.println("\n============ Empty Inventory ============");
+            System.out.println("=========================================\n");
+        } else {
+            System.out.println("\n============ Inventory ============");
 
-            System.out.println("[" + (i + 1) + "] | Name: " + item.getName() + " | Effect: " + item.getEffect() + " | Type: " + item.getType());
-            System.out.println("-----------------------------------");
+            for (int i = 0; i < this.inventory.size(); i++) {
+                Item item = this.inventory.get(i);
+
+                System.out.println("[" + (i + 1) + "] | Name: " + item.getName() + " | Effect: " + item.getEffect() + " | Type: " + item.getType());
+                System.out.println("-----------------------------------");
+            }
+
+            System.out.println("===================================\n");
         }
-
-        System.out.println("===================================");
     }
 
     public void attackEnemy(NPC enemy) {
@@ -195,14 +201,15 @@ public abstract class Hero extends Entity {
 
     public void useConsumable() {
         Scanner input = new Scanner(System.in);
-        heroInventory();
+
 
         if (this.inventory.isEmpty()) {
-            System.out.println("You don't have any items to use.");
+            System.out.println("\nYou don't have any items to use.\n");
             return;
         }
 
-        System.out.println("Choose one of your items to use or press 0 to close the inventory:");
+        heroInventory();
+        System.out.println("\nChoose one of your items to use or press 0 to close the inventory:");
 
         int index = input.nextInt();
 
@@ -233,8 +240,8 @@ public abstract class Hero extends Entity {
             }
 
             System.out.println(
-                    "You drink a healing potion and recover "
-                            + healedAmount + " HP."
+                    "\nYou drink a healing potion and recover "
+                            + healedAmount + " HP.\n"
             );
 
             removeItem(itemSelected);
@@ -246,8 +253,8 @@ public abstract class Hero extends Entity {
             this.attack += itemSelected.getEffect();
 
             System.out.println(
-                    "You drink an attack potion and increase your attack by "
-                            + itemSelected.getEffect() + "."
+                    "\nYou drink an attack potion and increase your attack by "
+                            + itemSelected.getEffect() + ".\n"
             );
 
             removeItem(itemSelected);
@@ -280,17 +287,17 @@ public abstract class Hero extends Entity {
             case 1:
                 hero.setMaxHp(hero.getMaxHp() + 20);
                 hero.setHp(hero.getHp() + 20);
-                System.out.println("Your body endures more punishment. Max HP increased.\n");
+                System.out.println("\nYour body endures more punishment. Max HP increased.\n");
                 break;
 
             case 2:
                 hero.setAttack(hero.getAttack() + 5);
-                System.out.println("Your strikes grow deadlier. Attack Damage increased.\n");
+                System.out.println("\nYour strikes grow deadlier. Attack Damage increased.\n");
                 break;
 
             case 3:
                 hero.setAbilityDamage(hero.getAbilityDamage() + 8);
-                System.out.println("Your mastery of combat abilities deepens. Ability Damage increased.\n");
+                System.out.println("\nYour mastery of combat abilities deepens. Ability Damage increased.\n");
                 break;
 
             default:

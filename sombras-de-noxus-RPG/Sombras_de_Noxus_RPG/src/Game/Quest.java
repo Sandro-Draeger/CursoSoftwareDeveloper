@@ -114,11 +114,11 @@ public abstract class Quest {
         System.out.println("\n===================================");
         System.out.println("           A BATTLE BEGINS");
         System.out.println("===================================");
-        System.out.println("A wild " + enemy.getName() + " appeared!\n");
+        System.out.println(enemy.getName() + " appeared!\n");
 
         while (!battleOver) {
 
-            System.out.println("----------- STATUS -----------");
+            System.out.println("----------- BATTLE STATUS -----------");
             System.out.println("Hero HP:  " + hero.getHp() + " / " + hero.getMaxHp() + "max");
             System.out.println("Enemy HP: " + enemy.getHp() + " / " + enemy.getMaxHp() + "max");
             System.out.println("--------------------------------\n");
@@ -138,16 +138,16 @@ public abstract class Quest {
 
             switch (choice) {
                 case 1:
-                    System.out.println("You attack!");
+                    System.out.println("\nYou attack!");
                     hero.attackEnemy(enemy);
                     break;
 
                 case 2:
                     if (Math.random() < 0.70) {
-                        System.out.println("You use " + hero.specialAbility);
+                        System.out.println("\nYou use " + hero.specialAbility);
                         hero.useSpecialAtk(enemy);
                     } else {
-                        System.out.println("You tried to use your special attack, but it failed!");
+                        System.out.println("\nYou tried to use your special attack, but it failed!\n");
                     }
                     break;
 
@@ -162,11 +162,12 @@ public abstract class Quest {
             if (enemy.getHp() <= 0) {
                 GameHelper.healMessage();
                 hero.setAttack(initialAttack);
+                hero.setHp(hero.getMaxHp());
                 break;
             }
 
             //Enemy Turn
-            System.out.println("\nWaiting for enemy response...");
+            System.out.println("\nWaiting for enemy response...\n");
             Thread.sleep(1000);
 
 
@@ -180,12 +181,11 @@ public abstract class Quest {
 
             if (hero.getHp() <= 0) {
                 hero.setAttack(initialAttack);
+                hero.setHp(hero.getMaxHp());
                 System.out.println("\nYou have been defeated...");
                 System.out.println("===================================");
                 battleOver = true;
             }
-
-            System.out.println("-------------------------------------\n");
         }
     }
 
