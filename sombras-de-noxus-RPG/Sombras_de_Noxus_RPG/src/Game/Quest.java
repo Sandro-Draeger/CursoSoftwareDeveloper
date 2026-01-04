@@ -26,83 +26,71 @@ public abstract class Quest {
 
     public static void questMenu(Hero hero, Shop shop) throws InterruptedException {
         Scanner input = new Scanner(System.in);
-        System.out.println("Great warrior " + hero.getName() + ", the path awaits. Choose your next journey.");
-        GameHelper.printNoxusMap();
-        int choice = input.nextInt();
 
-        switch (choice) {
+        while (true) {
+            System.out.println("Great warrior " + hero.getName() + ", the path awaits. Choose your next journey.\n");
+            GameHelper.printNoxusMap();
 
-            case 1:
-                if (!quest1Complete) {
-                    borderOfNoxus(hero, shop);
-                } else {
-                    System.out.println(
-                            "\nYou have already cleared the road of the bandit threat. " +
-                                    "The borders of Noxus now stand in peace.\n"
-                    );
+            int choice = input.nextInt();
+
+            switch (choice) {
+
+                case 1:
+                    if (!quest1Complete) {
+                        borderOfNoxus(hero, shop);
+                    } else {
+                        System.out.println(
+                                "\nYou have already cleared the road of the bandit threat.\n"
+                        );
+                    }
                     break;
-                }
-                break;
 
-            case 2:
-                if (!quest2Complete) {
-                    bloodRitual(hero, shop);
-                } else {
-                    System.out.println(
-                            "\nThe Crimson Ritual has already been stopped.\n"
-                                    + "Only echoes of blood magic remain.\n"
-                    );
-                }
-                break;
+                case 2:
+                    if (!quest2Complete) {
+                        bloodRitual(hero, shop);
+                    } else {
+                        System.out.println("\nThe Crimson Ritual has already been stopped.\n");
+                    }
+                    break;
 
-            case 3:
-                if (!quest3Complete) {
-                    immortalBastionSwamp(hero, shop);
-                } else {
-                    System.out.println(
-                            "\nThe Immortal Bastion swamps have already been cleared.\n"
-                                    + "Only stagnant silence remains.\n"
-                    );
-                }
-                break;
+                case 3:
+                    if (!quest3Complete) {
+                        immortalBastionSwamp(hero, shop);
+                    } else {
+                        System.out.println("\nThe Immortal Bastion swamps have already been cleared.\n");
+                    }
+                    break;
 
-            case 4:
-                if (!quest4Complete) {
-                    crimsonGorge(hero, shop);
-                } else {
-                    System.out.println(
-                            "\nThe Crimson Gorge has already been sealed.\n"
-                                    + "Arcane anomalies are contained, and hostile constructs lie dormant.\n"
-                                    + "For now, the Gorge no longer threatens Noxian territory.\n"
-                    );
-                }
-                break;
+                case 4:
+                    if (!quest4Complete) {
+                        crimsonGorge(hero, shop);
+                    } else {
+                        System.out.println("\nThe Crimson Gorge has already been sealed.\n");
+                    }
+                    break;
 
-            case 5:
-                if (!quest5Complete) {
-                    lostCitadelOfZaunMor(hero, shop);
-                } else {
-                    System.out.println(
-                            "\nThe Lost Citadel of Zaun-Mor has been conquered.\n"
-                                    + "Blood stains the stone and ash fills the air.\n"
-                                    + "Only the echoes of ancient beasts remain.\n"
-                    );
-                }
-                break;
+                case 5:
+                    if (!quest5Complete) {
+                        lostCitadelOfZaunMor(hero, shop);
+                    } else {
+                        System.out.println("\nThe Lost Citadel of Zaun-Mor has been conquered.\n");
+                    }
+                    break;
 
-            case 6:
-                finalTrial(hero, shop);
-                break;
+                case 6:
+                    finalTrial(hero, shop);
+                    break;
 
-            case 7:
-                tavernMenu(shop, hero);
-                break;
+                case 7:
+                    tavernMenu(shop, hero);
+                    return;
 
-            default:
-                System.out.println("Invalid choice, great warrior. Choose a valid journey.");
-                break;
+                default:
+                    System.out.println("Invalid choice, great warrior.");
+            }
         }
     }
+
 
     /**
      * Starts a turn-based battle system between a hero and an enemy (NPC).
@@ -121,6 +109,7 @@ public abstract class Quest {
     public static void startBattle(Hero hero, NPC enemy) throws InterruptedException {
         Scanner sc = new Scanner(System.in);
         boolean battleOver = false;
+        int initialAttack = hero.getAttack();
         run = false;
 
 
@@ -179,9 +168,8 @@ public abstract class Quest {
             }
 
             if (enemy.getHp() <= 0) {
-                System.out.println("=================================   HEAL   ========================================");
-                System.out.println("Passive Activated: Heroic Bravery! Your wounds regenerate after a victorious battle.");
-                System.out.println("====================================================================================");
+                GameHelper.healMessage();
+                hero.setAttack(initialAttack);
                 break;
             }
 
@@ -199,6 +187,7 @@ public abstract class Quest {
             Thread.sleep(1000);
 
             if (hero.getHp() <= 0) {
+                hero.setAttack(initialAttack);
                 System.out.println("\nYou have been defeated...");
                 System.out.println("===================================");
                 battleOver = true;
@@ -210,24 +199,27 @@ public abstract class Quest {
 
 
     private static boolean checkBattleResult(Hero hero, Shop shop) throws InterruptedException {
-        if (run || hero.getHp() < 0) {
+
+        if (run || hero.getHp() <= 0) {
+            run = false;
             System.out.println(
                     "\nYou are forced to retreat.\n"
             );
             hero.setHp(hero.getMaxHp());
-            questMenu(hero, shop);
-        } else {
-            System.out.println(
-                    "\nThe enemy falls.\n"
-                            + "You complete your mission.\n"
-            );
-            hero.setHp(hero.getMaxHp());
-            GameHelper.QuestComplete();
-            Hero.levelUp(hero);
-            return true;
+            return false;
         }
-        return false;
+
+        System.out.println(
+                "\nThe enemy falls.\n"
+                        + "You complete your mission.\n"
+        );
+        hero.setHp(hero.getMaxHp());
+        GameHelper.QuestComplete();
+        Hero.levelUp(hero);
+
+        return true;
     }
+
 
     /**
      * Starts a riddle-based battle between a hero and an enemy (NPC).
@@ -393,7 +385,6 @@ public abstract class Quest {
         choice = input.nextInt();
 
         if (choice == 2) {
-            tavernMenu(shop, hero);
             return;
         }
 
@@ -403,7 +394,6 @@ public abstract class Quest {
             System.out.println(
                     "\nThe bandit overwhelms you.\n"
             );
-            tavernMenu(shop, hero);
             return;
         }
 
@@ -478,7 +468,6 @@ public abstract class Quest {
         choice = input.nextInt();
 
         if (choice == 2) {
-            questMenu(hero, shop);
             return;
         }
 
@@ -488,7 +477,6 @@ public abstract class Quest {
         if (checkBattleResult(hero, shop)) {
             quest1Complete = true;
         }
-
     }
 
 

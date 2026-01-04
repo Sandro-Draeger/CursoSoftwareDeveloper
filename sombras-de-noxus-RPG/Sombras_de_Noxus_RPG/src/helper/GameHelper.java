@@ -12,6 +12,11 @@ public class GameHelper {
         System.out.println(SCENE_DIVIDER);
     }
 
+    public static void healMessage() {
+        System.out.println("\n=================================   HEAL   ========================================");
+        System.out.println("Passive Activated: Heroic Bravery! Your wounds regenerate after a victorious battle.");
+        System.out.println("====================================================================================\n");
+    }
 
     public static void printNoxusMap() {
         // NOXIAN COLOR PALETTE
@@ -80,8 +85,8 @@ public class GameHelper {
     }
 
     public static void QuestComplete(){
-        System.out.println("========================================");
+        System.out.println("\n========================================");
         System.out.println("             QUEST COMPLETE             ");
-        System.out.println("========================================");
+        System.out.println("========================================\n");
     }
 }

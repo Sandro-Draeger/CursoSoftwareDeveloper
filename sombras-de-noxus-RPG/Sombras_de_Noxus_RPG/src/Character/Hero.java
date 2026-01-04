@@ -66,7 +66,7 @@ public abstract class Hero extends Entity {
 
     public static void showClassWeaponDetails(ClassType classType) {
 
-        System.out.println("=== SELECTED CLASS ===\n");
+        System.out.println("\n=== SELECTED CLASS ===");
 
         switch (classType) {
 
@@ -74,32 +74,32 @@ public abstract class Hero extends Entity {
                 System.out.println("Class: LEGIONNAIRE");
                 System.out.println("Weapon: Sword");
                 System.out.println("Description: Warrior specialized in close combat.");
-                System.out.println("During the game, the player can purchase weapon-specific upgrades in the shop.");
+                System.out.println("During the game, the player can purchase weapon-specific upgrades in the shop.\n");
                 break;
 
             case BLOODY_MAGE:
                 System.out.println("Class: BLOODY MAGE");
                 System.out.println("Weapon: Staff");
                 System.out.println("Description: Mage who uses arcane energy to attack enemies.");
-                System.out.println("During the game, the player can purchase weapon-specific upgrades in the shop.");
+                System.out.println("During the game, the player can purchase weapon-specific upgrades in the shop.\n");
                 break;
 
             case CRIMSON_ARCHER:
                 System.out.println("Class: CRIMSON ARCHER");
                 System.out.println("Weapon: Bow");
                 System.out.println("Description: Agile archer specialized in long-range attacks.");
-                System.out.println("During the game, the player can purchase weapon-specific upgrades in the shop.");
+                System.out.println("During the game, the player can purchase weapon-specific upgrades in the shop.\n");
                 break;
 
             case RED_BASTION:
                 System.out.println("Class: RED BASTION");
                 System.out.println("Weapon: Shield");
                 System.out.println("Description: Resilient defender who uses the shield as a weapon.");
-                System.out.println("During the game, the player can purchase weapon-specific upgrades in the shop.");
+                System.out.println("During the game, the player can purchase weapon-specific upgrades in the shop.\n");
                 break;
 
             default:
-                System.out.println("Unknown class.");
+                System.out.println("Unknown class.\n");
                 break;
         }
     }
@@ -196,38 +196,61 @@ public abstract class Hero extends Entity {
     public void useConsumable() {
         Scanner input = new Scanner(System.in);
         heroInventory();
+
         if (this.inventory.isEmpty()) {
             System.out.println("You don't have any items to use.");
+            return;
+        }
 
-        } else {
-            System.out.println("Choose one of your items to use or press 0 to close the inventary:");
+        System.out.println("Choose one of your items to use or press 0 to close the inventory:");
 
-            int index = input.nextInt();
+        int index = input.nextInt();
 
-            Item itemSelected = this.inventory.get(index - 1);
+        // FECHAR INVENTÁRIO
+        if (index == 0) {
+            return;
+        }
 
-            if (index == 0) {
-                return;
+        // VALIDAÇÃO DE ÍNDICE
+        if (index < 1 || index > this.inventory.size()) {
+            System.out.println("Invalid item selection.");
+            return;
+        }
+
+        Item itemSelected = this.inventory.get(index - 1);
+
+        // ===== HEAL =====
+        if (itemSelected.getType() == ItemType.HEAL) {
+
+            int healedAmount;
+
+            if (this.hp + itemSelected.getEffect() > this.maxHp) {
+                healedAmount = this.maxHp - this.hp;
+                this.hp = this.maxHp;
+            } else {
+                healedAmount = itemSelected.getEffect();
+                this.hp += itemSelected.getEffect();
             }
-            if (itemSelected.getType() == ItemType.HEAL) {
 
-                if (this.hp + itemSelected.getEffect() > this.maxHp) {
-                    this.hp = this.maxHp;
-                } else {
-                    this.hp += itemSelected.getEffect();
-                }
+            System.out.println(
+                    "You drink a healing potion and recover "
+                            + healedAmount + " HP."
+            );
 
-                System.out.println("You drink a healing potion and recover "
-                        + itemSelected.getEffect() + " hp");
+            removeItem(itemSelected);
+        }
 
-                removeItem(itemSelected);
-            }
+        // ===== ATTACK BUFF =====
+        else if (itemSelected.getType() == ItemType.ATTACK) {
 
-            if (itemSelected.getType() == ItemType.ATTACK) {
-                this.attack += itemSelected.getEffect();
-                System.out.println("You drink a attack potion and increase " + itemSelected.getEffect() + " atk");
-                removeItem(itemSelected);
-            }
+            this.attack += itemSelected.getEffect();
+
+            System.out.println(
+                    "You drink an attack potion and increase your attack by "
+                            + itemSelected.getEffect() + "."
+            );
+
+            removeItem(itemSelected);
         }
     }
 
@@ -257,17 +280,17 @@ public abstract class Hero extends Entity {
             case 1:
                 hero.setMaxHp(hero.getMaxHp() + 20);
                 hero.setHp(hero.getHp() + 20);
-                System.out.println("Your body endures more punishment. Max HP increased.");
+                System.out.println("Your body endures more punishment. Max HP increased.\n");
                 break;
 
             case 2:
                 hero.setAttack(hero.getAttack() + 5);
-                System.out.println("Your strikes grow deadlier. Attack Damage increased.");
+                System.out.println("Your strikes grow deadlier. Attack Damage increased.\n");
                 break;
 
             case 3:
                 hero.setAbilityDamage(hero.getAbilityDamage() + 8);
-                System.out.println("Your mastery of combat abilities deepens. Ability Damage increased.");
+                System.out.println("Your mastery of combat abilities deepens. Ability Damage increased.\n");
                 break;
 
             default:
