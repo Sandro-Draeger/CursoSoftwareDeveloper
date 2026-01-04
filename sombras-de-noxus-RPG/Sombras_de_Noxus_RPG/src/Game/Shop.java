@@ -67,16 +67,16 @@ public class Shop {
 
             choice = input.nextInt();
 
-            // Ajusta índice começando em 0
-            int index = choice - 1;
+            if (choice == 0) {
+                return;
+            }
 
-            // Validação
-            if (index < 0 || index >= todayStock.size()) {
+            if (choice < 0 || choice > todayStock.size()) {
                 System.out.println("Invalid choice!");
                 return;
             }
 
-            Item selectedItem = todayStock.get(index);
+            Item selectedItem = todayStock.get(choice - 1);
 
             if (selectedItem instanceof Consumable) {
 
@@ -92,12 +92,12 @@ public class Shop {
 
                 Weapons weapon = (Weapons) selectedItem;
 
-                if (weapon.getAbleToUse().equals(hero.getPlayer())) {
+                if (weapon.getAbleToUse() == null || weapon.getAbleToUse().equals(hero.getPlayer())) {
 
                     if (selectedItem.getPrice() <= hero.getGold()) {
                         hero.setGold(hero.getGold() - selectedItem.getPrice());
                         hero.setAttack(hero.getAttack() + selectedItem.getEffect());
-                        System.out.println(selectedItem.getName() + " upgraded your weapon in " + selectedItem.getEffect() + "++ atk");
+                        System.out.println(selectedItem.getName() + " upgraded your weapon in " + selectedItem.getEffect() + "+ atk");
                     } else {
                         System.out.println("You don't have enough Noxian crowns.");
                     }

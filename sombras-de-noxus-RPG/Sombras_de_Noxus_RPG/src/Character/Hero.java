@@ -44,10 +44,6 @@ public abstract class Hero extends Entity {
         return player;
     }
 
-    public String getSpecialAbility() {
-        return specialAbility;
-    }
-
     public int getAbilityDamage() {
         return abilityDamage;
     }

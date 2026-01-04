@@ -67,7 +67,6 @@ public abstract class Tavern {
         }
     }
 
-
     public static boolean gamblingResult() throws InterruptedException {
         Scanner input = new Scanner(System.in);
         boolean result = false;
@@ -86,7 +85,6 @@ public abstract class Tavern {
         }
         return result;
     }
-
 
     public static void tavernMenu(Shop shop, Hero hero) throws InterruptedException {
         Scanner input = new Scanner(System.in);

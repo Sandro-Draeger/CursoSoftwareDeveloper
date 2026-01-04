@@ -1,18 +1,21 @@
 package Game;
-
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-
 import Character.Hero;
 import Character.NPC;
 import Enums.ItemType;
 import Item.Consumable;
 import helper.GameHelper;
-
 import static Game.Tavern.tavernMenu;
 
-
+/**
+ * Centralizes all quest logic, battles and narrative flows of the game.
+ * <p>
+ * This class controls quest progression, battle systems, special encounters
+ * and the final trial. Quest completion states are tracked through static flags.
+ * </p>
+ */
 public abstract class Quest {
 
 
@@ -22,7 +25,17 @@ public abstract class Quest {
     static boolean quest4Complete = false;
     static boolean quest5Complete = false;
 
-
+    /**
+     * Displays the quest selection menu and controls quest navigation.
+     * <p>
+     * Allows the player to choose available quests, access the tavern,
+     * or initiate the final trial. Completed quests cannot be replayed.
+     * </p>
+     *
+     * @param hero the current player character
+     * @param shop the shop instance used for tavern interactions
+     * @throws InterruptedException if execution is interrupted during timed events
+     */
     public static void questMenu(Hero hero, Shop shop) throws InterruptedException {
         Scanner input = new Scanner(System.in);
 
@@ -181,7 +194,6 @@ public abstract class Quest {
 
             if (hero.getHp() <= 0) {
                 hero.setAttack(initialAttack);
-                hero.setHp(hero.getMaxHp());
                 System.out.println("\nYou have been defeated...");
                 System.out.println("===================================");
                 battleOver = true;
@@ -189,7 +201,18 @@ public abstract class Quest {
         }
     }
 
-
+    /**
+     * Evaluates the outcome of a final quest battle.
+     * <p>
+     * Restores hero health, handles quest completion rewards
+     * and level progression.
+     * </p>
+     *
+     * @param hero the player-controlled hero
+     * @param shop the shop instance (used for flow control)
+     * @return {@code true} if the hero wins the battle, {@code false} otherwise
+     * @throws InterruptedException if execution is interrupted
+     */
     private static boolean checkFinalBattleResult(Hero hero, Shop shop) throws InterruptedException {
 
         if (hero.getHp() <= 0) {
@@ -211,25 +234,23 @@ public abstract class Quest {
         return true;
     }
 
-
     /**
-     * Starts a riddle-based battle between a hero and an enemy (NPC).
+     * Executes a riddle-based battle against an enemy NPC.
      * <p>
-     * Both participants have equal health. The enemy challenges the hero
-     * with riddles instead of physical attacks. Correct answers deal damage
-     * to the enemy, while wrong answers damage the hero. The battle ends when
-     * one side is defeated or the player chooses to flee.
+     * Both hero and enemy have equal health. Correct answers
+     * damage the enemy, while wrong answers damage the hero.
+     * No items or abilities are allowed.
      * </p>
      *
      * @param hero  the player-controlled hero
-     * @param enemy the enemy NPC that presents the riddles
-     * @throws InterruptedException if the thread is interrupted during delays
+     * @param enemy the enemy NPC presenting the riddles
+     * @throws InterruptedException if interrupted during delays
      */
     public static void riddleBattle(Hero hero, NPC enemy) throws InterruptedException {
         Scanner input = new Scanner(System.in);
         ArrayList<Riddle> riddles = Riddle.initRiddles();
         enemy.setMaxHp(hero.getMaxHp());
-        enemy.setHp(hero.getHp()); //ambos teram as mesmas chances de ganhar, como nao tem poção, a vida do player será o parametro
+        enemy.setHp(hero.getHp());
 
         System.out.println("\n===================================");
         System.out.println("           RIDDLE BATTLE");
@@ -244,7 +265,7 @@ public abstract class Quest {
         while (true) {
 
             // STATUS
-            System.out.println("----------- STATUS -----------");
+            System.out.println("----------- BATTLE STATUS -----------");
             System.out.println("Hero HP:  " + hero.getHp() + " / " + hero.getMaxHp() + " max");
             System.out.println("Enemy HP: " + enemy.getHp() + " / " + enemy.getMaxHp() + " max");
             System.out.println("--------------------------------\n");
@@ -258,14 +279,9 @@ public abstract class Quest {
                 System.out.println((i + 1) + ". " + riddle.getOptions().get(i));
             }
 
-            System.out.print("\nChoose your answer (1-3) or 0 to flee: ");
+            System.out.print("\nChoose your answer (1-3): ");
             int playerAnswer = input.nextInt();
 
-            // FUGIR
-            if (playerAnswer == 0) {
-                System.out.println("You fled from the riddle battle!");
-                return;
-            }
 
             System.out.println("\nWaiting for enemy response...");
             Thread.sleep(800);
@@ -301,7 +317,17 @@ public abstract class Quest {
 
     //=============== QUESTS ===============
 
-
+    /**
+     * Executes the "Border of Noxus" quest.
+     * <p>
+     * Includes exploration choices, random events and multiple battles.
+     * Completion unlocks further quests.
+     * </p>
+     *
+     * @param hero the player-controlled hero
+     * @param shop the shop instance for retreat handling
+     * @throws InterruptedException if interrupted during narrative delays
+     */
     public static void borderOfNoxus(Hero hero, Shop shop) throws InterruptedException {
         Scanner input = new Scanner(System.in);
         hero.setHp(hero.getMaxHp());
@@ -471,8 +497,17 @@ public abstract class Quest {
         }
     }
 
-
-    //quest02
+    /**
+     * Executes the "Blood Ritual" quest.
+     * <p>
+     * Features random underground events, cultist encounters
+     * and a final boss battle tied to blood magic.
+     * </p>
+     *
+     * @param hero the player-controlled hero
+     * @param shop the shop instance for retreat handling
+     * @throws InterruptedException if interrupted during narrative delays
+     */
     public static void bloodRitual(Hero hero, Shop shop) throws InterruptedException {
         Scanner input = new Scanner(System.in);
         hero.setHp(hero.getMaxHp());
@@ -652,8 +687,17 @@ public abstract class Quest {
         }
     }
 
-
-    //quest03
+    /**
+     * Executes the "Immortal Bastion Swamp" quest.
+     * <p>
+     * Includes random swamp hazards, repeated encounters
+     * and a chance-based final boss appearance.
+     * </p>
+     *
+     * @param hero the player-controlled hero
+     * @param shop the shop instance for retreat handling
+     * @throws InterruptedException if interrupted during narrative delays
+     */
     public static void immortalBastionSwamp(Hero hero, Shop shop) throws InterruptedException {
         Scanner input = new Scanner(System.in);
         Random random = new Random();
@@ -813,9 +857,17 @@ public abstract class Quest {
         }
     }
 
-
-
-    //quest04
+    /**
+     * Executes the "Crimson Gorge" quest.
+     * <p>
+     * The player must choose between two distinct paths,
+     * each with unique challenges, leading to a final boss.
+     * </p>
+     *
+     * @param hero the player-controlled hero
+     * @param shop the shop instance for retreat handling
+     * @throws InterruptedException if interrupted during narrative delays
+     */
     public static void crimsonGorge(Hero hero, Shop shop) throws InterruptedException {
         Scanner input = new Scanner(System.in);
         Random random = new Random();
@@ -960,8 +1012,17 @@ public abstract class Quest {
         }
     }
 
-
-    //quest05
+    /**
+     * Executes the "Lost Citadel of Zaun-Mor" quest.
+     * <p>
+     * Features branching paths, resurrection mechanics
+     * and a powerful drake boss encounter.
+     * </p>
+     *
+     * @param hero the player-controlled hero
+     * @param shop the shop instance for retreat handling
+     * @throws InterruptedException if interrupted during narrative delays
+     */
     public static void lostCitadelOfZaunMor(Hero hero, Shop shop) throws InterruptedException {
         Scanner input = new Scanner(System.in);
         Random random = new Random();
@@ -1095,18 +1156,28 @@ public abstract class Quest {
         }
     }
 
-
-    //quest06
+    /**
+     * Executes the Final Trial of Noxus.
+     * <p>
+     * The hero faces the three members of the Trifarix in sequence:
+     * Strength, Cunning and Fear. Choices made here define the final ending.
+     * </p>
+     *
+     * @param hero the player-controlled hero
+     * @param shop the shop instance (used for flow control)
+     * @throws InterruptedException if interrupted during narrative delays
+     */
     public static void finalTrial(Hero hero, Shop shop) throws InterruptedException {
         Scanner input = new Scanner(System.in);
         hero.setHp(hero.getMaxHp());
+        int fullHP = hero.getMaxHp();
 
-        //enemies
+        //ENEMIES
         NPC VladimirBoss = new NPC(
                 "Vladimir – Trifarix of Strength", 420, 420, 26, "blood spear", 60, 4
         );
         NPC LeBlancBoss = new NPC(
-                "LeBlanc – Trifarix of Cunning", 340, 340, 22, "illusory strike", 45, 4
+                "LeBlanc – Trifarix of Cunning", 120, 120, 22, "illusory strike", 45, 4
         );
         NPC MordekaiserBoss = new NPC(
                 "Mordekaiser – Trifarix of Fear", 520, 520, 30, "iron mace", 75, 5
@@ -1121,9 +1192,7 @@ public abstract class Quest {
             return;
         }
 
-        // =========================
         // INTRO GERAL
-        // =========================
         System.out.println(
                 "You step forward into the Final Trial.\n\n"
                         + "This is not a mission.\n"
@@ -1137,9 +1206,7 @@ public abstract class Quest {
         );
         Thread.sleep(1500);
 
-        // =========================
         // 1) VLADIMIR – STRENGTH
-        // =========================
         System.out.println(
                 "The air grows heavy with the scent of iron.\n"
                         + "Crimson sigils form as blood bends to unseen will.\n\n"
@@ -1159,7 +1226,6 @@ public abstract class Quest {
             return;
         }
 
-
         System.out.println(
                 "Vladimir staggers.\n"
                         + "The crimson sigils unravel as his form dissolves into a storm of blood.\n"
@@ -1174,14 +1240,12 @@ public abstract class Quest {
                         + "Attack Damage increased by 12.\n"
         );
         hero.setAttack(hero.getAttack() + 12);
+        hero.setHp(hero.getHp());
 
         GameHelper.printDivider();
-
         Thread.sleep(1500);
 
-        // =========================
         // 2) LEBLANC – CUNNING
-        // =========================
         System.out.println(
                 "\nSlow applause echoes.\n"
                         + "Reality fractures into layered illusions.\n\n"
@@ -1202,17 +1266,16 @@ public abstract class Quest {
             return;
         }
 
-        // Derrota “normal” da LeBlanc
         System.out.println(
                 "The illusions shatter.\n"
                         + "LeBlanc's smile fades as her form scatters into mirrored fragments.\n"
                         + "For now, Cunning yields — but you can feel her eyes on you still.\n"
         );
+        hero.setHp(fullHP);
+        hero.setMaxHp(fullHP);
         Thread.sleep(1500);
 
-        // =========================
-        // 3) MORDEKAISER – FEAR (BOSS FINAL)
-        // =========================
+        // 3) MORDEKAISER – FEAR
         System.out.println(
                 "The arena twists into a realm of cold iron and dying stars.\n"
                         + "Each breath becomes a weight, each heartbeat a fading drum.\n\n"
@@ -1224,9 +1287,6 @@ public abstract class Quest {
 
         startBattle(hero, MordekaiserBoss);
 
-        // =========================
-        // MORTE PARA MORDEKAISER → PROPOSTA
-        // =========================
         if (hero.getHp() <= 0) {
 
             System.out.println(
@@ -1254,7 +1314,6 @@ public abstract class Quest {
             int choice = input.nextInt();
 
             switch (choice) {
-
                 case 1:
                     System.out.println(
                             "\nYou surrender your mortal defiance.\n"
@@ -1275,8 +1334,7 @@ public abstract class Quest {
                     Thread.sleep(1500);
 
                     System.out.println("=== ENDING: TRIFARIX ASCENDANT ===");
-
-                    break;
+                    System.exit(0);
 
                 case 2:
                     System.out.println(
@@ -1301,9 +1359,6 @@ public abstract class Quest {
             }
         }
 
-        // =========================
-        // VITÓRIA CONTRA MORDEKAISER → FINAL GLORIOSO
-        // =========================
         System.out.println(
                 "The colossus staggers.\n"
                         + "Cracks spread across his iron shell as stolen souls burst free in screams and song.\n\n"
@@ -1323,8 +1378,8 @@ public abstract class Quest {
         Thread.sleep(1500);
 
         System.out.println("=== ENDING: NOXIAN LEGEND ===");
+        System.exit(0);
     }
-
 
 }
 

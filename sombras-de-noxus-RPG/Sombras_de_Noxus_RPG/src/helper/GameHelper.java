@@ -55,8 +55,8 @@ public class GameHelper {
                         "            x                                                                                       x        \n" +
                         "            x                                                                                       x        \n" +
                         "            x                                                                                       x        \n" +
-                        "             x                                                           " + GRAY + "•BORDERS OF NOXUS•" + RESET + "        x        \n" +
-                        "              xx           " + RED + "•IMMORTAL BASTION SWAMP•" + RESET + "                                               xx\n" +
+                        "             x                                                           " + GRAY + "•BORDERS OF NOXUS•" + RESET + "x     \n" +
+                        "              xx           " + RED + "•IMMORTAL BASTION SWAMP•" + RESET + "                                      xx\n" +
                         "               xx                                                                                 x          \n" +
                         "                 xxx                                                                            xx           \n" +
                         "                    xx                                                               xxxxxxx xxxx            \n" +

@@ -14,12 +14,12 @@ public class NPC extends Entity{
 
     public void attackEnemy(Hero hero) {
         hero.setHp(hero.getHp() - this.attack);
-        System.out.println("The "+this.name+" deals " + this.attack + " damage!");
+        System.out.println("The "+this.name+" deals " + this.attack + " damage!\n");
     }
 
     public void useSpecialAtk(Hero hero) {
         hero.setHp(hero.getHp() - this.abilityDamage);
-        System.out.println("The "+this.name+" hits you with a SPECIAL attack "+this.specialAbility+ " and deals "+ this.abilityDamage + " damage!");
+        System.out.println("The "+this.name+" hits you with a SPECIAL attack "+this.specialAbility+ " and deals "+ this.abilityDamage + " damage!\n");
     }
 
 

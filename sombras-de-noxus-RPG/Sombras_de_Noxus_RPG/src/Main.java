@@ -91,7 +91,7 @@ public class Main {
         Thread.sleep(1500);
 
         System.out.println("*You have received a starting bonus of 50 Noxian Crowns to begin your journey.*\n");
-        player.setGold(50);
+        player.setGold(1000);
 
         Thread.sleep(1000);
 
