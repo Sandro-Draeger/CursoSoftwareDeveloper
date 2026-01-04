@@ -25,7 +25,7 @@ public abstract class Hero extends Entity {
         this.abilityDamage = abilityDamage;
         this.gold = gold;
         this.inventory = new ArrayList<>();
-        this.level = 0;
+        this.level = 1;
     }
 
     public int getGold() {
@@ -110,7 +110,7 @@ public abstract class Hero extends Entity {
         System.out.println("* Level: " + this.level);
         System.out.println("* HP: " + this.hp);
         System.out.println("* Attack Damage: " + this.attack);
-        System.out.println("* Special Ability: " + this.specialAbility);
+        System.out.println("* Special Ability: " + this.specialAbility + " (70% chance to hit)");
         System.out.println("* Ability Damage: " + this.abilityDamage);
         System.out.println("* Noxian Crowns: " + this.gold + " nc");
         System.out.println("==============================");

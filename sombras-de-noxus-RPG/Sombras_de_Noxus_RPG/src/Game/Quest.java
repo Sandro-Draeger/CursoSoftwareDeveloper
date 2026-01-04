@@ -22,7 +22,6 @@ public abstract class Quest {
     static boolean quest4Complete = false;
     static boolean quest5Complete = false;
 
-    static boolean run = false;
 
     public static void questMenu(Hero hero, Shop shop) throws InterruptedException {
         Scanner input = new Scanner(System.in);
@@ -110,7 +109,6 @@ public abstract class Quest {
         Scanner sc = new Scanner(System.in);
         boolean battleOver = false;
         int initialAttack = hero.getAttack();
-        run = false;
 
 
         System.out.println("\n===================================");
@@ -132,7 +130,6 @@ public abstract class Quest {
             System.out.println("1. Attack");
             System.out.println("2. Special Ability");
             System.out.println("3. Use Potion");
-            System.out.println("4. Run");
             System.out.print("Choose your action: ");
 
             int choice = sc.nextInt();
@@ -157,11 +154,6 @@ public abstract class Quest {
                 case 3:
                     hero.useConsumable();
                     continue;
-
-                case 4:
-                    run = true;
-                    System.out.println("You have run from the battle.");
-                    return;
 
                 default:
                     System.out.println("Invalid choice!");
@@ -198,10 +190,9 @@ public abstract class Quest {
     }
 
 
-    private static boolean checkBattleResult(Hero hero, Shop shop) throws InterruptedException {
+    private static boolean checkFinalBattleResult(Hero hero, Shop shop) throws InterruptedException {
 
-        if (run || hero.getHp() <= 0) {
-            run = false;
+        if (hero.getHp() <= 0) {
             System.out.println(
                     "\nYou are forced to retreat.\n"
             );
@@ -247,7 +238,7 @@ public abstract class Quest {
         System.out.println("The enemy does not fight with weapons, but with knowledge." +
                 "\nIt will challenge you with riddles.\nFor each correct answer, the enemy suffers 30 damage." +
                 "\nFor each wrong answer, you suffer 30 damage.\nNo potions, abilities, or items can be used in this trial." +
-                "\nChoose wisely — intelligence is your only weapon.");
+                "\nChoose wisely — intelligence is your only weapon.\n");
 
 
         while (true) {
@@ -313,6 +304,7 @@ public abstract class Quest {
 
     public static void borderOfNoxus(Hero hero, Shop shop) throws InterruptedException {
         Scanner input = new Scanner(System.in);
+        hero.setHp(hero.getMaxHp());
 
         NPC BanditScout = new NPC("Bandit Scout", 55, 55, 6, "quick stab", 10, 1);
         NPC BanditBruiser = new NPC("Bandit Bruiser", 90, 90, 10, "heavy punch", 18, 1);
@@ -390,7 +382,7 @@ public abstract class Quest {
 
         startBattle(hero, BanditScout);
 
-        if (hero.getHp() <= 0 || run) {
+        if (hero.getHp() <= 0) {
             System.out.println(
                     "\nThe bandit overwhelms you.\n"
             );
@@ -474,7 +466,7 @@ public abstract class Quest {
         startBattle(hero, BanditBruiser);
 
 
-        if (checkBattleResult(hero, shop)) {
+        if (checkFinalBattleResult(hero, shop)) {
             quest1Complete = true;
         }
     }
@@ -482,10 +474,8 @@ public abstract class Quest {
 
     //quest02
     public static void bloodRitual(Hero hero, Shop shop) throws InterruptedException {
-
         Scanner input = new Scanner(System.in);
-        boolean startedQuest = false;
-        int fullHp = hero.getHp();
+        hero.setHp(hero.getMaxHp());
 
         // Enemies
         NPC CrimsonAcolyte = new NPC("Crimson Acolyte", 70, 70, 8, "blood bolt", 15, 1);
@@ -493,25 +483,17 @@ public abstract class Quest {
         NPC AcolyteOfVladimir = new NPC("Acolyte of Vladimir", 140, 140, 12, "blood slash", 25, 2);
 
         // ================= INTRO =================
-        if (startedQuest) {
-            System.out.println(
-                    "\nOnce again, you feel the pull of dark magic beneath Noxus.\n"
-                            + "The metallic scent of blood fills the air,\n"
-                            + "and whispers of the Crimson Circle echo in your mind.\n"
-            );
-        } else {
-            System.out.println(
-                    "\nBeneath the iron streets of Noxus, rumors speak of a forbidden gathering.\n"
-                            + "The Crimson Circle prepares a ritual — fueled by blood and devotion.\n"
-                            + "Those who vanish near the old catacombs are never seen again.\n"
-            );
-        }
+        System.out.println(
+                "\nBeneath the iron streets of Noxus, rumors speak of a forbidden gathering.\n"
+                        + "The Crimson Circle prepares a ritual — fueled by blood and devotion.\n"
+                        + "Those who vanish near the old catacombs are never seen again.\n"
+        );
 
         Thread.sleep(1000);
 
         // ================= RANDOM EVENT =================
         Random random = new Random();
-        int randomEvent = random.nextInt(3) + 1;
+        int randomEvent = random.nextInt(3);
 
         System.out.println(
                 "\nYou move deeper into the underground halls of Noxus,\n"
@@ -519,33 +501,40 @@ public abstract class Quest {
         );
 
         switch (randomEvent) {
-
-            case 1:
+            case 0:
                 System.out.println(
                         "\nForbidden chants echo through the tunnels.\n"
-                                + "Before you can react, a surge of blood magic erupts toward you!\n"
+                                + "A surge of blood magic erupts toward you!\n"
                 );
                 hero.takeDamage(25);
                 System.out.println("Current HP: " + hero.getHp() + "\n");
+
+                if (hero.getHp() <= 0) {
+                    tavernMenu(shop, hero);
+                    return;
+                }
                 break;
 
-            case 2:
+            case 1:
                 System.out.println(
                         "\nA fresh trail of blood stains the stone floor.\n"
-                                + "Following it, you discover a pouch dropped by fleeing cultists.\n"
+                                + "You discover a pouch dropped by fleeing cultists.\n"
                 );
                 hero.addGold(30);
                 System.out.println("You gain 30 Noxian Crowns.\n");
                 break;
 
-            case 3:
+            case 2:
                 System.out.println(
                         "\nYou remain hidden in the shadows.\n"
-                                + "The cultists pass by unaware,\n"
-                                + "leaving a few scattered coins behind.\n"
+                                + "The cultists leave a few scattered coins behind.\n"
                 );
                 hero.addGold(15);
                 System.out.println("You gain 15 Noxian Crowns.\n");
+                break;
+
+            default:
+                System.out.println("Something feels off...");
                 break;
         }
 
@@ -554,78 +543,61 @@ public abstract class Quest {
         // ================= FIRST BATTLE =================
         System.out.println(
                 "\nA hooded figure slowly turns toward you.\n"
-                        + CrimsonAcolyte.getName() + " raises his hand,\n"
-                        + "as blood begins to swirl around him.\n"
+                        + CrimsonAcolyte.getName() + " raises his hand.\n"
         );
 
-        System.out.println(
-                "[1] Confront him\n"
-                        + "[2] Retreat to safety\n"
-        );
-
+        System.out.println("[1] Confront him\n[2] Retreat to safety");
         int choice = input.nextInt();
 
         switch (choice) {
             case 1:
                 startBattle(hero, CrimsonAcolyte);
 
-                if (hero.getHp() > 0 && !run) {
-                    System.out.println(
-                            "\nThe Crimson Acolyte collapses,\n"
-                                    + "his blood magic fading away.\n"
-                                    + "Your wounds close as you press forward.\n"
-                    );
-                    hero.setHp(fullHp);
-                } else {
-                    System.out.println(
-                            "\nThe acolyte overwhelms you with forbidden magic.\n"
-                    );
-
-                    System.out.println(
-                            "[1] Try again\n"
-                                    + "[2] Return to the Tavern\n"
-                    );
-
-                    choice = input.nextInt();
-
-                    if (choice == 1) {
-                        startBattle(hero, CrimsonAcolyte);
-                    } else {
-                        tavernMenu(shop, hero);
-                    }
+                if (hero.getHp() <= 0) {
+                    tavernMenu(shop, hero);
+                    return;
                 }
+
+                System.out.println(
+                        "\nThe Crimson Acolyte collapses.\n"
+                                + "You press forward.\n"
+                );
+                hero.setHp(hero.getMaxHp());
                 break;
 
             case 2:
                 tavernMenu(shop, hero);
-                break;
+                return;
+
+            default:
+                System.out.println("Invalid choice.");
+                return;
         }
 
         Thread.sleep(1000);
 
         // ================= INTERMEDIATE EVENT =================
         System.out.println(
-                "\nAs you move forward,\n"
-                        + "the blood beneath your feet begins to shift,\n"
+                "\nThe blood beneath your feet begins to shift,\n"
                         + "alive with dark intent.\n"
         );
 
-        System.out.println(
-                "How do you proceed?\n"
-                        + "[1] Attempt to destroy it\n"
-                        + "[2] Move carefully through it\n"
-        );
-
+        System.out.println("[1] Attempt to destroy it\n[2] Move carefully");
         choice = input.nextInt();
 
         switch (choice) {
             case 1:
                 System.out.println(
                         "\nThe blood reacts violently,\n"
-                                + "forming sharp blades that tear into your armor!\n"
+                                + "forming sharp blades that tear into you!\n"
                 );
                 hero.takeDamage(20);
                 System.out.println("Current HP: " + hero.getHp() + "\n");
+
+                if (hero.getHp() <= 0) {
+                    tavernMenu(shop, hero);
+                    return;
+                }
                 break;
 
             case 2:
@@ -634,10 +606,18 @@ public abstract class Quest {
                                 + "a grotesque creature takes shape!\n"
                 );
                 startBattle(hero, BloodLeech);
-                if (hero.getHp() > 0 || !run) {
-                    hero.setHp(fullHp);
+
+                if (hero.getHp() <= 0) {
+                    tavernMenu(shop, hero);
+                    return;
                 }
+
+                hero.setHp(hero.getMaxHp());
                 break;
+
+            default:
+                System.out.println("Invalid choice.");
+                return;
         }
 
         Thread.sleep(1000);
@@ -645,41 +625,40 @@ public abstract class Quest {
         // ================= FINAL BOSS =================
         System.out.println(
                 "\n========================================\n"
-                        + "At the heart of the ritual chamber\n"
-                        + "stands a towering figure.\n"
-                        + "An " + AcolyteOfVladimir.getName() + "\n"
-                        + "watches calmly, blood orbiting his body\n"
-                        + "like a living weapon.\n"
+                        + "At the heart of the ritual chamber stands:\n"
+                        + AcolyteOfVladimir.getName() + "\n"
                         + "========================================\n"
         );
 
-        System.out.println(
-                "[1] Interrupt the ritual\n"
-                        + "[2] Retreat to the Tavern\n"
-        );
-
+        System.out.println("[1] Interrupt the ritual\n[2] Retreat to the Tavern");
         choice = input.nextInt();
 
         switch (choice) {
             case 1:
                 startBattle(hero, AcolyteOfVladimir);
 
-                if (checkBattleResult(hero, shop)) {
+                if (checkFinalBattleResult(hero, shop)) {
                     quest2Complete = true;
                 }
+                return;
 
             case 2:
                 tavernMenu(shop, hero);
-                break;
+                return;
+
+            default:
+                System.out.println("Invalid choice.");
+                return;
         }
     }
 
+
     //quest03
     public static void immortalBastionSwamp(Hero hero, Shop shop) throws InterruptedException {
-
         Scanner input = new Scanner(System.in);
         Random random = new Random();
-        int fullHp = hero.getHp();
+        int fullHp = hero.getMaxHp();
+        hero.setHp(hero.getMaxHp());
 
         // Enemies
         NPC ToxicSludge = new NPC("Toxic Sludge", 130, 130, 11, "acid spit", 22, 2);
@@ -698,19 +677,24 @@ public abstract class Quest {
         Thread.sleep(1000);
 
         // ================= INITIAL RANDOM EVENT =================
-        int randomEvent = random.nextInt(3) + 1;
+        int randomEvent = random.nextInt(3);
 
         switch (randomEvent) {
-            case 1:
+            case 0:
                 System.out.println(
                         "\nA toxic cloud rises from the swamp,\n"
                                 + "burning your lungs as you struggle to breathe!\n"
                 );
                 hero.takeDamage(30);
                 System.out.println("Current HP: " + hero.getHp() + "\n");
+
+                if (hero.getHp() <= 0) {
+                    tavernMenu(shop, hero);
+                    return;
+                }
                 break;
 
-            case 2:
+            case 1:
                 System.out.println(
                         "\nYou discover the remains of an old Noxian outpost.\n"
                                 + "Among the wreckage, a few Crowns still remain.\n"
@@ -718,11 +702,15 @@ public abstract class Quest {
                 hero.addGold(35);
                 break;
 
-            case 3:
+            case 2:
                 System.out.println(
                         "\nAn eerie silence settles over the swamp.\n"
                                 + "You steel your mind for what lies ahead.\n"
                 );
+                break;
+
+            default:
+                System.out.println("The swamp feels unsettling...");
                 break;
         }
 
@@ -731,7 +719,7 @@ public abstract class Quest {
         // ================= RANDOM ENCOUNTERS =================
         int encounters = random.nextInt(2) + 1;
 
-        for (int i = 1; i <= encounters; i++) {
+        for (int i = 0; i < encounters; i++) {
 
             NPC enemy;
             int chances = random.nextInt(100);
@@ -747,32 +735,32 @@ public abstract class Quest {
                             + enemy.getName() + " rises from the swamp!\n"
             );
 
-            System.out.println(
-                    "[1] Fight\n"
-                            + "[2] Retreat to the Tavern\n"
-            );
-
+            System.out.println("[1] Fight\n[2] Retreat to the Tavern");
             int choice = input.nextInt();
 
             if (choice == 2) {
+                tavernMenu(shop, hero);
+                return;
+            } else if (choice != 1) {
+                System.out.println("Invalid choice.");
                 tavernMenu(shop, hero);
                 return;
             }
 
             startBattle(hero, enemy);
 
-            if (hero.getHp() > 0 && !run) {
-                System.out.println(
-                        "\nYou defeat the creature,\n"
-                                + "but the swamp remains hostile and unforgiving.\n"
-                );
-                enemy.setHp(enemy.getMaxHp());
-                hero.setHp(fullHp);
-            } else {
-                System.out.println(
-                        "\nYou succumb to the swamp's toxic influence.\n"
-                );
+            if (hero.getHp() <= 0) {
+                tavernMenu(shop, hero);
+                return;
             }
+
+            System.out.println(
+                    "\nYou defeat the creature,\n"
+                            + "but the swamp remains hostile and unforgiving.\n"
+            );
+
+            enemy.setHp(enemy.getMaxHp());
+            hero.setHp(fullHp);
 
             Thread.sleep(1000);
         }
@@ -784,7 +772,6 @@ public abstract class Quest {
             System.out.println(
                     "\nAfter hours of struggle,\n"
                             + "the swamp finally grows quiet.\n"
-                            + "No dominant presence remains.\n\n"
                             + "The purge was only partial — but sufficient for now.\n"
             );
             GameHelper.QuestComplete();
@@ -797,37 +784,43 @@ public abstract class Quest {
         System.out.println(
                 "\n========================================\n"
                         + "The ground trembles.\n"
-                        + "From the depths of the swamp emerges a man clad in chemical armor.\n\n"
-                        + "The Boss " + ChemBaronRenegadeCaptain.getName() + "\n"
-                        + "grips a blade dripping with toxins.\n"
+                        + "From the depths of the swamp emerges:\n"
+                        + ChemBaronRenegadeCaptain.getName() + "\n"
                         + "========================================\n"
         );
 
-        System.out.println(
-                "[1] Confront the Captain\n"
-                        + "[2] Retreat to the Tavern\n"
-        );
-
+        System.out.println("[1] Confront the Captain\n[2] Retreat to the Tavern");
         int choice = input.nextInt();
 
         if (choice == 2) {
+            tavernMenu(shop, hero);
+            return;
+        } else if (choice != 1) {
+            System.out.println("Invalid choice.");
             tavernMenu(shop, hero);
             return;
         }
 
         startBattle(hero, ChemBaronRenegadeCaptain);
 
-        if (checkBattleResult(hero, shop)) {
+        if (hero.getHp() <= 0) {
+            tavernMenu(shop, hero);
+            return;
+        }
+
+        if (checkFinalBattleResult(hero, shop)) {
             quest3Complete = true;
         }
     }
+
 
 
     //quest04
     public static void crimsonGorge(Hero hero, Shop shop) throws InterruptedException {
         Scanner input = new Scanner(System.in);
         Random random = new Random();
-        int fullHp = hero.getHp();
+        int fullHp = hero.getMaxHp();
+        hero.setHp(hero.getMaxHp());
 
         // Enemies
         NPC ArcaneWraith = new NPC("Arcane Wraith", 150, 150, 14, "arcane burn", 28, 2);
@@ -847,13 +840,9 @@ public abstract class Quest {
                         + "The other echoes with Zaunite machinery.\n"
         );
 
-        System.out.println(
-                "[1] Arcane Path\n"
-                        + "[2] Zaun Path\n"
-        );
-
+        System.out.println("[1] Arcane Path\n[2] Zaun Path");
         int choice = input.nextInt();
-        int pathEvent = random.nextInt(2) + 1;
+        int pathEvent = random.nextInt(2);
 
         switch (choice) {
 
@@ -863,29 +852,28 @@ public abstract class Quest {
                         "\nYou step into a chamber where crimson arcane forces distort reality.\n"
                 );
 
-                while (true) {
+                hero.setMaxHp(90);
+                hero.setHp(90);
 
-                    hero.setMaxHp(90);
-                    hero.setHp(90);
+                System.out.println(
+                        "An Arcane Wraith materializes, testing your will...\n"
+                );
 
-                    System.out.println(
-                            "An Arcane Wraith materializes, testing your will...\n"
-                    );
+                riddleBattle(hero, ArcaneWraith);
 
-                    riddleBattle(hero, ArcaneWraith);
-
-                    if (hero.getHp() > 0) {
-                        System.out.println(
-                                "\nThe wraith dissipates, leaving arcane energy behind.\n"
-                        );
-                        hero.addItem(mediumHealPotion);
-                        System.out.println("A medium heal potion was added to your inventory.\n");
-
-                        hero.setMaxHp(fullHp);
-                        hero.setHp(fullHp);
-                        break;
-                    }
+                if (hero.getHp() <= 0) {
+                    tavernMenu(shop, hero);
+                    return;
                 }
+
+                System.out.println(
+                        "\nThe wraith dissipates, leaving arcane energy behind.\n"
+                );
+                hero.addItem(mediumHealPotion);
+                System.out.println("A medium heal potion was added to your inventory.\n");
+
+                hero.setMaxHp(fullHp);
+                hero.setHp(fullHp);
                 break;
 
             // ================= ZAUN PATH =================
@@ -894,12 +882,17 @@ public abstract class Quest {
                         "\nYou descend into a corridor filled with steam, pipes, and toxic residue.\n"
                 );
 
-                if (pathEvent == 1) {
+                if (pathEvent == 0) {
                     System.out.println(
                             "A pressurized pipe bursts, spraying corrosive chemicals!\n"
                     );
                     hero.takeDamage(25);
                     System.out.println("Current HP: " + hero.getHp() + "\n");
+
+                    if (hero.getHp() <= 0) {
+                        tavernMenu(shop, hero);
+                        return;
+                    }
                 } else {
                     System.out.println(
                             "You salvage usable chems from abandoned machinery.\n"
@@ -910,41 +903,27 @@ public abstract class Quest {
 
                 Thread.sleep(2000);
 
-                while (true) {
+                System.out.println(
+                        "\n========================================\n"
+                                + ZaunSentinelArmor.getName() + " activates, blocking your advance!\n"
+                                + "========================================\n"
+                );
 
-                    System.out.println(
-                            "\n========================================\n"
-                                    + ZaunSentinelArmor.getName() + " activates, blocking your advance!\n"
-                                    + "========================================\n"
-                    );
+                Thread.sleep(2000);
 
-                    Thread.sleep(2000);
+                startBattle(hero, ZaunSentinelArmor);
 
-                    startBattle(hero, ZaunSentinelArmor);
-
-                    if (hero.getHp() > 0 && !run) {
-                        System.out.println(
-                                "\nWell done, warrior.\n"
-                                        + "The sentinel collapses, its systems failing.\n"
-                        );
-                        hero.setHp(fullHp);
-                        return;
-                    }
-
-                    System.out.println(
-                            "\nYou were defeated by the sentinel.\n"
-                                    + "[1] Fight again\n"
-                                    + "[2] Retreat to the Tavern\n"
-                    );
-
-                    int retryChoice = input.nextInt();
-                    if (retryChoice == 2) {
-                        tavernMenu(shop, hero);
-                        return;
-                    }
-
-                    hero.setHp(fullHp);
+                if (hero.getHp() <= 0) {
+                    tavernMenu(shop, hero);
+                    return;
                 }
+
+                System.out.println(
+                        "\nWell done, warrior.\n"
+                                + "The sentinel collapses, its systems failing.\n"
+                );
+                hero.setHp(fullHp);
+                break;
 
             default:
                 System.out.println("\nInvalid choice.\n");
@@ -953,7 +932,6 @@ public abstract class Quest {
         }
 
         // ================= FINAL BOSS =================
-
         System.out.println(
                 "\n========================================\n"
                         + "The Crimson Gorge trembles violently.\n"
@@ -963,21 +941,21 @@ public abstract class Quest {
                         + "========================================\n"
         );
 
-        System.out.println(
-                "[1] Fight\n"
-                        + "[2] Retreat to the Tavern\n"
-        );
-
+        System.out.println("[1] Fight\n[2] Retreat to the Tavern");
         choice = input.nextInt();
 
         if (choice == 2) {
+            tavernMenu(shop, hero);
+            return;
+        } else if (choice != 1) {
+            System.out.println("Invalid choice.");
             tavernMenu(shop, hero);
             return;
         }
 
         startBattle(hero, BrokenHexCoreGolem);
 
-        if (checkBattleResult(hero, shop)) {
+        if (checkFinalBattleResult(hero, shop)) {
             quest4Complete = true;
         }
     }
@@ -985,92 +963,63 @@ public abstract class Quest {
 
     //quest05
     public static void lostCitadelOfZaunMor(Hero hero, Shop shop) throws InterruptedException {
-
         Scanner input = new Scanner(System.in);
         Random random = new Random();
-        int fullHp = hero.getHp();
+        hero.setHp(hero.getMaxHp());
 
         // Enemies
         NPC CrimsonDrake = new NPC("Crimson Drake", 180, 180, 16, "ember spit", 30, 2);
-        NPC RaptorBloodfang = new NPC(
-                "Raptor Bloodfang", 170, 170, 18, "razor dive", 32, 3
-        );
-        NPC ElderRedDrake = new NPC(
-                "Elder Red Drake", 360, 360, 24, "inferno roar", 55, 4
-        );
+        NPC RaptorBloodfang = new NPC("Raptor Bloodfang", 170, 170, 18, "razor dive", 32, 3);
+        NPC ElderRedDrake = new NPC("Elder Red Drake", 360, 360, 24, "inferno roar", 55, 4);
 
         // Items
         Consumable smallHealPotion = new Consumable("Small Heal Potion", ItemType.HEAL, 15, 15);
         Consumable mediumHealPotion = new Consumable("Medium Heal Potion", ItemType.HEAL, 25, 30);
-        Consumable smallAttackBuff = new Consumable("Small Attack Increase", ItemType.ATTACK, 10, 40);
-        Consumable bigAttackBuff = new Consumable("Big Attack Increase", ItemType.ATTACK, 20, 80);
 
         // ================= INTRO =================
         System.out.println(
                 "\nYou stand before the ruins of Zaun-Mor —\n"
-                        + "a lost citadel swallowed by fire and corruption.\n\n"
-                        + "The air burns your lungs,\n"
-                        + "and crimson-scaled creatures circle above.\n\n"
-                        + "This place was not meant to be reclaimed.\n"
+                        + "a lost citadel swallowed by fire and corruption.\n"
+                        + "Crimson-scaled creatures circle above.\n"
         );
 
         Thread.sleep(1000);
 
         // ================= PATH CHOICE =================
         System.out.println(
-                "\nWithin the shattered citadel, two paths remain accessible.\n"
-        );
-        System.out.println(
                 "[1] Ascend the shattered battlements\n"
                         + "[2] Descend into the molten tunnels\n"
         );
 
         int choice = input.nextInt();
-        int randomEvent = random.nextInt(2) + 1;
+        int randomEvent = random.nextInt(2);
 
         switch (choice) {
 
             case 1:
-                System.out.println(
-                        "\nYou climb the broken battlements,\n"
-                                + "fully exposed to the burning sky.\n"
-                );
-
-                if (randomEvent == 1) {
-                    System.out.println(
-                            "\nA sudden firestorm erupts across the towers!\n"
-                    );
+                System.out.println("\nYou climb the broken battlements.\n");
+                if (randomEvent == 0) {
                     hero.takeDamage(25);
-                    System.out.println("Current HP: " + hero.getHp() + "\n");
+                    System.out.println("Firestorm scorches you! HP: " + hero.getHp());
                 } else {
                     hero.addItem(smallHealPotion);
-                    System.out.println(
-                            "\nAmong the ruins, you discover a Small Heal Potion.\n"
-                                    + "It has been added to your inventory.\n"
-                    );
+                    System.out.println("You found a Small Heal Potion.\n");
                 }
                 break;
 
             case 2:
-                System.out.println(
-                        "\nYou descend into tunnels flooded with molten residue\n"
-                                + "and thick, toxic fumes.\n"
-                );
-
-                if (randomEvent == 1) {
-                    System.out.println(
-                            "\nToxic gases overwhelm you!\n"
-                    );
+                System.out.println("\nYou descend into molten tunnels.\n");
+                if (randomEvent == 0) {
                     hero.takeDamage(20);
-                    System.out.println("Current HP: " + hero.getHp() + "\n");
+                    System.out.println("Toxic fumes burn your lungs! HP: " + hero.getHp());
                 } else {
                     hero.addGold(40);
-                    System.out.println(
-                            "\nYou scavenge an abandoned Zaunite cache.\n"
-                                    + "You gain 40 Crowns.\n"
-                    );
+                    System.out.println("You gain 40 Crowns.\n");
                 }
                 break;
+
+            default:
+                return;
         }
 
         Thread.sleep(1000);
@@ -1086,19 +1035,12 @@ public abstract class Quest {
         }
 
         System.out.println(
-                "\n========================================\n"
-                        + firstEnemy.getName() + " descends upon you,\n"
-                        + "claws tearing through the air!\n"
-                        + "========================================\n"
+                "\n" + firstEnemy.getName() + " descends upon you!\n"
         );
 
         startBattle(hero, firstEnemy);
 
-        if (hero.getHp() <= 0 || run) {
-            System.out.println(
-                    "\nYou fall beneath the beast's assault.\n"
-            );
-            questMenu(hero, shop);
+        if (hero.getHp() <= 0) {
             return;
         }
 
@@ -1107,73 +1049,57 @@ public abstract class Quest {
 
         if (resurrection < 30) {
             System.out.println(
-                    "\nThe creature collapses —\n"
-                            + "but its body ignites in crimson flames!\n\n"
-                            + "It rises once more,\n"
-                            + "driven by pure rage!\n"
+                    "\nThe creature ignites in crimson flames...\n"
+                            + "It rises once more!\n"
             );
-        } else {
-            System.out.println(
-                    "\nThe creature's body finally goes still.\n"
-                            + "It will not rise again.\n"
-            );
+
+            firstEnemy.setHp(firstEnemy.getMaxHp() / 2);
+            startBattle(hero, firstEnemy);
+
+            if (hero.getHp() <= 0) {
+                return;
+            }
         }
 
-        Thread.sleep(1000);
-        firstEnemy.setHp(firstEnemy.getMaxHp() / 2);
-        startBattle(hero, firstEnemy);
+        System.out.println(
+                "\nThe creature finally falls.\n"
+        );
 
-        if (hero.getHp() <= 0 || run) {
-            System.out.println(
-                    "\nThe resurrected beast finishes you.\n"
-            );
-            questMenu(hero, shop);
-            return;
-        } else {
-            System.out.println(
-                    "\nThe creature's body finally goes still.\n"
-                            + "It will not rise again.\n"
-            );
-            hero.addItem(mediumHealPotion);
-            System.out.println(
-                    "You receive a Medium Heal Potion.\n"
-                            + "It has been added to your inventory.\n"
-            );
-        }
+        hero.addItem(mediumHealPotion);
+        System.out.println("You receive a Medium Heal Potion.\n");
 
         Thread.sleep(1000);
 
         // ================= FINAL BOSS =================
         System.out.println(
                 "\n========================================\n"
-                        + "The citadel trembles violently.\n"
-                        + "A colossal shadow eclipses the crimson sky.\n\n"
-                        + ElderRedDrake.getName() + "\n"
-                        + "descends, its inferno consuming all hope.\n"
+                        + ElderRedDrake.getName() + " descends from the sky!\n"
                         + "========================================\n"
         );
 
         System.out.println(
                 "[1] Face the Elder Drake\n"
-                        + "[2] Retreat to the Tavern\n"
+                        + "[2] Retreat\n"
         );
 
         choice = input.nextInt();
 
-        if (choice == 2) {
-            tavernMenu(shop, hero);
+        if (choice != 1) {
             return;
         }
 
         startBattle(hero, ElderRedDrake);
-        if (checkBattleResult(hero, shop)) {
+
+        if (checkFinalBattleResult(hero, shop)) {
             quest5Complete = true;
         }
     }
 
+
     //quest06
     public static void finalTrial(Hero hero, Shop shop) throws InterruptedException {
         Scanner input = new Scanner(System.in);
+        hero.setHp(hero.getMaxHp());
 
         //enemies
         NPC VladimirBoss = new NPC(
@@ -1192,7 +1118,6 @@ public abstract class Quest {
                             + "Reach at least Level 3 to face the Trifarix.\n"
             );
             Thread.sleep(2000);
-            questMenu(hero, shop);
             return;
         }
 
@@ -1231,7 +1156,6 @@ public abstract class Quest {
                     "Your strength is drained.\n"
                             + "Vladimir turns away as your blood feeds the Trial.\n"
             );
-            questMenu(hero, shop);
             return;
         }
 
@@ -1259,7 +1183,7 @@ public abstract class Quest {
         // 2) LEBLANC – CUNNING
         // =========================
         System.out.println(
-                "Slow applause echoes.\n"
+                "\nSlow applause echoes.\n"
                         + "Reality fractures into layered illusions.\n\n"
                         + "A figure emerges from deception itself.\n"
                         + "LeBlanc — Trifarix of Cunning.\n\n"
@@ -1275,7 +1199,6 @@ public abstract class Quest {
                     "Your mind collapses beneath endless deception.\n"
                             + "LeBlanc vanishes, her laughter lingering in the broken illusions.\n"
             );
-            questMenu(hero, shop);
             return;
         }
 
@@ -1367,8 +1290,6 @@ public abstract class Quest {
                             "Your soul is crushed into the void between worlds.\n"
                                     + "The Final Trial must be faced again.\n"
                     );
-
-                    questMenu(hero, shop);
                     return;
 
                 default:
@@ -1376,7 +1297,6 @@ public abstract class Quest {
                             "Your silence is taken as defiance.\n"
                                     + "The chains tighten.\n"
                     );
-                    questMenu(hero, shop);
                     return;
             }
         }
@@ -1404,6 +1324,7 @@ public abstract class Quest {
 
         System.out.println("=== ENDING: NOXIAN LEGEND ===");
     }
+
 
 }
 
