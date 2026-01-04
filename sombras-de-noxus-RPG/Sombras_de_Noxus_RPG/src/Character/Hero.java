@@ -231,7 +231,6 @@ public abstract class Hero extends Entity {
         }
     }
 
-
     public void useSpecialAtk(NPC enemy) {
         enemy.hp -= this.abilityDamage;
         System.out.println("You dealt " + this.abilityDamage + " damage with your special ability");

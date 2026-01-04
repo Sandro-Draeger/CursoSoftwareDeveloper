@@ -15,7 +15,13 @@ import static Game.Tavern.tavernMenu;
 
 public abstract class Quest {
 
-    static boolean quest1Complete = false; //TODO fazer para as demais quests;
+
+    static boolean quest1Complete = false;
+    static boolean quest2Complete = false;
+    static boolean quest3Complete = false;
+    static boolean quest4Complete = false;
+    static boolean quest5Complete = false;
+
     static boolean run = false;
 
     public static void questMenu(Hero hero, Shop shop) throws InterruptedException {
@@ -39,19 +45,49 @@ public abstract class Quest {
                 break;
 
             case 2:
-                bloodRitual(hero, shop);
+                if (!quest2Complete) {
+                    bloodRitual(hero, shop);
+                } else {
+                    System.out.println(
+                            "\nThe Crimson Ritual has already been stopped.\n"
+                                    + "Only echoes of blood magic remain.\n"
+                    );
+                }
                 break;
 
             case 3:
-                immortalBastionSwamp(hero, shop);
+                if (!quest3Complete) {
+                    immortalBastionSwamp(hero, shop);
+                } else {
+                    System.out.println(
+                            "\nThe Immortal Bastion swamps have already been cleared.\n"
+                                    + "Only stagnant silence remains.\n"
+                    );
+                }
                 break;
 
             case 4:
-                crimsonGorge(hero, shop);
+                if (!quest4Complete) {
+                    crimsonGorge(hero, shop);
+                } else {
+                    System.out.println(
+                            "\nThe Crimson Gorge has already been sealed.\n"
+                                    + "Arcane anomalies are contained, and hostile constructs lie dormant.\n"
+                                    + "For now, the Gorge no longer threatens Noxian territory.\n"
+                    );
+                }
                 break;
 
             case 5:
-                lostCitadelOfZaunMor(hero, shop);
+                if (!quest5Complete) {
+                    lostCitadelOfZaunMor(hero, shop);
+                } else {
+                    System.out.println(
+                            "\nThe Lost Citadel of Zaun-Mor has been conquered.\n"
+                                    + "Blood stains the stone and ash fills the air.\n"
+                                    + "Only the echoes of ancient beasts remain.\n"
+                    );
+                }
                 break;
 
             case 6:
@@ -171,7 +207,8 @@ public abstract class Quest {
             System.out.println("-------------------------------------\n");
         }
     }
-//TODO implementar em todos os  Boss
+
+
     private static boolean checkBattleResult(Hero hero, Shop shop) throws InterruptedException {
         if (run || hero.getHp() < 0) {
             System.out.println(
@@ -362,7 +399,7 @@ public abstract class Quest {
 
         startBattle(hero, BanditScout);
 
-        if (hero.getHp() <= 0) {
+        if (hero.getHp() <= 0 || run) {
             System.out.println(
                     "\nThe bandit overwhelms you.\n"
             );
@@ -448,13 +485,11 @@ public abstract class Quest {
         startBattle(hero, BanditBruiser);
 
 
-        if (checkBattleResult(hero, shop)){
+        if (checkBattleResult(hero, shop)) {
             quest1Complete = true;
         }
 
     }
-
-
 
 
     //quest02
@@ -546,7 +581,7 @@ public abstract class Quest {
             case 1:
                 startBattle(hero, CrimsonAcolyte);
 
-                if (hero.getHp() > 0) {
+                if (hero.getHp() > 0 && !run) {
                     System.out.println(
                             "\nThe Crimson Acolyte collapses,\n"
                                     + "his blood magic fading away.\n"
@@ -611,7 +646,7 @@ public abstract class Quest {
                                 + "a grotesque creature takes shape!\n"
                 );
                 startBattle(hero, BloodLeech);
-                if (hero.getHp() > 0) {
+                if (hero.getHp() > 0 || !run) {
                     hero.setHp(fullHp);
                 }
                 break;
@@ -641,37 +676,9 @@ public abstract class Quest {
             case 1:
                 startBattle(hero, AcolyteOfVladimir);
 
-                if (hero.getHp() > 0) {
-                    System.out.println(
-                            "\nWith a final strike, the ritual collapses.\n"
-                                    + "The acolyte falls,\n"
-                                    + "and the Crimson Circle’s influence weakens — for now.\n"
-                    );
-                    hero.setHp(fullHp);
-                    Hero.levelUp(hero);
-                    Thread.sleep(1000);
-                    questMenu(hero, shop);
-
-                } else {
-                    System.out.println(
-                            "\nThe power granted by Vladimir’s teachings\n"
-                                    + "proves overwhelming.\n"
-                    );
-
-                    System.out.println(
-                            "[1] Challenge him again\n"
-                                    + "[2] Retreat to the Tavern\n"
-                    );
-
-                    choice = input.nextInt();
-
-                    if (choice == 1) {
-                        startBattle(hero, AcolyteOfVladimir);
-                    } else {
-                        tavernMenu(shop, hero);
-                    }
+                if (checkBattleResult(hero, shop)) {
+                    quest2Complete = true;
                 }
-                break;
 
             case 2:
                 tavernMenu(shop, hero);
@@ -766,7 +773,7 @@ public abstract class Quest {
 
             startBattle(hero, enemy);
 
-            if (hero.getHp() > 0) {
+            if (hero.getHp() > 0 && !run) {
                 System.out.println(
                         "\nYou defeat the creature,\n"
                                 + "but the swamp remains hostile and unforgiving.\n"
@@ -777,20 +784,6 @@ public abstract class Quest {
                 System.out.println(
                         "\nYou succumb to the swamp's toxic influence.\n"
                 );
-
-                System.out.println(
-                        "[1] Try again\n"
-                                + "[2] Retreat to the Tavern\n"
-                );
-
-                choice = input.nextInt();
-
-                if (choice == 1) {
-                    startBattle(hero, enemy);
-                } else {
-                    tavernMenu(shop, hero);
-                    return;
-                }
             }
 
             Thread.sleep(1000);
@@ -806,7 +799,7 @@ public abstract class Quest {
                             + "No dominant presence remains.\n\n"
                             + "The purge was only partial — but sufficient for now.\n"
             );
-            GameHelper.QuestComplete();//TODO adicionar em todos
+            GameHelper.QuestComplete();
             Hero.levelUp(hero);
             questMenu(hero, shop);
             return;
@@ -836,34 +829,8 @@ public abstract class Quest {
 
         startBattle(hero, ChemBaronRenegadeCaptain);
 
-        if (hero.getHp() > 0) {
-            System.out.println(
-                    "\nWith the fall of the Renegade Captain,\n"
-                            + "chemical control over the swamp collapses.\n"
-                            + "Noxus reclaims part of the corrupted territory.\n"
-            );
-            hero.setHp(fullHp);
-            GameHelper.QuestComplete();
-            Hero.levelUp(hero);
-            Thread.sleep(1000);
-            questMenu(hero, shop);
-        } else {
-            System.out.println(
-                    "\nThe Renegade Captain proves too powerful.\n"
-            );
-
-            System.out.println(
-                    "[1] Challenge him again\n"
-                            + "[2] Return to the Tavern\n"
-            );
-
-            choice = input.nextInt();
-
-            if (choice == 1) {
-                startBattle(hero, ChemBaronRenegadeCaptain);
-            } else {
-                tavernMenu(shop, hero);
-            }
+        if (checkBattleResult(hero, shop)) {
+            quest3Complete = true;
         }
     }
 
@@ -930,18 +897,6 @@ public abstract class Quest {
                         hero.setHp(fullHp);
                         break;
                     }
-
-                    System.out.println(
-                            "\nYou failed the arcane trial.\n"
-                                    + "[1] Try again\n"
-                                    + "[2] Retreat to the Tavern\n"
-                    );
-
-                    int retryChoice = input.nextInt();
-                    if (retryChoice == 2) {
-                        tavernMenu(shop, hero);
-                        return;
-                    }
                 }
                 break;
 
@@ -979,7 +934,7 @@ public abstract class Quest {
 
                     startBattle(hero, ZaunSentinelArmor);
 
-                    if (hero.getHp() > 0) {
+                    if (hero.getHp() > 0 && !run) {
                         System.out.println(
                                 "\nWell done, warrior.\n"
                                         + "The sentinel collapses, its systems failing.\n"
@@ -1034,21 +989,11 @@ public abstract class Quest {
 
         startBattle(hero, BrokenHexCoreGolem);
 
-        if (hero.getHp() > 0) {
-            System.out.println(
-                    "\nWith the destruction of the Hex Core Golem,\n"
-                            + "the Crimson Gorge finally grows silent.\n"
-            );
-            hero.setHp(fullHp);
-            Hero.levelUp(hero);
-            questMenu(hero, shop);
-        } else {
-            System.out.println(
-                    "\nThe golem's power proves overwhelming.\n"
-            );
-            tavernMenu(shop, hero);
+        if (checkBattleResult(hero, shop)) {
+            quest4Complete = true;
         }
     }
+
 
     //quest05
     public static void lostCitadelOfZaunMor(Hero hero, Shop shop) throws InterruptedException {
@@ -1161,11 +1106,11 @@ public abstract class Quest {
 
         startBattle(hero, firstEnemy);
 
-        if (hero.getHp() <= 0) {
+        if (hero.getHp() <= 0 || run) {
             System.out.println(
                     "\nYou fall beneath the beast's assault.\n"
             );
-            tavernMenu(shop, hero);
+            questMenu(hero, shop);
             return;
         }
 
@@ -1186,14 +1131,15 @@ public abstract class Quest {
             );
         }
 
+        Thread.sleep(1000);
         firstEnemy.setHp(firstEnemy.getMaxHp() / 2);
         startBattle(hero, firstEnemy);
 
-        if (hero.getHp() <= 0) {
+        if (hero.getHp() <= 0 || run) {
             System.out.println(
                     "\nThe resurrected beast finishes you.\n"
             );
-            tavernMenu(shop, hero);
+            questMenu(hero, shop);
             return;
         } else {
             System.out.println(
@@ -1232,22 +1178,8 @@ public abstract class Quest {
         }
 
         startBattle(hero, ElderRedDrake);
-
-        if (hero.getHp() > 0) {
-            System.out.println(
-                    "\nWith a final, earth-shattering roar,\n"
-                            + "the Elder Red Drake collapses.\n\n"
-                            + "Zaun-Mor finally falls silent.\n"
-                            + "You emerge victorious from the Lost Citadel.\n"
-            );
-            hero.setHp(fullHp);
-            Hero.levelUp(hero);
-            questMenu(hero, shop);
-        } else {
-            System.out.println(
-                    "\nThe Elder Drake incinerates all resistance.\n"
-            );
-            tavernMenu(shop, hero);
+        if (checkBattleResult(hero, shop)) {
+            quest5Complete = true;
         }
     }
 
@@ -1268,10 +1200,10 @@ public abstract class Quest {
 
         if (hero.getLevel() < 3) {
             System.out.println(
-                    "You feel an overwhelming pressure before the Trial begins.\n"
-                            + "This path is reserved for proven warriors.\n"
+                    "This path is reserved for proven warriors.\n"
                             + "Reach at least Level 3 to face the Trifarix.\n"
             );
+            Thread.sleep(2000);
             questMenu(hero, shop);
             return;
         }
@@ -1311,7 +1243,7 @@ public abstract class Quest {
                     "Your strength is drained.\n"
                             + "Vladimir turns away as your blood feeds the Trial.\n"
             );
-            tavernMenu(shop, hero);
+            questMenu(hero, shop);
             return;
         }
 
@@ -1321,6 +1253,18 @@ public abstract class Quest {
                         + "The crimson sigils unravel as his form dissolves into a storm of blood.\n"
                         + "For the first time, the Trifarix loses a pillar — and it will not return.\n"
         );
+
+        GameHelper.printDivider();
+
+        System.out.println(
+                "\nUniversal Upgrade acquired: Crimson Essence.\n"
+                        + "The upgrade has been permanently integrated into your weapon.\n"
+                        + "Attack Damage increased by 12.\n"
+        );
+        hero.setAttack(hero.getAttack() + 12);
+
+        GameHelper.printDivider();
+
         Thread.sleep(1500);
 
         // =========================
@@ -1343,7 +1287,7 @@ public abstract class Quest {
                     "Your mind collapses beneath endless deception.\n"
                             + "LeBlanc vanishes, her laughter lingering in the broken illusions.\n"
             );
-            tavernMenu(shop, hero);
+            questMenu(hero, shop);
             return;
         }
 
@@ -1421,8 +1365,7 @@ public abstract class Quest {
 
                     System.out.println("=== ENDING: TRIFARIX ASCENDANT ===");
 
-                    questMenu(hero, shop);
-                    return;
+                    break;
 
                 case 2:
                     System.out.println(
@@ -1437,7 +1380,7 @@ public abstract class Quest {
                                     + "The Final Trial must be faced again.\n"
                     );
 
-                    tavernMenu(shop, hero);
+                    questMenu(hero, shop);
                     return;
 
                 default:
@@ -1445,7 +1388,7 @@ public abstract class Quest {
                             "Your silence is taken as defiance.\n"
                                     + "The chains tighten.\n"
                     );
-                    tavernMenu(shop, hero);
+                    questMenu(hero, shop);
                     return;
             }
         }
@@ -1472,7 +1415,6 @@ public abstract class Quest {
         Thread.sleep(1500);
 
         System.out.println("=== ENDING: NOXIAN LEGEND ===");
-        questMenu(hero, shop);
     }
 
 }
