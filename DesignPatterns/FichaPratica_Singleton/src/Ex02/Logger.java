@@ -1,6 +1,4 @@
 package Ex02;
-
-
 import java.io.*;
 import java.util.Scanner;
 
@@ -22,7 +20,7 @@ public class Logger {
     public void log(String text) throws IOException {
      FileWriter writer = new FileWriter(ficheiro, true);
 
-     writer.write(text);
+     writer.write(text + "\n");
      writer.close();
     }
 
