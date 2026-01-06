@@ -32,7 +32,6 @@ public class UserSessionManager {
         return random.nextInt(1500);
     }
 
-
     public static void updateLastAccess(UserSessionManager sessionManager){
         Long updatedTime = System.currentTimeMillis();
         sessionManager.setLastAccess(String.valueOf(updatedTime));

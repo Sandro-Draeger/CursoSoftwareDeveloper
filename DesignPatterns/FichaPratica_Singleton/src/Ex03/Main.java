@@ -9,6 +9,8 @@ public class Main {
 
         sessionManager.updateLastAccess(sessionManager);
 
+        System.out.println("---------------------");
+
         System.out.println("Token de Acesso: " + sessionManager.getSessionToken());
         System.out.println("Último Acesso: " + sessionManager.getLastAccess());
 
