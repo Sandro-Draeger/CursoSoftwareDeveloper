@@ -37,7 +37,7 @@ class UserController extends Controller
             ->route('user.view', ['id' => $request->id])
             ->with('message', 'User atualizado com sucesso!');
     }
-
+//listar e filtro de users
     public function listUsers(){
 
         $usersFromDB = DB::table('users')

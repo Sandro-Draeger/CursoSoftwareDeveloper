@@ -1,45 +1,100 @@
 @extends('layouts.fe_master')
 
 @section('content')
-    <h5>Aqui vamos ver os dados de um user</h5>
+<div class="container mt-4">
 
-    <h6>Nome: {{ $user->name }}</h6>
-    <h6>Email: {{ $user->email }}</h6>
-    <h6>Morada: {{ $user->address }}</h6>
-    <h6>NIF: {{ $user->nif }}</h6>
-           <form method="POST" action="{{ route('users.update') }}">
-        @csrf
-        @method('PUT')
-
-        <input type="hidden" name="id" value="{{ $user->id }}" />
-
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Nome</label>
-            <input value="{{$user->name}}" name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    {{-- Card: Dados do Utilizador --}}
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Dados do Utilizador</h5>
         </div>
-        @error('name')
-            <p class="text-danger"> Erro de nome</p>
-        @enderror
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input value="{{$user->email}}" name="email" disabled required type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            <div  id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 mb-2">
+                    <strong>Nome:</strong> {{ $user->name }}
+                </div>
+                <div class="col-md-6 mb-2">
+                    <strong>Email:</strong> {{ $user->email }}
+                </div>
+                <div class="col-md-6 mb-2">
+                    <strong>Morada:</strong> {{ $user->address }}
+                </div>
+                <div class="col-md-6 mb-2">
+                    <strong>NIF:</strong> {{ $user->nif }}
+                </div>
+            </div>
         </div>
-        @error('email')
-            <p class="text-danger"> Erro de email</p>
-        @enderror
+    </div>
 
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Morada</label>
-            <input value="{{ $user->address }}" name="address" type="text" class="form-control" id="exampleInputEmail1"
-                aria-describedby="emailHelp">
+    {{-- Card: Editar Utilizador --}}
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h5 class="mb-0">Editar Utilizador</h5>
         </div>
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Nif</label>
-            <input value="{{ $user->nif }}" name="nif" type="text" class="form-control" id="exampleInputEmail1"
-                aria-describedby="emailHelp">
-        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ route('users.update') }}">
+                @csrf
+                @method('PUT')
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+                <input type="hidden" name="id" value="{{ $user->id }}">
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Nome</label>
+                        <input
+                            type="text"
+                            name="name"
+                            value="{{ old('name', $user->name) }}"
+                            class="form-control @error('name') is-invalid @enderror"
+                        >
+                        @error('name')
+                            <div class="invalid-feedback">Erro de nome</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Email</label>
+                        <input
+                            type="email"
+                            value="{{ $user->email }}"
+                            class="form-control"
+                            disabled
+                        >
+                        <div class="form-text">
+                            O email não pode ser alterado.
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Morada</label>
+                        <input
+                            type="text"
+                            name="address"
+                            value="{{ old('address', $user->address) }}"
+                            class="form-control"
+                        >
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">NIF</label>
+                        <input
+                            type="text"
+                            name="nif"
+                            value="{{ old('nif', $user->nif) }}"
+                            class="form-control"
+                        >
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-success">
+                        💾 Guardar Alterações
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
 @endsection
+

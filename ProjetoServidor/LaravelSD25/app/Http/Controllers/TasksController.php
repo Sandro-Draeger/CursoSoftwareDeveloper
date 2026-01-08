@@ -10,10 +10,6 @@ use App\Models\User;
 class TasksController extends Controller
 {
 
-
-
-
-
     public function storeTask(Request $request){
         //dd($request->all());
 
@@ -33,10 +29,35 @@ class TasksController extends Controller
               return redirect()->route('task.all')->with('message', 'Task adicionada com sucesso!');
     }
 
-        public function addTask(){
-        $tasks = $this->getAllTasks();
+    public function updateTask(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|integer',
+            'name' => 'required',
+            'description' => 'required',
+            'user_id' => 'required|integer',
+            'status' => 'required|in:0,1',
+        ]);
 
-        return view('tasks.add_tasks', compact('tasks'));
+        DB::table('tasks')
+            ->where('id', $request->id)
+            ->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'user_id' => $request->user_id,
+                'status' => $request->status,
+                'updated_at' => now(),
+            ]);
+
+        return redirect()->route('task.all')->with('message', 'Task atualizada com sucesso!');
+    }
+
+
+    public function addTask(){
+            $tasks = $this->getAllTasks();
+            $users = User::all();
+
+            return view('tasks.add_tasks', compact('tasks', 'users'));
     }
 
 
@@ -50,9 +71,9 @@ class TasksController extends Controller
     public function viewTasks($id){
 
         $task = $this->getAllTasks()->where('id', $id)->first();
+        $users = User::all();
 
-
-        return view('tasks.view_tasks', compact('task'));
+        return view('tasks.view_tasks', compact('task', 'users'));
     }
 
     public function deleteTasks($id){
@@ -64,7 +85,6 @@ class TasksController extends Controller
         return back();
     }
 
-
 protected function getAllTasks(){
         $tasks = DB::table('tasks')
         ->join('users', 'users.id', '=', 'tasks.user_id')
@@ -74,6 +94,7 @@ protected function getAllTasks(){
         return $tasks;
 
     }
+
 
 
     }

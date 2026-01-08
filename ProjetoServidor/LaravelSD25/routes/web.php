@@ -40,6 +40,8 @@ Route::get('/delete-task/{id}', [TasksController::class, 'deleteTasks'])->name('
 
 Route::post('/store-task',[TasksController::class, 'storeTask'])->name('tasks.store');
 
+Route::put('/update-task',[TasksController::class, 'updateTask'])->name('tasks.update'); //update task
+
 Route::get('/add-tasks',  [TasksController::class, 'addTask'])->name('tasks.add');
 
 //rota: Gifts
