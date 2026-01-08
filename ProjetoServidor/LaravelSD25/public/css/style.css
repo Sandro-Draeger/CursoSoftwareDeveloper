@@ -46,3 +46,17 @@ form {
     color: var(--colorFont);
 }
 
+#btnAcesso{
+    background-color: rgba(4, 21, 255, 0.329);
+    border: rgba(4, 21, 255, 0.507) 1px solid;
+    border-radius: 6px;
+    color: white;
+    padding: 5px;
+    margin: 2px;
+}
+
+#btnAcesso:hover{
+    background-color: rgb(4, 21, 255);
+    color: white;
+    transition: 0.3s;
+}

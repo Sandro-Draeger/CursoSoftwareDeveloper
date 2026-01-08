@@ -1,36 +1,74 @@
 @extends('layouts.fe_master')
 @section('content')
 
-    <h3>Olá, aqui podes adicionar utilizadores!</h3>
+<div class="row justify-content-center mt-4">
+    <div class="col-md-6">
 
- <form method="POST" action="{{ route('users.store') }}">
-        @csrf
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Adicionar Utilizador</h5>
+            </div>
 
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Nome</label>
-            <input required name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        </div>
-        @error('name')
-            <p class="text-danger"> Erro de nome</p>
-        @enderror
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input required  name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            <div  id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-        </div>
-        @error('email')
-            <p class="text-danger"> Erro de email</p>
-        @enderror
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input required name="password" type="password" class="form-control" id="exampleInputPassword1">
-        </div>
-        @error('password')
-            <p class="text-danger"> Erro de password</p>
-        @enderror
+            <div class="card-body">
+                <p class="text-muted mb-4">
+                    Olá, aqui podes adicionar utilizadores!
+                </p>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+                <form method="POST" action="{{ route('users.store') }}">
+                    @csrf
+
+                    <div class="mb-3">
+                        <label class="form-label">Nome</label>
+                        <input
+                            required
+                            name="name"
+                            type="text"
+                            class="form-control @error('name') is-invalid @enderror"
+                        >
+                        @error('name')
+                            <div class="invalid-feedback">Erro de nome</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email address</label>
+                        <input
+                            required
+                            name="email"
+                            type="email"
+                            class="form-control @error('email') is-invalid @enderror"
+                        >
+                        <div class="form-text">
+                            We'll never share your email with anyone else.
+                        </div>
+                        @error('email')
+                            <div class="invalid-feedback">Erro de email</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input
+                            required
+                            name="password"
+                            type="password"
+                            class="form-control @error('password') is-invalid @enderror"
+                        >
+                        @error('password')
+                            <div class="invalid-feedback">Erro de password</div>
+                        @enderror
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-success">
+                            Criar Utilizador
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 @endsection
-
