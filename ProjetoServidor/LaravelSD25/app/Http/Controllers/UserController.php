@@ -16,14 +16,34 @@ class UserController extends Controller
         return view('users.add_user', compact('users'));
     }
 
-    public function listUsers(){
-        
+    //nova função para update
+    public function updateUser(Request $request){
 
-        $usersFromDB = db::table('users')
+        //validar se os dados recebidos estão em conformidade com a BAse de dados
+        $request->validate([
+            'name' => 'required',
+            'address' => 'nullable|string|max:255',
+            'nif' => 'nullable|string|max:20',
+        ]);
+
+        User::where('id', $request->id)
+            ->update([
+                'name' => $request->name,
+                'address' => $request->address,
+                'nif' => $request->nif,
+            ]);
+
+        return redirect()
+            ->route('user.view', ['id' => $request->id])
+            ->with('message', 'User atualizado com sucesso!');
+    }
+
+    public function listUsers(){
+
+        $usersFromDB = DB::table('users')
         ->get();
 
-
-        return view('users.all_users', compact('usersThatWillComeFromDB', 'usersFromDB'));
+        return view('users.all_users', compact('usersFromDB'));
     }
 
     public function viewUser($id){
@@ -56,6 +76,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'updated_at' => now(),
         ]);
               return redirect()->route('user.add')->with('message', 'User adicionado com sucesso!');
 

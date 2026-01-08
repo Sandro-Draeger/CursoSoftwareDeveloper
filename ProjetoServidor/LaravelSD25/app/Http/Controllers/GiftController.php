@@ -66,4 +66,10 @@ class GiftController extends Controller
             )
             ->get();
     }
+
+    public function create()
+{
+    $users = User::all(); // ou o filtro que você quiser
+    return view('sua_view', compact('users'));
+}
 }

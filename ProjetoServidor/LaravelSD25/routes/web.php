@@ -22,6 +22,8 @@ Route::get('/add-user',  [UserController::class, 'addUser'])->name('user.add');
 
 Route::post('/store-user',[UserController::class, 'storeUser'])->name('users.store');
 
+Route::put('/update-user',[UserController::class, 'updateUser'])->name('users.update'); //nova rota para update
+
 Route::get('/all-users',  [UserController::class, 'listUsers'])->name('user.all');
 
 Route::get('/user/{id}', [UserController::class, 'viewUser'])->name('user.view');
@@ -46,6 +48,7 @@ Route::get('/add-gifts',  [GiftController::class, 'addGift'])->name('gift.add');
 Route::post('/store-gifts',[GiftController::class, 'storeGift'])->name('gift.store');
 
 Route::get('/all-gifts',  [GiftController::class, 'listGift'])->name('gift.all');
+
 
 
 Route::fallback(function () {

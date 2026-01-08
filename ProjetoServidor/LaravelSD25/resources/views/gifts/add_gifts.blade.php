@@ -25,7 +25,7 @@
             <label class="form-label">Pessoa que vai receber</label>
             <select name="user_id" class="form-select" required>
                 <option value="">Selecione um</option>
-                @foreach ($users as $user)
+                @foreach($users as $user)
                     <option value="{{ $user->id }}">{{ $user->name }} </option>
                 @endforeach
             </select>
