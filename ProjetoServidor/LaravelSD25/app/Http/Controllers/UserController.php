@@ -37,11 +37,22 @@ class UserController extends Controller
             ->route('user.view', ['id' => $request->id])
             ->with('message', 'User atualizado com sucesso!');
     }
-//listar e filtro de users
+    //listar e filtro de users
     public function listUsers(){
 
-        $usersFromDB = DB::table('users')
-        ->get();
+        //se o campo de pesquisa tiver valor, atribui à variável $search, senão atribui null
+        $search = request()->query('search') ? request()->query('search') : null;
+
+        //se tiver valor na variável $search, faz pesquisa com filtro, senão lista todos
+        if($search){
+            $usersFromDB = DB::table('users')
+            ->where('name', 'like', '%'.$search.'%')
+            ->orWhere('email', 'like', '%'.$search.'%')
+            ->get();
+        }else{
+            $usersFromDB = DB::table('users')
+            ->get();
+        }
 
         return view('users.all_users', compact('usersFromDB'));
     }

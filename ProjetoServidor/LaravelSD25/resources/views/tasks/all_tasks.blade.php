@@ -8,12 +8,30 @@
             <a href="{{ route('tasks.add') }}" class="btn btn-green btn-sm">➕ Adicionar Task</a>
         </div>
 
+
         <div class="card-body">
+              {{-- Formulário de pesquisa --}}
+            <form class="row g-2 mb-4" action="" method="get">
+                <div class="col-md-8">
+                    <input
+                        type="text"
+                        name="search"
+                        id="search"
+                        class="form-control"
+                        placeholder="Pesquisar por nome ou email"
+                    >
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary w-100">Pesquisar</button>
+                </div>
+            </form>
+
+            {{-- Tabela de tasks --}}
             <div class="table-responsive">
                 <table class="table table-hover align-middle">
                     <thead class="table-light">
                         <tr>
-                            <th>#</th>
+                            <th>ID</th>
                             <th>Nome</th>
                             <th>Descrição</th>
                             <th>Status</th>

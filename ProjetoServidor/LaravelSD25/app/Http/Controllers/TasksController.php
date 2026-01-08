@@ -63,7 +63,18 @@ class TasksController extends Controller
 
     public function all_tasks()
     {
-        $tasksFromDB = $this->getAllTasks();
+        $search = request()->query('search') ? request()->query('search') : null;
+
+        if($search){
+            $tasksFromDB = DB::table('tasks')
+            ->where('name', 'like', '%'.$search.'%')
+            ->orWhere('description', 'like', '%'.$search.'%')
+            ->orWhere('status', 'like', '%'.$search.'%')
+            ->orWhere('user_id', 'like', '%'.$search.'%')
+            ->get();
+        }else{
+            $tasksFromDB = $this->getAllTasks();
+        }
 
         return view('tasks.all_tasks', compact('tasksFromDB'));
     }
