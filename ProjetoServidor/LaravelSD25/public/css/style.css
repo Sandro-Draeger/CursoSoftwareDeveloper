@@ -1,5 +1,9 @@
+:root{
+    --colorFont:black;
+}
+
 body{
-    background-color: rgb(90, 90, 190)!important;
+    background-color: rgb(255, 255, 255)!important;
     color: white;
 }
 
@@ -16,12 +20,12 @@ img{
 
 h3{
     text-align: center;
-    color: white!important;
+    color: var(--colorFont);
     padding: 20px;
 }
 
 a {
-    color: white!important;
+    color: var(--colorFont);
     font-size: 15px;
 }
 
@@ -39,6 +43,6 @@ form {
 }
 
 .nav-item nav-link {
-    color: white!important;
+    color: var(--colorFont);
 }
 
