@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UtilController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\GiftController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/home', [UtilController::class, 'home'])->name('home');
 
@@ -32,7 +33,7 @@ Route::get('/delete-user/{id}', [UserController::class, 'deleteUser'])->name('us
 
 
 //rota: Tasks
-Route::get('/all-tasks',  [TasksController::class, 'all_tasks'])->name('task.all');
+Route::get('/all-tasks',  [TasksController::class, 'all_tasks'])->name('task.all')->middleware('auth');
 
 Route::get('/task/{id}', [TasksController::class, 'viewTasks'])->name('tasks.view');
 
@@ -51,6 +52,8 @@ Route::post('/store-gifts',[GiftController::class, 'storeGift'])->name('gift.sto
 
 Route::get('/all-gifts',  [GiftController::class, 'listGift'])->name('gift.all');
 
+//rota: dashboard fallback
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard')->middleware('auth');
 
 
 Route::fallback(function () {

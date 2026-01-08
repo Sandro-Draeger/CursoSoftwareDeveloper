@@ -51,15 +51,21 @@
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->nif }}</td>
                                 <td class="text-end">
+                                    @auth
+                                     {{-- Apenas mostrar ações se o user estiver autenticado --}}
                                     <a href="{{ route('user.view', $user->id) }}" class="btn btn-sm btn-info">
                                         Ver/Editar
                                     </a>
+                                    @if(Auth::user()->email == 'sandro@gmail.com')
                                     <a href="{{ route('users.delete', $user->id) }}"
                                        class="btn btn-sm btn-danger"
                                        onclick="return confirm('Tem a certeza que deseja apagar este user?')">
                                         Apagar
                                     </a>
+                                    @endif
+                                    @endauth
                                 </td>
+
                             </tr>
                         @endforeach
                     </tbody>

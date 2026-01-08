@@ -50,8 +50,13 @@
                             <button type="submit" class="btn btn-danger btn-sm">
                                 Logout
                             </button>
-                        </form>
+
                     @else
+                        <a href="{{ route('dashboard') }}" class="btn btn-outline-light btn-sm">
+                            Dashboard
+                        </a>
+                        </form>
+                        
                         <a href="{{ route('login') }}" class="btn btn-outline-light btn-sm">
                             Login
                         </a>
